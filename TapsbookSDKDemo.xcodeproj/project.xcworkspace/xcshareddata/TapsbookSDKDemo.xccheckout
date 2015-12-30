@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CACBB29D-424F-4C99-9DF1-A091439F6982</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TapsbookSDKDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B</key>
+		<string>github.com:tapsbook/photobookSDK.git</string>
+		<key>447449A98BF016BCD9C9AEED0D50A6BE5C7E9123</key>
+		<string>github.com:sherwoodyao/tapsbook-SDK.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TapsbookSDKDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B</key>
+		<string>../..</string>
+		<key>447449A98BF016BCD9C9AEED0D50A6BE5C7E9123</key>
+		<string>../..TapsbookSDK/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:tapsbook/photobookSDK.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>447449A98BF016BCD9C9AEED0D50A6BE5C7E9123</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TapsbookSDK</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TapsbookSDKDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

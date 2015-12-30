@@ -1,0 +1,249 @@
+PODS:
+  - AFAmazonS3Manager (3.2.1):
+    - AFNetworking/NSURLConnection (~> 2.4)
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - AGGeometryKit (1.2.2):
+    - AGGeometryKit/CALayerProperties (= 1.2.2)
+    - AGGeometryKit/UIViewProperties (= 1.2.2)
+  - AGGeometryKit/CALayerProperties (1.2.2)
+  - AGGeometryKit/UIViewProperties (1.2.2)
+  - AHEasing (1.2)
+  - AsyncDisplayKit (1.9.1):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9.1)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.1)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bolts (1.5.0):
+    - Bolts/AppLinks (= 1.5.0)
+    - Bolts/Tasks (= 1.5.0)
+  - Bolts/AppLinks (1.5.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.5.0)
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.2.0):
+    - CocoaLumberjack/Default
+  - DZNSegmentedControl (1.3.2)
+  - FastImageCache (1.3)
+  - FBSDKCoreKit (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.8.0)
+    - FBSDKCoreKit/no-arc (= 4.8.0)
+  - FBSDKCoreKit/arc (4.8.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.8.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.8.0):
+    - FBSDKCoreKit
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - FormatterKit (1.8.0):
+    - FormatterKit/AddressFormatter (= 1.8.0)
+    - FormatterKit/ArrayFormatter (= 1.8.0)
+    - FormatterKit/ColorFormatter (= 1.8.0)
+    - FormatterKit/LocationFormatter (= 1.8.0)
+    - FormatterKit/NameFormatter (= 1.8.0)
+    - FormatterKit/OrdinalNumberFormatter (= 1.8.0)
+    - FormatterKit/TimeIntervalFormatter (= 1.8.0)
+    - FormatterKit/UnitOfInformationFormatter (= 1.8.0)
+    - FormatterKit/URLRequestFormatter (= 1.8.0)
+  - FormatterKit/AddressFormatter (1.8.0)
+  - FormatterKit/ArrayFormatter (1.8.0)
+  - FormatterKit/ColorFormatter (1.8.0)
+  - FormatterKit/LocationFormatter (1.8.0)
+  - FormatterKit/NameFormatter (1.8.0)
+  - FormatterKit/OrdinalNumberFormatter (1.8.0)
+  - FormatterKit/TimeIntervalFormatter (1.8.0)
+  - FormatterKit/UnitOfInformationFormatter (1.8.0)
+  - FormatterKit/URLRequestFormatter (1.8.0)
+  - FXBlurView (1.6.4)
+  - FXLabel (1.5.8)
+  - GoogleAnalytics (3.14.0)
+  - HappyDNS (0.2.3)
+  - KVOController (1.0.3)
+  - libextobjc (0.4.1):
+    - libextobjc/EXTADT (= 0.4.1)
+    - libextobjc/EXTConcreteProtocol (= 0.4.1)
+    - libextobjc/EXTKeyPathCoding (= 0.4.1)
+    - libextobjc/EXTNil (= 0.4.1)
+    - libextobjc/EXTSafeCategory (= 0.4.1)
+    - libextobjc/EXTScope (= 0.4.1)
+    - libextobjc/EXTSelectorChecking (= 0.4.1)
+    - libextobjc/EXTSynthesize (= 0.4.1)
+    - libextobjc/NSInvocation+EXT (= 0.4.1)
+    - libextobjc/NSMethodSignature+EXT (= 0.4.1)
+    - libextobjc/RuntimeExtensions (= 0.4.1)
+    - libextobjc/UmbrellaHeader (= 0.4.1)
+  - libextobjc/EXTADT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTConcreteProtocol (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTKeyPathCoding (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTNil (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSafeCategory (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTScope (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSelectorChecking (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSynthesize (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSInvocation+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSMethodSignature+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4.1)
+  - libextobjc/UmbrellaHeader (0.4.1)
+  - Masonry (0.6.3)
+  - MBProgressHUD (0.9.1)
+  - MZAppearance (1.1.6)
+  - MZFormSheetController (3.1.2):
+    - MZAppearance
+    - MZFormSheetController/Core (= 3.1.2)
+  - MZFormSheetController/Core (3.1.2):
+    - MZAppearance
+  - MZFormSheetPresentationController (2.1.2):
+    - MZAppearance
+  - pop (1.0.8)
+  - Qiniu (7.0.15):
+    - AFNetworking (~> 2.0)
+    - HappyDNS (~> 0.2)
+  - Reachability (3.2)
+  - SCLAlertView-Objective-C (0.7.9)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - SlackTextViewController (1.7.2)
+  - smc-runtime (6.3.0)
+  - Stripe (6.0.1):
+    - Stripe/Core (= 6.0.1)
+  - Stripe/Core (6.0.1)
+  - TLLayoutTransitioning (1.0.9):
+    - AHEasing
+  - TTTAttributedLabel (1.13.4)
+  - TTTRandomizedEnumerator (0.0.3)
+  - UICKeyChainStore (2.1.0)
+
+DEPENDENCIES:
+  - AFAmazonS3Manager (~> 3.2)
+  - AFNetworking (~> 2.0)
+  - AGGeometryKit (~> 1.2)
+  - AHEasing (~> 1.2)
+  - AsyncDisplayKit (~> 1.9)
+  - BlocksKit (~> 2.2)
+  - CocoaLumberjack (~> 2.2)
+  - DZNSegmentedControl (~> 1.3)
+  - FastImageCache (~> 1.3)
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
+  - FMDB (~> 2.5)
+  - FormatterKit (~> 1.8)
+  - FXBlurView (~> 1.6)
+  - FXLabel (~> 1.5)
+  - GoogleAnalytics (~> 3.14)
+  - KVOController (~> 1.0)
+  - libextobjc (~> 0.4.1)
+  - Masonry (~> 0.6)
+  - MBProgressHUD (~> 0.9)
+  - MZFormSheetController (~> 3.1)
+  - MZFormSheetPresentationController (~> 2.1)
+  - pop (~> 1.0)
+  - Qiniu (~> 7.0)
+  - Reachability (~> 3.2)
+  - SCLAlertView-Objective-C (~> 0.7)
+  - SDWebImage (~> 3.7)
+  - SlackTextViewController (~> 1.7)
+  - smc-runtime (~> 6.3)
+  - Stripe (~> 6.0)
+  - TLLayoutTransitioning (~> 1.0)
+  - TTTAttributedLabel (~> 1.13)
+  - TTTRandomizedEnumerator (~> 0.0)
+  - UICKeyChainStore (~> 2.1)
+
+SPEC CHECKSUMS:
+  AFAmazonS3Manager: 688f9238511bb86011159d0155fcda09838b0e0d
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AGGeometryKit: 46e712c5a3958e23b98fef15e57df1149670f231
+  AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
+  AsyncDisplayKit: 7bf2b3fa444284f80fd0c1e36655e324549f79d2
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  DZNSegmentedControl: b78b19d0b11d521a2be56ecff8a8a25d09a289d4
+  FastImageCache: 25f214fd46405daca3d1995d783fb83b9036c62e
+  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
+  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
+  FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  FXLabel: 14f7d4abb0eb531a0824b327a86f5b790171207f
+  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
+  HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
+  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
+  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
+  MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
+  MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
+  pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
+  Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SCLAlertView-Objective-C: e36ab12dc1ec4ff6f932888083b21d71a3a1ad23
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SlackTextViewController: 1f4e8f68c156ef93de73fd422db2b8d5d5b0f4e7
+  smc-runtime: 3941bb60d22acbec01ae9ca31d290a4fdcd513e1
+  Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
+  TLLayoutTransitioning: 286f546cc309ea9693dce2e3b1c4cab77f3308cf
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  TTTRandomizedEnumerator: 27eefafc5d45b01465c7303d59b5b94c46dcf824
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
+
+COCOAPODS: 0.39.0

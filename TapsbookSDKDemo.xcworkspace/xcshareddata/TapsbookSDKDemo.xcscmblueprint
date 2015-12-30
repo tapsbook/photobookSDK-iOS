@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "447449A98BF016BCD9C9AEED0D50A6BE5C7E9123" : 0,
+    "2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7179DD2E-72FD-4A58-AD16-DD353957A471",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "447449A98BF016BCD9C9AEED0D50A6BE5C7E9123" : "TapsbookSDKDemo\/TapsbookSDK\/",
+    "2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B" : "TapsbookSDKDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TapsbookSDKDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TapsbookSDKDemo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:tapsbook\/photobookSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B344F0AFB0FF5A4BD7629F53A8D558D3CD5540B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:sherwoodyao\/tapsbook-SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "447449A98BF016BCD9C9AEED0D50A6BE5C7E9123"
+    }
+  ]
+}

@@ -1,0 +1,1216 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		35235B028B57CDACFAC7472F /* libPods-TapsbookSDKDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE67DFD198593D261CF56314 /* libPods-TapsbookSDKDemo.a */; };
+		974306D8A83581D201CA61CE /* libPods-TapsbookSDKDemo_SDKDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4CE376242D33DABFD5CFE7 /* libPods-TapsbookSDKDemo_SDKDebug.a */; };
+		C129090B1A85115D00E0F8E1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C129090A1A85115D00E0F8E1 /* CoreLocation.framework */; };
+		C129090F1A85116600E0F8E1 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C129090E1A85116600E0F8E1 /* AddressBookUI.framework */; };
+		C12FB8EA1C316755009C45A6 /* SDKConfiguratorCustomCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */; };
+		C134FC171A424DFF00F02B8F /* PhotoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C183CBAC195D434D005B68F1 /* PhotoListViewController.xib */; };
+		C134FC181A424DFF00F02B8F /* PhotoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C183CBAC195D434D005B68F1 /* PhotoListViewController.xib */; };
+		C13F6A111BFA3F61000162F5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C13F6A0D1BFA3F61000162F5 /* libWeChatSDK.a */; };
+		C13F6A121BFA3F61000162F5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C13F6A0D1BFA3F61000162F5 /* libWeChatSDK.a */; };
+		C13F6A131BFA3F61000162F5 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C13F6A0E1BFA3F61000162F5 /* read_me.txt */; };
+		C13F6A141BFA3F61000162F5 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C13F6A0E1BFA3F61000162F5 /* read_me.txt */; };
+		C13F6A161BFA3FFA000162F5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C13F6A151BFA3FFA000162F5 /* libc++.tbd */; };
+		C172D66019E5959400DB9D8B /* PullableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C172D56119E5959400DB9D8B /* PullableView.m */; };
+		C172D66119E5959400DB9D8B /* PullableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C172D56119E5959400DB9D8B /* PullableView.m */; };
+		C183CB7C195D427E005B68F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7B195D427E005B68F1 /* Foundation.framework */; };
+		C183CB7E195D427E005B68F1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7D195D427E005B68F1 /* CoreGraphics.framework */; };
+		C183CB80195D427E005B68F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7F195D427E005B68F1 /* UIKit.framework */; };
+		C183CB86195D427E005B68F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C183CB84195D427E005B68F1 /* InfoPlist.strings */; };
+		C183CB88195D427E005B68F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CB87195D427E005B68F1 /* main.m */; };
+		C183CB8C195D427E005B68F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CB8B195D427E005B68F1 /* AppDelegate.m */; };
+		C183CB8E195D427E005B68F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C183CB8D195D427E005B68F1 /* Images.xcassets */; };
+		C183CB95195D427E005B68F1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB94195D427E005B68F1 /* XCTest.framework */; };
+		C183CB96195D427E005B68F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7B195D427E005B68F1 /* Foundation.framework */; };
+		C183CB97195D427E005B68F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7F195D427E005B68F1 /* UIKit.framework */; };
+		C183CB9F195D427E005B68F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C183CB9D195D427E005B68F1 /* InfoPlist.strings */; };
+		C183CBA1195D427E005B68F1 /* TapsbookSDKDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CBA0195D427E005B68F1 /* TapsbookSDKDemoTests.m */; };
+		C183CBAD195D434D005B68F1 /* PhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CBAB195D434D005B68F1 /* PhotoListViewController.m */; };
+		C183CBB3195D4D36005B68F1 /* TapsbookSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C183CBB1195D4D36005B68F1 /* TapsbookSDK.bundle */; };
+		C183CBB4195D4D36005B68F1 /* TapsbookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB2195D4D36005B68F1 /* TapsbookSDK.framework */; };
+		C183CBB6195D5112005B68F1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB5195D5112005B68F1 /* libsqlite3.0.dylib */; };
+		C183CBB8195D5118005B68F1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB7195D5118005B68F1 /* libz.dylib */; };
+		C183CBBA195D5121005B68F1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB9195D5121005B68F1 /* Accelerate.framework */; };
+		C183CBBC195D5128005B68F1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBB195D5128005B68F1 /* AdSupport.framework */; };
+		C183CBBE195D5131005B68F1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBD195D5131005B68F1 /* SystemConfiguration.framework */; };
+		C183CBC0195D513C005B68F1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBF195D513C005B68F1 /* ImageIO.framework */; };
+		C183CBC2195D5143005B68F1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBC1195D5143005B68F1 /* MessageUI.framework */; };
+		C183CBC4195D5148005B68F1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBC3195D5148005B68F1 /* Social.framework */; };
+		C183CE88195D5291005B68F1 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE87195D5291005B68F1 /* PhotoCell.m */; };
+		C183CE8A195D52AC005B68F1 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C183CE89195D52AC005B68F1 /* PhotoCell.xib */; };
+		C183CE8C195D54BE005B68F1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CE8B195D54BE005B68F1 /* AssetsLibrary.framework */; };
+		C183CE8F195D69D4005B68F1 /* ALAssetRepresentation+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE8E195D69D4005B68F1 /* ALAssetRepresentation+Helper.m */; };
+		C183CE92195D6A85005B68F1 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE91195D6A85005B68F1 /* UIImage+Save.m */; };
+		C183CE94195D6D66005B68F1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CE93195D6D66005B68F1 /* CoreData.framework */; };
+		C18AEDB9195DAEDF005D2609 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE87195D5291005B68F1 /* PhotoCell.m */; };
+		C18AEDC5195DAEDF005D2609 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE91195D6A85005B68F1 /* UIImage+Save.m */; };
+		C18AEDCB195DAEDF005D2609 /* PhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CBAB195D434D005B68F1 /* PhotoListViewController.m */; };
+		C18AEDF9195DAEDF005D2609 /* ALAssetRepresentation+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CE8E195D69D4005B68F1 /* ALAssetRepresentation+Helper.m */; };
+		C18AEE07195DAEDF005D2609 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CB8B195D427E005B68F1 /* AppDelegate.m */; };
+		C18AEE0F195DAEDF005D2609 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C183CB87195D427E005B68F1 /* main.m */; };
+		C18AEE15195DAEDF005D2609 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CE93195D6D66005B68F1 /* CoreData.framework */; };
+		C18AEE16195DAEDF005D2609 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CE8B195D54BE005B68F1 /* AssetsLibrary.framework */; };
+		C18AEE17195DAEDF005D2609 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBC3195D5148005B68F1 /* Social.framework */; };
+		C18AEE18195DAEDF005D2609 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBC1195D5143005B68F1 /* MessageUI.framework */; };
+		C18AEE1B195DAEDF005D2609 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBF195D513C005B68F1 /* ImageIO.framework */; };
+		C18AEE1C195DAEDF005D2609 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBD195D5131005B68F1 /* SystemConfiguration.framework */; };
+		C18AEE1D195DAEDF005D2609 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBBB195D5128005B68F1 /* AdSupport.framework */; };
+		C18AEE1E195DAEDF005D2609 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB9195D5121005B68F1 /* Accelerate.framework */; };
+		C18AEE1F195DAEDF005D2609 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB7195D5118005B68F1 /* libz.dylib */; };
+		C18AEE20195DAEDF005D2609 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CBB5195D5112005B68F1 /* libsqlite3.0.dylib */; };
+		C18AEE22195DAEDF005D2609 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7D195D427E005B68F1 /* CoreGraphics.framework */; };
+		C18AEE23195DAEDF005D2609 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7F195D427E005B68F1 /* UIKit.framework */; };
+		C18AEE25195DAEDF005D2609 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C183CB7B195D427E005B68F1 /* Foundation.framework */; };
+		C18AEE27195DAEDF005D2609 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C183CE89195D52AC005B68F1 /* PhotoCell.xib */; };
+		C18AEE28195DAEDF005D2609 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C183CB84195D427E005B68F1 /* InfoPlist.strings */; };
+		C18AEE2A195DAEDF005D2609 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C183CB8D195D427E005B68F1 /* Images.xcassets */; };
+		C18AEE36195DAEF9005D2609 /* libTapsbookSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18AEDB2195DAED1005D2609 /* libTapsbookSDK.a */; };
+		C18AEE37195DAF05005D2609 /* TapsbookSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C18AEDB6195DAED1005D2609 /* TapsbookSDK.bundle */; };
+		C1C214481C31A2AE0036D700 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1C214471C31A2AE0036D700 /* LaunchScreen.xib */; };
+		C1C2144B1C31A3010036D700 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1C214471C31A2AE0036D700 /* LaunchScreen.xib */; };
+		C1C7EA0D197CE8E90000F91D /* SDKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */; };
+		C1CBE83F1C3418730028F23D /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CBE83D1C3418730028F23D /* CheckoutViewController.m */; };
+		C1CBE8401C3418730028F23D /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CBE83D1C3418730028F23D /* CheckoutViewController.m */; };
+		C1CBE8411C3418730028F23D /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1CBE83E1C3418730028F23D /* CheckoutViewController.xib */; };
+		C1CBE8421C3418730028F23D /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1CBE83E1C3418730028F23D /* CheckoutViewController.xib */; };
+		C1CDE60B1AB07A6400A2BA3C /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1CDE6091AB07A6400A2BA3C /* AlipaySDK.bundle */; };
+		C1CDE60C1AB07A6400A2BA3C /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1CDE6091AB07A6400A2BA3C /* AlipaySDK.bundle */; };
+		C1CDE60D1AB07A6400A2BA3C /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CDE60A1AB07A6400A2BA3C /* AlipaySDK.framework */; };
+		C1CDE60E1AB07A6400A2BA3C /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CDE60A1AB07A6400A2BA3C /* AlipaySDK.framework */; };
+		C1D6B85C1961A98A0077F14A /* SDKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */; };
+		C1EF9E771A4179F0009CDC3B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EF9E761A4179F0009CDC3B /* Photos.framework */; };
+		C1EF9E781A4179F8009CDC3B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EF9E761A4179F0009CDC3B /* Photos.framework */; };
+		D52811011C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */; };
+		D5744A5D1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */; };
+		D5744A5E1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */; };
+		D57DCB951BC717220004D8D0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB931BC717220004D8D0 /* Fabric.framework */; };
+		D57DCB961BC717220004D8D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB941BC717220004D8D0 /* Crashlytics.framework */; };
+		D57DCB9A1BC7174D0004D8D0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB971BC7174D0004D8D0 /* Fabric.framework */; };
+		D57DCB9C1BC7174D0004D8D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C183CB98195D427E005B68F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C183CB70195D427E005B68F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C183CB77195D427E005B68F1;
+			remoteInfo = TapsbookSDKDemo;
+		};
+		C18AEDB1195DAED1005D2609 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C110A3BE18D1B009003E5424;
+			remoteInfo = TapsbookSDK;
+		};
+		C18AEDB3195DAED1005D2609 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C110A3CE18D1B00A003E5424;
+			remoteInfo = TapsbookSDKTests;
+		};
+		C18AEDB5195DAED1005D2609 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C110A3FE18D1B764003E5424;
+			remoteInfo = TapsbookSDKResources;
+		};
+		C18AEE32195DAEF1005D2609 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C110A3BD18D1B009003E5424;
+			remoteInfo = TapsbookSDK;
+		};
+		C18AEE34195DAEF1005D2609 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C110A3FD18D1B764003E5424;
+			remoteInfo = TapsbookSDKResources;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4D23A48192C97F0E23E96B8A /* Pods-TapsbookSDKDemo_SDKDebug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapsbookSDKDemo_SDKDebug.release.xcconfig"; path = "Pods/Target Support Files/Pods-TapsbookSDKDemo_SDKDebug/Pods-TapsbookSDKDemo_SDKDebug.release.xcconfig"; sourceTree = "<group>"; };
+		8D30846C69ABA287706D3EB7 /* Pods-TapsbookSDKDemo_SDKDebug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapsbookSDKDemo_SDKDebug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TapsbookSDKDemo_SDKDebug/Pods-TapsbookSDKDemo_SDKDebug.debug.xcconfig"; sourceTree = "<group>"; };
+		BE67DFD198593D261CF56314 /* libPods-TapsbookSDKDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TapsbookSDKDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C129090A1A85115D00E0F8E1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C129090E1A85116600E0F8E1 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		C12FB9201C319BE4009C45A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C12FB9211C319BE4009C45A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C13F6A051BFA28C2000162F5 /* TapsbookSDKDemo_copy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TapsbookSDKDemo_copy.entitlements; sourceTree = "<group>"; };
+		C13F6A0D1BFA3F61000162F5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		C13F6A0E1BFA3F61000162F5 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		C13F6A0F1BFA3F61000162F5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		C13F6A101BFA3F61000162F5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		C13F6A151BFA3FFA000162F5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		C172D56019E5959400DB9D8B /* PullableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullableView.h; sourceTree = "<group>"; };
+		C172D56119E5959400DB9D8B /* PullableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullableView.m; sourceTree = "<group>"; };
+		C183CB78195D427E005B68F1 /* TapsbookSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapsbookSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C183CB7B195D427E005B68F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C183CB7D195D427E005B68F1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C183CB7F195D427E005B68F1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C183CB83195D427E005B68F1 /* TapsbookSDKDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapsbookSDKDemo-Info.plist"; sourceTree = "<group>"; };
+		C183CB85195D427E005B68F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C183CB87195D427E005B68F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C183CB89195D427E005B68F1 /* TapsbookSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapsbookSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
+		C183CB8A195D427E005B68F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C183CB8B195D427E005B68F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C183CB8D195D427E005B68F1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C183CB93195D427E005B68F1 /* TapsbookSDKDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapsbookSDKDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C183CB94195D427E005B68F1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C183CB9C195D427E005B68F1 /* TapsbookSDKDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapsbookSDKDemoTests-Info.plist"; sourceTree = "<group>"; };
+		C183CB9E195D427E005B68F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C183CBA0195D427E005B68F1 /* TapsbookSDKDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapsbookSDKDemoTests.m; sourceTree = "<group>"; };
+		C183CBAA195D434D005B68F1 /* PhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListViewController.h; sourceTree = "<group>"; };
+		C183CBAB195D434D005B68F1 /* PhotoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListViewController.m; sourceTree = "<group>"; };
+		C183CBAC195D434D005B68F1 /* PhotoListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoListViewController.xib; sourceTree = "<group>"; };
+		C183CBB1195D4D36005B68F1 /* TapsbookSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapsbookSDK.bundle; sourceTree = "<group>"; };
+		C183CBB2195D4D36005B68F1 /* TapsbookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TapsbookSDK.framework; sourceTree = "<group>"; };
+		C183CBB5195D5112005B68F1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C183CBB7195D5118005B68F1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C183CBB9195D5121005B68F1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C183CBBB195D5128005B68F1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		C183CBBD195D5131005B68F1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C183CBBF195D513C005B68F1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C183CBC1195D5143005B68F1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C183CBC3195D5148005B68F1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		C183CE86195D5291005B68F1 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		C183CE87195D5291005B68F1 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		C183CE89195D52AC005B68F1 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		C183CE8B195D54BE005B68F1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		C183CE8D195D69D4005B68F1 /* ALAssetRepresentation+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetRepresentation+Helper.h"; sourceTree = "<group>"; };
+		C183CE8E195D69D4005B68F1 /* ALAssetRepresentation+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetRepresentation+Helper.m"; sourceTree = "<group>"; };
+		C183CE90195D6A85005B68F1 /* UIImage+Save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Save.h"; sourceTree = "<group>"; };
+		C183CE91195D6A85005B68F1 /* UIImage+Save.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Save.m"; sourceTree = "<group>"; };
+		C183CE93195D6D66005B68F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapsbookSDK.xcodeproj; path = TapsbookSDK/TapsbookSDK.xcodeproj; sourceTree = "<group>"; };
+		C18AEE30195DAEDF005D2609 /* TapsbookSDKDemo_copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapsbookSDKDemo_copy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18AEE31195DAEDF005D2609 /* TapsbookSDKDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TapsbookSDKDemo copy-Info.plist"; path = "/Users/ultragtx/DevProjects/iOS/Projects/TapsbookSDKDemo/TapsbookSDKDemo copy-Info.plist"; sourceTree = "<absolute>"; };
+		C1C214471C31A2AE0036D700 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		C1CBE83C1C3418730028F23D /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
+		C1CBE83D1C3418730028F23D /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
+		C1CBE83E1C3418730028F23D /* CheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
+		C1CDE6091AB07A6400A2BA3C /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		C1CDE60A1AB07A6400A2BA3C /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		C1D044501A4D99FE00D8F77F /* WalgreensQPSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WalgreensQPSDK.framework; sourceTree = "<group>"; };
+		C1D6B85A1961A98A0077F14A /* SDKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKConfigurator.h; sourceTree = "<group>"; };
+		C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKConfigurator.m; sourceTree = "<group>"; };
+		C1EF9E761A4179F0009CDC3B /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		CB0D9BE1188903B4D06DFADE /* Pods-TapsbookSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapsbookSDKDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TapsbookSDKDemo/Pods-TapsbookSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		D52810FF1C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKConfiguratorCustomCheckout.h; sourceTree = "<group>"; };
+		D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKConfiguratorCustomCheckout.m; sourceTree = "<group>"; };
+		D5744A5B1C347DC8007C5191 /* TBPSSizeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPSSizeUtil.h; sourceTree = "<group>"; };
+		D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPSSizeUtil.m; sourceTree = "<group>"; };
+		D57DCB931BC717220004D8D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D57DCB941BC717220004D8D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D57DCB971BC7174D0004D8D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		EB6753D72E91E639204F795B /* Pods-TapsbookSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapsbookSDKDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TapsbookSDKDemo/Pods-TapsbookSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		FC4CE376242D33DABFD5CFE7 /* libPods-TapsbookSDKDemo_SDKDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TapsbookSDKDemo_SDKDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C183CB75195D427E005B68F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1EF9E781A4179F8009CDC3B /* Photos.framework in Frameworks */,
+				C183CE94195D6D66005B68F1 /* CoreData.framework in Frameworks */,
+				C1CDE60D1AB07A6400A2BA3C /* AlipaySDK.framework in Frameworks */,
+				D57DCB951BC717220004D8D0 /* Fabric.framework in Frameworks */,
+				C183CE8C195D54BE005B68F1 /* AssetsLibrary.framework in Frameworks */,
+				D57DCB961BC717220004D8D0 /* Crashlytics.framework in Frameworks */,
+				C183CBC4195D5148005B68F1 /* Social.framework in Frameworks */,
+				C183CBC2195D5143005B68F1 /* MessageUI.framework in Frameworks */,
+				C183CBC0195D513C005B68F1 /* ImageIO.framework in Frameworks */,
+				C183CBBE195D5131005B68F1 /* SystemConfiguration.framework in Frameworks */,
+				C183CBBC195D5128005B68F1 /* AdSupport.framework in Frameworks */,
+				C183CBBA195D5121005B68F1 /* Accelerate.framework in Frameworks */,
+				C183CBB8195D5118005B68F1 /* libz.dylib in Frameworks */,
+				C183CBB6195D5112005B68F1 /* libsqlite3.0.dylib in Frameworks */,
+				C13F6A111BFA3F61000162F5 /* libWeChatSDK.a in Frameworks */,
+				C183CB7E195D427E005B68F1 /* CoreGraphics.framework in Frameworks */,
+				C183CB80195D427E005B68F1 /* UIKit.framework in Frameworks */,
+				C183CBB4195D4D36005B68F1 /* TapsbookSDK.framework in Frameworks */,
+				C183CB7C195D427E005B68F1 /* Foundation.framework in Frameworks */,
+				35235B028B57CDACFAC7472F /* libPods-TapsbookSDKDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C183CB90195D427E005B68F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C183CB95195D427E005B68F1 /* XCTest.framework in Frameworks */,
+				C183CB97195D427E005B68F1 /* UIKit.framework in Frameworks */,
+				C183CB96195D427E005B68F1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18AEE14195DAEDF005D2609 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C13F6A161BFA3FFA000162F5 /* libc++.tbd in Frameworks */,
+				C129090F1A85116600E0F8E1 /* AddressBookUI.framework in Frameworks */,
+				C129090B1A85115D00E0F8E1 /* CoreLocation.framework in Frameworks */,
+				C1EF9E771A4179F0009CDC3B /* Photos.framework in Frameworks */,
+				C18AEE15195DAEDF005D2609 /* CoreData.framework in Frameworks */,
+				C18AEE16195DAEDF005D2609 /* AssetsLibrary.framework in Frameworks */,
+				C18AEE17195DAEDF005D2609 /* Social.framework in Frameworks */,
+				C18AEE18195DAEDF005D2609 /* MessageUI.framework in Frameworks */,
+				C18AEE1B195DAEDF005D2609 /* ImageIO.framework in Frameworks */,
+				C18AEE1C195DAEDF005D2609 /* SystemConfiguration.framework in Frameworks */,
+				D57DCB9C1BC7174D0004D8D0 /* Crashlytics.framework in Frameworks */,
+				C18AEE1D195DAEDF005D2609 /* AdSupport.framework in Frameworks */,
+				C18AEE1E195DAEDF005D2609 /* Accelerate.framework in Frameworks */,
+				C18AEE1F195DAEDF005D2609 /* libz.dylib in Frameworks */,
+				C1CDE60E1AB07A6400A2BA3C /* AlipaySDK.framework in Frameworks */,
+				D57DCB9A1BC7174D0004D8D0 /* Fabric.framework in Frameworks */,
+				C18AEE20195DAEDF005D2609 /* libsqlite3.0.dylib in Frameworks */,
+				C13F6A121BFA3F61000162F5 /* libWeChatSDK.a in Frameworks */,
+				C18AEE22195DAEDF005D2609 /* CoreGraphics.framework in Frameworks */,
+				C18AEE23195DAEDF005D2609 /* UIKit.framework in Frameworks */,
+				C18AEE25195DAEDF005D2609 /* Foundation.framework in Frameworks */,
+				C18AEE36195DAEF9005D2609 /* libTapsbookSDK.a in Frameworks */,
+				974306D8A83581D201CA61CE /* libPods-TapsbookSDKDemo_SDKDebug.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7FC5C0C97B309C39A9A64C80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB6753D72E91E639204F795B /* Pods-TapsbookSDKDemo.debug.xcconfig */,
+				CB0D9BE1188903B4D06DFADE /* Pods-TapsbookSDKDemo.release.xcconfig */,
+				8D30846C69ABA287706D3EB7 /* Pods-TapsbookSDKDemo_SDKDebug.debug.xcconfig */,
+				4D23A48192C97F0E23E96B8A /* Pods-TapsbookSDKDemo_SDKDebug.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C13F6A0C1BFA3F61000162F5 /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C13F6A0D1BFA3F61000162F5 /* libWeChatSDK.a */,
+				C13F6A0E1BFA3F61000162F5 /* read_me.txt */,
+				C13F6A0F1BFA3F61000162F5 /* WXApi.h */,
+				C13F6A101BFA3F61000162F5 /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
+			sourceTree = "<group>";
+		};
+		C172D55F19E5959400DB9D8B /* PullableView */ = {
+			isa = PBXGroup;
+			children = (
+				C172D56019E5959400DB9D8B /* PullableView.h */,
+				C172D56119E5959400DB9D8B /* PullableView.m */,
+			);
+			path = PullableView;
+			sourceTree = "<group>";
+		};
+		C183CB6F195D427E005B68F1 = {
+			isa = PBXGroup;
+			children = (
+				C13F6A051BFA28C2000162F5 /* TapsbookSDKDemo_copy.entitlements */,
+				C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */,
+				C183CBB0195D4D36005B68F1 /* TapsbookSDK_Binary */,
+				C183CD31195D51BE005B68F1 /* SDKVendor */,
+				C183CB81195D427E005B68F1 /* TapsbookSDKDemo */,
+				C183CB9A195D427E005B68F1 /* TapsbookSDKDemoTests */,
+				C183CB7A195D427E005B68F1 /* Frameworks */,
+				C183CB79195D427E005B68F1 /* Products */,
+				C18AEE31195DAEDF005D2609 /* TapsbookSDKDemo copy-Info.plist */,
+				7FC5C0C97B309C39A9A64C80 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		C183CB79195D427E005B68F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C183CB78195D427E005B68F1 /* TapsbookSDKDemo.app */,
+				C183CB93195D427E005B68F1 /* TapsbookSDKDemoTests.xctest */,
+				C18AEE30195DAEDF005D2609 /* TapsbookSDKDemo_copy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C183CB7A195D427E005B68F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C13F6A151BFA3FFA000162F5 /* libc++.tbd */,
+				D57DCB971BC7174D0004D8D0 /* Fabric.framework */,
+				D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */,
+				D57DCB931BC717220004D8D0 /* Fabric.framework */,
+				D57DCB941BC717220004D8D0 /* Crashlytics.framework */,
+				C129090E1A85116600E0F8E1 /* AddressBookUI.framework */,
+				C129090A1A85115D00E0F8E1 /* CoreLocation.framework */,
+				C1EF9E761A4179F0009CDC3B /* Photos.framework */,
+				C183CE93195D6D66005B68F1 /* CoreData.framework */,
+				C183CE8B195D54BE005B68F1 /* AssetsLibrary.framework */,
+				C183CBC3195D5148005B68F1 /* Social.framework */,
+				C183CBC1195D5143005B68F1 /* MessageUI.framework */,
+				C183CBBF195D513C005B68F1 /* ImageIO.framework */,
+				C183CBBD195D5131005B68F1 /* SystemConfiguration.framework */,
+				C183CBBB195D5128005B68F1 /* AdSupport.framework */,
+				C183CBB9195D5121005B68F1 /* Accelerate.framework */,
+				C183CBB7195D5118005B68F1 /* libz.dylib */,
+				C183CBB5195D5112005B68F1 /* libsqlite3.0.dylib */,
+				C183CB7B195D427E005B68F1 /* Foundation.framework */,
+				C183CB7D195D427E005B68F1 /* CoreGraphics.framework */,
+				C183CB7F195D427E005B68F1 /* UIKit.framework */,
+				C183CB94195D427E005B68F1 /* XCTest.framework */,
+				BE67DFD198593D261CF56314 /* libPods-TapsbookSDKDemo.a */,
+				FC4CE376242D33DABFD5CFE7 /* libPods-TapsbookSDKDemo_SDKDebug.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C183CB81195D427E005B68F1 /* TapsbookSDKDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D5744A5B1C347DC8007C5191 /* TBPSSizeUtil.h */,
+				D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */,
+				C183CB8A195D427E005B68F1 /* AppDelegate.h */,
+				C183CB8B195D427E005B68F1 /* AppDelegate.m */,
+				C1D6B85A1961A98A0077F14A /* SDKConfigurator.h */,
+				C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */,
+				D52810FF1C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.h */,
+				D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */,
+				C1CBE83C1C3418730028F23D /* CheckoutViewController.h */,
+				C1CBE83D1C3418730028F23D /* CheckoutViewController.m */,
+				C1CBE83E1C3418730028F23D /* CheckoutViewController.xib */,
+				C183CBAA195D434D005B68F1 /* PhotoListViewController.h */,
+				C183CBAB195D434D005B68F1 /* PhotoListViewController.m */,
+				C183CBAC195D434D005B68F1 /* PhotoListViewController.xib */,
+				C183CE86195D5291005B68F1 /* PhotoCell.h */,
+				C183CE87195D5291005B68F1 /* PhotoCell.m */,
+				C183CE89195D52AC005B68F1 /* PhotoCell.xib */,
+				C183CE8D195D69D4005B68F1 /* ALAssetRepresentation+Helper.h */,
+				C183CE8E195D69D4005B68F1 /* ALAssetRepresentation+Helper.m */,
+				C183CE90195D6A85005B68F1 /* UIImage+Save.h */,
+				C183CE91195D6A85005B68F1 /* UIImage+Save.m */,
+				C1C214471C31A2AE0036D700 /* LaunchScreen.xib */,
+				C183CB8D195D427E005B68F1 /* Images.xcassets */,
+				C183CB82195D427E005B68F1 /* Supporting Files */,
+			);
+			path = TapsbookSDKDemo;
+			sourceTree = "<group>";
+		};
+		C183CB82195D427E005B68F1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C183CB83195D427E005B68F1 /* TapsbookSDKDemo-Info.plist */,
+				C183CB84195D427E005B68F1 /* InfoPlist.strings */,
+				C183CB87195D427E005B68F1 /* main.m */,
+				C183CB89195D427E005B68F1 /* TapsbookSDKDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C183CB9A195D427E005B68F1 /* TapsbookSDKDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				C183CBA0195D427E005B68F1 /* TapsbookSDKDemoTests.m */,
+				C183CB9B195D427E005B68F1 /* Supporting Files */,
+			);
+			path = TapsbookSDKDemoTests;
+			sourceTree = "<group>";
+		};
+		C183CB9B195D427E005B68F1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C183CB9C195D427E005B68F1 /* TapsbookSDKDemoTests-Info.plist */,
+				C183CB9D195D427E005B68F1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C183CBB0195D4D36005B68F1 /* TapsbookSDK_Binary */ = {
+			isa = PBXGroup;
+			children = (
+				C183CBB1195D4D36005B68F1 /* TapsbookSDK.bundle */,
+				C183CBB2195D4D36005B68F1 /* TapsbookSDK.framework */,
+			);
+			path = TapsbookSDK_Binary;
+			sourceTree = "<group>";
+		};
+		C183CD31195D51BE005B68F1 /* SDKVendor */ = {
+			isa = PBXGroup;
+			children = (
+				C13F6A0C1BFA3F61000162F5 /* WeChatSDK */,
+				C1CDE6081AB07A6400A2BA3C /* AliSDK */,
+				C1D0444F1A4D99FE00D8F77F /* WalgreesQPSDK */,
+				C172D55F19E5959400DB9D8B /* PullableView */,
+			);
+			path = SDKVendor;
+			sourceTree = "<group>";
+		};
+		C18AEDAA195DAED0005D2609 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C18AEDB2195DAED1005D2609 /* libTapsbookSDK.a */,
+				C18AEDB4195DAED1005D2609 /* TapsbookSDKTests.xctest */,
+				C18AEDB6195DAED1005D2609 /* TapsbookSDK.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C1CDE6081AB07A6400A2BA3C /* AliSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C1CDE6091AB07A6400A2BA3C /* AlipaySDK.bundle */,
+				C1CDE60A1AB07A6400A2BA3C /* AlipaySDK.framework */,
+			);
+			path = AliSDK;
+			sourceTree = "<group>";
+		};
+		C1D0444F1A4D99FE00D8F77F /* WalgreesQPSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C1D044501A4D99FE00D8F77F /* WalgreensQPSDK.framework */,
+			);
+			path = WalgreesQPSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C183CB77195D427E005B68F1 /* TapsbookSDKDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C183CBA4195D427E005B68F1 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemo" */;
+			buildPhases = (
+				CC588399D181D80F6673E1FA /* Check Pods Manifest.lock */,
+				C183CB74195D427E005B68F1 /* Sources */,
+				C183CB75195D427E005B68F1 /* Frameworks */,
+				C183CB76195D427E005B68F1 /* Resources */,
+				D57DCB911BC716C30004D8D0 /* ShellScript */,
+				F9DFA1235E0A0D228AE11E3E /* Embed Pods Frameworks */,
+				2B47BD36BB2F571996C432B1 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TapsbookSDKDemo;
+			productName = TapsbookSDKDemo;
+			productReference = C183CB78195D427E005B68F1 /* TapsbookSDKDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C183CB92195D427E005B68F1 /* TapsbookSDKDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C183CBA7195D427E005B68F1 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemoTests" */;
+			buildPhases = (
+				C183CB8F195D427E005B68F1 /* Sources */,
+				C183CB90195D427E005B68F1 /* Frameworks */,
+				C183CB91195D427E005B68F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C183CB99195D427E005B68F1 /* PBXTargetDependency */,
+			);
+			name = TapsbookSDKDemoTests;
+			productName = TapsbookSDKDemoTests;
+			productReference = C183CB93195D427E005B68F1 /* TapsbookSDKDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C18AEDB7195DAEDF005D2609 /* TapsbookSDKDemo_SDKDebug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C18AEE2D195DAEDF005D2609 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemo_SDKDebug" */;
+			buildPhases = (
+				700EA12223C5962742BF8CB8 /* Check Pods Manifest.lock */,
+				C18AEDB8195DAEDF005D2609 /* Sources */,
+				C18AEE14195DAEDF005D2609 /* Frameworks */,
+				C18AEE26195DAEDF005D2609 /* Resources */,
+				D57DCB9F1BC7191E0004D8D0 /* ShellScript */,
+				39F03808BF557F22F58D6D80 /* Embed Pods Frameworks */,
+				076F00272E752725BBE9FF12 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C18AEE33195DAEF1005D2609 /* PBXTargetDependency */,
+				C18AEE35195DAEF1005D2609 /* PBXTargetDependency */,
+			);
+			name = TapsbookSDKDemo_SDKDebug;
+			productName = TapsbookSDKDemo;
+			productReference = C18AEE30195DAEDF005D2609 /* TapsbookSDKDemo_copy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C183CB70195D427E005B68F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = tapsbook;
+				TargetAttributes = {
+					C183CB77195D427E005B68F1 = {
+						DevelopmentTeam = QRRQ9XR4VE;
+					};
+					C183CB92195D427E005B68F1 = {
+						TestTargetID = C183CB77195D427E005B68F1;
+					};
+					C18AEDB7195DAEDF005D2609 = {
+						DevelopmentTeam = QRRQ9XR4VE;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = C183CB73195D427E005B68F1 /* Build configuration list for PBXProject "TapsbookSDKDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ar,
+			);
+			mainGroup = C183CB6F195D427E005B68F1;
+			productRefGroup = C183CB79195D427E005B68F1 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C18AEDAA195DAED0005D2609 /* Products */;
+					ProjectRef = C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C183CB77195D427E005B68F1 /* TapsbookSDKDemo */,
+				C183CB92195D427E005B68F1 /* TapsbookSDKDemoTests */,
+				C18AEDB7195DAEDF005D2609 /* TapsbookSDKDemo_SDKDebug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C18AEDB2195DAED1005D2609 /* libTapsbookSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTapsbookSDK.a;
+			remoteRef = C18AEDB1195DAED1005D2609 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C18AEDB4195DAED1005D2609 /* TapsbookSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TapsbookSDKTests.xctest;
+			remoteRef = C18AEDB3195DAED1005D2609 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C18AEDB6195DAED1005D2609 /* TapsbookSDK.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TapsbookSDK.bundle;
+			remoteRef = C18AEDB5195DAED1005D2609 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C183CB76195D427E005B68F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134FC181A424DFF00F02B8F /* PhotoListViewController.xib in Resources */,
+				C183CE8A195D52AC005B68F1 /* PhotoCell.xib in Resources */,
+				C1CDE60B1AB07A6400A2BA3C /* AlipaySDK.bundle in Resources */,
+				C183CB86195D427E005B68F1 /* InfoPlist.strings in Resources */,
+				C1C214481C31A2AE0036D700 /* LaunchScreen.xib in Resources */,
+				C183CB8E195D427E005B68F1 /* Images.xcassets in Resources */,
+				C183CBB3195D4D36005B68F1 /* TapsbookSDK.bundle in Resources */,
+				C1CBE8411C3418730028F23D /* CheckoutViewController.xib in Resources */,
+				C13F6A131BFA3F61000162F5 /* read_me.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C183CB91195D427E005B68F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C183CB9F195D427E005B68F1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18AEE26195DAEDF005D2609 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C134FC171A424DFF00F02B8F /* PhotoListViewController.xib in Resources */,
+				C18AEE27195DAEDF005D2609 /* PhotoCell.xib in Resources */,
+				C1CDE60C1AB07A6400A2BA3C /* AlipaySDK.bundle in Resources */,
+				C18AEE28195DAEDF005D2609 /* InfoPlist.strings in Resources */,
+				C1C2144B1C31A3010036D700 /* LaunchScreen.xib in Resources */,
+				C18AEE2A195DAEDF005D2609 /* Images.xcassets in Resources */,
+				C18AEE37195DAF05005D2609 /* TapsbookSDK.bundle in Resources */,
+				C1CBE8421C3418730028F23D /* CheckoutViewController.xib in Resources */,
+				C13F6A141BFA3F61000162F5 /* read_me.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		076F00272E752725BBE9FF12 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TapsbookSDKDemo_SDKDebug/Pods-TapsbookSDKDemo_SDKDebug-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B47BD36BB2F571996C432B1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TapsbookSDKDemo/Pods-TapsbookSDKDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		39F03808BF557F22F58D6D80 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TapsbookSDKDemo_SDKDebug/Pods-TapsbookSDKDemo_SDKDebug-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		700EA12223C5962742BF8CB8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CC588399D181D80F6673E1FA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D57DCB911BC716C30004D8D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "releaseConfig=\"Release\"\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Crashlytics\"\n./Fabric.framework/run a818b70774b1d9f278cb7562ab89516677503409 05bc3b21664c58e20d247f95dc36fa71f1d0e4e0dc35abca97586fe1ce7c186f\nfi\n";
+		};
+		D57DCB9F1BC7191E0004D8D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "releaseConfig=\"Release\"\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Crashlytics\"\n./Fabric.framework/run a818b70774b1d9f278cb7562ab89516677503409 05bc3b21664c58e20d247f95dc36fa71f1d0e4e0dc35abca97586fe1ce7c186f\nfi";
+		};
+		F9DFA1235E0A0D228AE11E3E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TapsbookSDKDemo/Pods-TapsbookSDKDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C183CB74195D427E005B68F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C183CE88195D5291005B68F1 /* PhotoCell.m in Sources */,
+				C1D6B85C1961A98A0077F14A /* SDKConfigurator.m in Sources */,
+				C183CE92195D6A85005B68F1 /* UIImage+Save.m in Sources */,
+				D5744A5D1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */,
+				C172D66019E5959400DB9D8B /* PullableView.m in Sources */,
+				C183CBAD195D434D005B68F1 /* PhotoListViewController.m in Sources */,
+				D52811011C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m in Sources */,
+				C1CBE83F1C3418730028F23D /* CheckoutViewController.m in Sources */,
+				C183CE8F195D69D4005B68F1 /* ALAssetRepresentation+Helper.m in Sources */,
+				C183CB8C195D427E005B68F1 /* AppDelegate.m in Sources */,
+				C183CB88195D427E005B68F1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C183CB8F195D427E005B68F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C183CBA1195D427E005B68F1 /* TapsbookSDKDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18AEDB8195DAEDF005D2609 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C18AEDB9195DAEDF005D2609 /* PhotoCell.m in Sources */,
+				C1C7EA0D197CE8E90000F91D /* SDKConfigurator.m in Sources */,
+				C18AEDC5195DAEDF005D2609 /* UIImage+Save.m in Sources */,
+				D5744A5E1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */,
+				C172D66119E5959400DB9D8B /* PullableView.m in Sources */,
+				C18AEDCB195DAEDF005D2609 /* PhotoListViewController.m in Sources */,
+				C12FB8EA1C316755009C45A6 /* SDKConfiguratorCustomCheckout.m in Sources */,
+				C1CBE8401C3418730028F23D /* CheckoutViewController.m in Sources */,
+				C18AEDF9195DAEDF005D2609 /* ALAssetRepresentation+Helper.m in Sources */,
+				C18AEE07195DAEDF005D2609 /* AppDelegate.m in Sources */,
+				C18AEE0F195DAEDF005D2609 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C183CB99195D427E005B68F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C183CB77195D427E005B68F1 /* TapsbookSDKDemo */;
+			targetProxy = C183CB98195D427E005B68F1 /* PBXContainerItemProxy */;
+		};
+		C18AEE33195DAEF1005D2609 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TapsbookSDK;
+			targetProxy = C18AEE32195DAEF1005D2609 /* PBXContainerItemProxy */;
+		};
+		C18AEE35195DAEF1005D2609 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TapsbookSDKResources;
+			targetProxy = C18AEE34195DAEF1005D2609 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C183CB84195D427E005B68F1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C183CB85195D427E005B68F1 /* en */,
+				C12FB9201C319BE4009C45A6 /* ar */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C183CB9D195D427E005B68F1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C183CB9E195D427E005B68F1 /* en */,
+				C12FB9211C319BE4009C45A6 /* ar */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C183CBA2195D427E005B68F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		C183CBA3195D427E005B68F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C183CBA5195D427E005B68F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB6753D72E91E639204F795B /* Pods-TapsbookSDKDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TapsbookSDK_Binary",
+					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
+					"$(PROJECT_DIR)/SDKVendor/AliSDK",
+					"$(PROJECT_DIR)/SDKVendor",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/SDKVendor",
+				);
+				INFOPLIST_FILE = "TapsbookSDKDemo/TapsbookSDKDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
+					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
+					"$(PROJECT_DIR)/SDKVendor/GAI",
+					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapsbook.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C183CBA6195D427E005B68F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB0D9BE1188903B4D06DFADE /* Pods-TapsbookSDKDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TapsbookSDK_Binary",
+					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
+					"$(PROJECT_DIR)/SDKVendor/AliSDK",
+					"$(PROJECT_DIR)/SDKVendor",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/SDKVendor",
+				);
+				INFOPLIST_FILE = "TapsbookSDKDemo/TapsbookSDKDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
+					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
+					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
+					"$(PROJECT_DIR)/SDKVendor/GAI",
+					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapsbook.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C183CBA8195D427E005B68F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapsbookSDKDemo.app/TapsbookSDKDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TapsbookSDKDemoTests/TapsbookSDKDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapsbook.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C183CBA9195D427E005B68F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapsbookSDKDemo.app/TapsbookSDKDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				INFOPLIST_FILE = "TapsbookSDKDemoTests/TapsbookSDKDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tapsbook.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		C18AEE2E195DAEDF005D2609 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D30846C69ABA287706D3EB7 /* Pods-TapsbookSDKDemo_SDKDebug.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TapsbookSDK_Binary",
+					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
+					"$(PROJECT_DIR)/SDKVendor/AliSDK",
+					"$(PROJECT_DIR)/SDKVendor",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/SDKVendor",
+				);
+				INFOPLIST_FILE = "TapsbookSDKDemo copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.atomknows.tapsbookSDKDemo;
+				PRODUCT_NAME = TapsbookSDKDemo_copy;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C18AEE2F195DAEDF005D2609 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D23A48192C97F0E23E96B8A /* Pods-TapsbookSDKDemo_SDKDebug.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TapsbookSDK_Binary",
+					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
+					"$(PROJECT_DIR)/SDKVendor/AliSDK",
+					"$(PROJECT_DIR)/SDKVendor",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapsbookSDKDemo/TapsbookSDKDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/SDKVendor",
+				);
+				INFOPLIST_FILE = "TapsbookSDKDemo copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.atomknows.tapsbookSDKDemo;
+				PRODUCT_NAME = TapsbookSDKDemo_copy;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C183CB73195D427E005B68F1 /* Build configuration list for PBXProject "TapsbookSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C183CBA2195D427E005B68F1 /* Debug */,
+				C183CBA3195D427E005B68F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C183CBA4195D427E005B68F1 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C183CBA5195D427E005B68F1 /* Debug */,
+				C183CBA6195D427E005B68F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C183CBA7195D427E005B68F1 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C183CBA8195D427E005B68F1 /* Debug */,
+				C183CBA9195D427E005B68F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C18AEE2D195DAEDF005D2609 /* Build configuration list for PBXNativeTarget "TapsbookSDKDemo_SDKDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C18AEE2E195DAEDF005D2609 /* Debug */,
+				C18AEE2F195DAEDF005D2609 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C183CB70195D427E005B68F1 /* Project object */;
+}
