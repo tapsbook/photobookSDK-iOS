@@ -24,7 +24,7 @@
     [[TBWeChatManager sharedInstance] setupWithApplication:application options:launchOptions];
     [[TBFacebookManager sharedInstance] setupWithApplication:application options:launchOptions];
     
-    [Fabric with:@[[Crashlytics class]]];
+//    [Fabric with:@[[Crashlytics class]]];
     
 //    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfigurator"];
     [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfiguratorCustomCheckout"];
