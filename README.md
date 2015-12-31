@@ -1,3 +1,5 @@
+## Tapsbook Photo Merchandising SDK
+
 The Tapsbook photo book iOS SDK allows you to easily integrate a native photo book creation and ordering experience directly in your iPhone or iPad app. Our photo book solution offers a quick and simple experience for your app users to preserve memories and showcase their favorite photos in a beautiful way while enabling you to maximize your monetization.  The SDK provides three ready-to-use components to help you integrate our photo book solution within an hour.
 
 1. Simple yet powerful photo book tool for your users to quickly create photo book in a few minutes
