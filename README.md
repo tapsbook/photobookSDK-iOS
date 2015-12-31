@@ -8,10 +8,10 @@ The SDK is integrated with the backend system via REST API to manage the photo b
 
 To get started, you will need to:
 
-1. Sign up for a free tapsBook developer account: Go to http://search.tapsbook.com to sign up. 
+1. Sign up for a free tapsBook developer account: Go to http://search.tapsbook.com to sign up. Shoot us an email help at tapsbook.com before you sign up.
 2. Register your app and get an app key.
 
-Binary builds of the SDK are available for [download](https://dl.dropboxusercontent.com/s/bwebjqfrpnbygt1/SDK-1.1.6.zip?dl=0)
+Binary builds of the SDK is embedded in this repo
 
 - Current release is iOS 8 compatible: 1.1.6 (updated 2015-12-27) 
 - The binary includes both 32bit and 64bit compiled output
@@ -19,8 +19,8 @@ Binary builds of the SDK are available for [download](https://dl.dropboxusercont
 
 Sample apps:
 
- - You can try out the photo book creation and ordering experience offered by TapsBook SDK in our demo Cleen app, available in the App Store
- - We also have a "hello world" photo book app [Download](https://dl.dropboxusercontent.com/s/29uvn7gt1ucxfj9/photobook-sample-1.1.6.zip?dl=0) that demonstrates how to build a photo book app using the SDK in minutes
+ - You can try out the photo book creation and ordering experience offered by TapsBook SDK in our [Cleen app](https://itunes.apple.com/us/app/cleen-books-delete-photos/id926163661?mt=8) available in the App Store
+ - This repo contains a demo app that demonstrates how to build a photo book app using the SDK in minutes
  
 Our Quick Start Guide will get you up and going fast:
 
