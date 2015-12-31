@@ -6,6 +6,8 @@ The Tapsbook photo book iOS SDK allows you to easily integrate a native photo bo
 2. Beautiful, fully customizable photo book page templates featuring your own branding/logo
 3. Full-featured, frictionless eCommerce checkout workflow for processing payments via Stripe APIs
 
+![untitled](https://cloud.githubusercontent.com/assets/842068/12061807/f0ba9ed0-af5d-11e5-977b-0cd03c67273d.gif)
+
 The SDK is integrated with the backend system via REST API to manage the photo book printing workflow by working with our photo book print partners and shipping service providers to offer you a turnkey photo merchandising solution.
 
 To get started, you will need to:
