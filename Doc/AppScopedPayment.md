@@ -6,5 +6,5 @@
 
 3. Please note that "Payment gateway" page contains the global stripe account that is available to all apps. If ann app does not contain individual stripe details, then the global stripe account (found in payment gateway screen) will be used for transactions. Therefore, do not remove items from "Payment gateway."
 
-![image](https://cloud.githubusercontent.com/assets/842068/12279519/a0793222-b955-11e5-9e9e-eaec3dd3b020.png)
+
 
