@@ -1,4 +1,4 @@
-### how to have individual Stripe account per app
+### Add individual Stripe account per app
 
 1. Login to dashboard and click on "My Profile" link in the top right drop-down.
 
