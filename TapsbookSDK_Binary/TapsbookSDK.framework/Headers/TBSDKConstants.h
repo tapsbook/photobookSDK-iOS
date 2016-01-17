@@ -117,6 +117,7 @@ extern NSString * const kTBGeneratePageImagesInDebugMode;
 extern NSString * const kTBPreferredProductSKU;
 extern NSString * const kTBProductSubType;
 extern NSString * const kTBSendOrderInfoToHostingApp;
+extern NSString * const kTBExternalCheckoutType;
 
 ///---------------------------------------
 /// @name Color Customization

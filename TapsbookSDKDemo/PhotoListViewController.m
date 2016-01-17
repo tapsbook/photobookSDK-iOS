@@ -54,6 +54,10 @@
 
 @property (assign, nonatomic) BOOL shouldCreateCanvas;
 
+// checkout 3
+@property (strong, nonatomic) NSMutableArray *albumsInCart;
+@property (strong, nonatomic) UIButton *checkoutButton;
+
 @end
 
 @implementation PhotoListViewController
@@ -72,6 +76,8 @@ static CGSize AssetGridThumbnailSize;
         
         _imageCacheingQueue = [[NSOperationQueue alloc] init];
         [self.imageCacheingQueue setMaxConcurrentOperationCount:3];
+        
+        _albumsInCart = [NSMutableArray array];
     }
     return self;
 }
@@ -125,6 +131,14 @@ static CGSize AssetGridThumbnailSize;
 //                                                sdkOrderListButton,
 //                                                sdkLoginButton,
                                                 ];
+    
+    UIButton *checkoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [checkoutButton setTitle:@"Cart(0)" forState:UIControlStateNormal];
+    [checkoutButton addTarget:self action:@selector(handleCheckoutButton:) forControlEvents:UIControlEventTouchUpInside];
+    [checkoutButton sizeToFit];
+    self.checkoutButton = checkoutButton;
+    UIBarButtonItem *checkoutButtonItem = [[UIBarButtonItem alloc] initWithCustomView:checkoutButton];
+    self.navigationItem.leftBarButtonItem = checkoutButtonItem;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -347,7 +361,7 @@ static CGSize AssetGridThumbnailSize;
 //                    self.shouldCreateCanvas = !self.shouldCreateCanvas;
 
                     
-//                    [[TBSDKAlbumManager sharedInstance] sdkAlbumOfID:1 completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
+//                    [[TBSDKAlbumManager sharedInstance] sdkAlbumOfID:52 completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
 //                        [[TBSDKAlbumManager sharedInstance] addImages:tbImages toSDKAlbum:sdkAlbum completionBlock:^(BOOL success, NSUInteger photosAdded, NSError *error) {
 //                            [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum presentOnViewController:self.navigationController shouldPrintDirectly:NO];
 //                        }];
@@ -428,12 +442,41 @@ static CGSize AssetGridThumbnailSize;
     }
 }
 
-#pragma mark -
-// required delegate for using your own checkout view controller
-- (void)albumManager:(TBSDKAlbumManager *)albumManager printAndCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:(UIViewController *)viewController {
-    CheckoutViewController *vc = [CheckoutViewController new];
-    vc.albumInfo = infoDict;
-    [viewController presentViewController:vc animated:YES completion:nil];
+#pragma mark - Checkout 3
+
+- (void)handleCheckoutButton:(id)sender {
+    if (self.albumsInCart.count == 0) {
+        return;
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[TBSDKAlbumManager sharedInstance] checkout3_checkoutAlbumsWithIDs:self.albumsInCart completionBlock:^(BOOL success, id result, NSError *error) {
+        [hud hide:YES];
+        if (success) {
+            
+        }
+        else {
+            [UIAlertView bk_showAlertViewWithTitle:@"Error" message:error.localizedDescription cancelButtonTitle:@"OK" otherButtonTitles:nil handler:nil];
+        }
+    }];
+}
+
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    [self.albumsInCart addObject:@(sdkAlbum.ID)];
+    
+    [self.checkoutButton setTitle:[NSString stringWithFormat:@"Cart(%zd)", self.albumsInCart.count] forState:UIControlStateNormal];
+    
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    // Update your cart view
+    
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum {
+    BOOL contains = [self.albumsInCart containsObject:@(sdkAlbum.ID)];
+    return contains;
 }
 
 @end

@@ -40,6 +40,11 @@
 
 - (void)fetchProductListWithCompletionBlock:(void (^)(BOOL success, NSArray *products, NSError *error))completionBlock;
 
+///---------------------------------------
+/// Checkout flow, type 3
+///---------------------------------------
+- (void)checkout3_checkoutAlbumsWithIDs:(NSArray *)albumIDs completionBlock:(void (^)(BOOL success, id result, NSError *error))completionBlock;
+
 @end
 
 @protocol TBSDKAlbumManagerDelegate_Checkout <TBSDKAlbumManagerDelegate>
@@ -104,5 +109,14 @@ loadPrintInfosForSDKAlbum:(TBSDKAlbum *)sdkAlbum
 
 - (void)albumManager:(TBSDKAlbumManager *)albumManager printAndCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:(UIViewController *)viewController;
 - (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:(UIViewController *)viewController;
+
+
+///---------------------------------------
+/// Checkout flow, type 3
+///---------------------------------------
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController;
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController;
+//- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_deleteSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict  viewControllerToPresentOn:viewController;
+- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum;
 
 @end

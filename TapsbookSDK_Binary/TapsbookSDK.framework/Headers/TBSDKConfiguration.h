@@ -10,6 +10,12 @@
 #import <TapsbookSDK/TBSDKConstants.h>
 #import <TapsbookSDK/TBImage.h>
 
+typedef NS_ENUM(NSInteger, TBExternalCheckoutType) {
+    TBExternalCheckoutType_1 = 1,
+    TBExternalCheckoutType_2 = 2,
+    TBExternalCheckoutType_3 = 3,
+};
+
 @protocol TBSDKConfiguratorProtocol;
 
 @interface TBSDKConfiguration : NSObject

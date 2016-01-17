@@ -66,7 +66,7 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        },
                                
                                kTBBookGeneration : @{                       // (Optional)
-                                       kTBTemplateDatabaseName : @"TBTemplate_MultiProduct_02.sqlite", // (Optional) The name of the template database
+                                       kTBTemplateDatabaseName : @"TBTemplate_MultiProduct_02_RTL_spread.sqlite", // (Optional) The name of the template database
                                        kTBDefaultThemeID : @{              // (Optional)
                                                @(TBProductType_Photobook) : @200,
                                                @(TBProductType_Canvas) : @1000,

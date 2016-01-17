@@ -164,7 +164,7 @@
 		C183CB7F195D427E005B68F1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C183CB83195D427E005B68F1 /* TapsbookSDKDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapsbookSDKDemo-Info.plist"; sourceTree = "<group>"; };
 		C183CB85195D427E005B68F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C183CB87195D427E005B68F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C183CB87195D427E005B68F1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C183CB89195D427E005B68F1 /* TapsbookSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapsbookSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
 		C183CB8A195D427E005B68F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C183CB8B195D427E005B68F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -218,6 +218,7 @@
 		D57DCB941BC717220004D8D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D57DCB971BC7174D0004D8D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D587F29E1C49A4FF00DD06B7 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB6753D72E91E639204F795B /* Pods-TapsbookSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapsbookSDKDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TapsbookSDKDemo/Pods-TapsbookSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		FC4CE376242D33DABFD5CFE7 /* libPods-TapsbookSDKDemo_SDKDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TapsbookSDKDemo_SDKDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -588,6 +589,7 @@
 			knownRegions = (
 				en,
 				ar,
+				he,
 			);
 			mainGroup = C183CB6F195D427E005B68F1;
 			productRefGroup = C183CB79195D427E005B68F1 /* Products */;
@@ -864,6 +866,7 @@
 			children = (
 				C183CB85195D427E005B68F1 /* en */,
 				C12FB9201C319BE4009C45A6 /* ar */,
+				D587F29E1C49A4FF00DD06B7 /* he */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
