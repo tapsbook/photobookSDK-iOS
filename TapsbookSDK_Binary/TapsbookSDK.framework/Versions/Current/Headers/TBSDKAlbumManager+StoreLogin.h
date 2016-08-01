@@ -21,4 +21,6 @@ typedef NS_ENUM(NSInteger, TBSDKLoginRegisterResult) {
 
 - (void)logoutCurrentUser;
 
+- (TBSDKUser *)currentSDKUser;
+
 @end

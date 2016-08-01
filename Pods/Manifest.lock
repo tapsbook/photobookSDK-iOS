@@ -104,6 +104,7 @@ PODS:
   - GoogleAnalytics (3.14.0)
   - HappyDNS (0.2.3)
   - KVOController (1.0.3)
+  - leveldb (1.18)
   - libextobjc (0.4.1):
     - libextobjc/EXTADT (= 0.4.1)
     - libextobjc/EXTConcreteProtocol (= 0.4.1)
@@ -139,8 +140,10 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
+  - LMDropdownView (1.0.3)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
+  - MOBFoundation (2.0.1)
   - MZAppearance (1.1.6)
   - MZFormSheetController (3.1.2):
     - MZAppearance
@@ -158,6 +161,9 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - ShareSDK3 (3.3.2):
+    - ShareSDK3/ShareSDK (= 3.3.2)
+  - ShareSDK3/ShareSDK (3.3.2)
   - SlackTextViewController (1.7.2)
   - smc-runtime (6.3.0)
   - Stripe (6.0.1):
@@ -188,9 +194,12 @@ DEPENDENCIES:
   - FXLabel (~> 1.5)
   - GoogleAnalytics (~> 3.14)
   - KVOController (~> 1.0)
+  - leveldb
   - libextobjc (~> 0.4.1)
+  - LMDropdownView
   - Masonry (~> 0.6)
   - MBProgressHUD (~> 0.9)
+  - MOBFoundation
   - MZFormSheetController (~> 3.1)
   - MZFormSheetPresentationController (~> 2.1)
   - pop (~> 1.0)
@@ -198,6 +207,7 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - SCLAlertView-Objective-C (~> 0.7)
   - SDWebImage (~> 3.7)
+  - ShareSDK3
   - SlackTextViewController (~> 1.7)
   - smc-runtime (~> 6.3)
   - Stripe (~> 6.0)
@@ -227,9 +237,12 @@ SPEC CHECKSUMS:
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
+  leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  LMDropdownView: f03fadfe65908c735580f63d04c47e6d7c5325f3
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MOBFoundation: a42168392e216fc56cbcbdfc3d5dcb3bbce5ef87
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
   MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
@@ -238,6 +251,7 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SCLAlertView-Objective-C: e36ab12dc1ec4ff6f932888083b21d71a3a1ad23
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  ShareSDK3: c76cb96eb38e079952b8157071486d945faa2df2
   SlackTextViewController: 1f4e8f68c156ef93de73fd422db2b8d5d5b0f4e7
   smc-runtime: 3941bb60d22acbec01ae9ca31d290a4fdcd513e1
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b

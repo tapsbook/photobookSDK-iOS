@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *avatar;
+@property (strong, nonatomic) NSString *referralCode;
+@property (assign, nonatomic) BOOL referralUsed;
 
 + (TBSDKUser *)currentUser;
 

@@ -37,6 +37,11 @@ pod 'UICKeyChainStore', '~> 2.1'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'LMDropdownView'
+pod 'leveldb'
+
+pod 'ShareSDK3'
+pod 'MOBFoundation'
 
 end
 

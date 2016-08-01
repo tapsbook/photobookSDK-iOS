@@ -119,6 +119,18 @@ extern NSString * const kTBProductSubType;
 extern NSString * const kTBSendOrderInfoToHostingApp;
 extern NSString * const kTBExternalCheckoutType;
 
+// 0
+extern NSString * const kTBSocial;
+// 1
+extern NSString * const kTBSocialWeixinAppID;
+extern NSString * const kTBSocialWeixinAppSecret;
+
+// 0
+extern NSString * const kTBHostingAppInfo;
+// 1
+extern NSString * const kTBHostingAppName;
+extern NSString * const kTBHostingAppIconName;
+
 ///---------------------------------------
 /// @name Color Customization
 ///---------------------------------------
@@ -137,6 +149,9 @@ extern NSString * const kTBPageVCTopMenuExitButtonColorHighlighted;
 
 extern NSString * const kTBPageVCTopMenuOrderBookButtonColorNormal;
 extern NSString * const kTBPageVCTopMenuOrderBookButtonColorHighlighted;
+
+extern NSString * const kTBPageVCTopMenuOrderBookButtonBgColorNormal;
+extern NSString * const kTBPageVCTopMenuOrderBookButtonBgColorHighlighted;
 
 extern NSString * const kTBPageVCTopMenuEditPageButtonColorNormal;
 extern NSString * const kTBPageVCTopMenuEditPageButtonColorHighlighted;
@@ -182,4 +197,6 @@ extern NSString * const kTBPageVCPhotoListPromtingMessageColor;
 
 extern NSString * const kTBCheckoutVCButtonColor;
 
-
+// Store user
+extern NSString * const kTBSDKUserDidLoginNotification;
+extern NSString * const kTBSDKUserDidLogoutNotification;

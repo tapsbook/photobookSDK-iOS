@@ -92,7 +92,7 @@ loadPrintInfosForSDKAlbum:(TBSDKAlbum *)sdkAlbum
 /**
  * Callback when user click print button. Implement this method if you want to use your own print and checkout workflow
  *
- * Before use this option, you must set YES to [TBSDKConfiguration shouldSendJSONDictToHostingAppWhenCheckout] in your app's configuration.
+ * Before use this option, you must set YES to TBSDKConfigurator kTBSendAlbumJSONDictToHostingApp in your app's configuration.
  *
  * By design, the SDK will render the page into print-ready images, the rendering
  * will be bypassed if you implement this method.  You will need to have a backend processing

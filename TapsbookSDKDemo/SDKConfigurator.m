@@ -36,7 +36,7 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server
                                                // Region : merchantKey
 #ifdef DEBUG
-                                               @(TBSDKRegion_UnitedStates) : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb", //@"test_0194ee8f7b3d651276952f92c6a4a4df", test_canvs_ca964b0bbef1fea8069c4068c9208a84, test_CLEEN_a34b764a261819f448e99cd35d60e729 test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb live_TPSBK_d199caba80930c813d59eaf8a6c30850
+                                               @(TBSDKRegion_UnitedStates) : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb",
 #else
                                                @(TBSDKRegion_UnitedStates) : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb",
 #endif

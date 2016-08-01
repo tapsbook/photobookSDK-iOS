@@ -12,6 +12,10 @@
 
 - (TBSDKRegion)currentRegion;
 
+- (BOOL)isCurrentRegionValid;
+
+- (BOOL)isRegionValid:(TBSDKRegion)region;
+
 - (NSString*)localizedCurrentRegion;
 
 - (void)setRegion:(TBSDKRegion)region alertIfChanging:(BOOL)shouldAlert withCompletionBlock:(void (^)(TBSDKRegion selectedRegion))completionBlock;

@@ -170,6 +170,19 @@
 
 - (void)dismissTBSDKViewControllersAnimated:(BOOL)animated completion:(void (^)(void))completion;
 
+/**
+ * get Cache Size
+ */
+- (NSUInteger)getCacheSize;
+
+/**
+ *  clear cache on disk
+ */
+
+- (void)clearCache;
+
+
+
 /** TapsbookSDK calls dataSource to get images
  *
  *  All TBImage's `dataSource` will be assigned `imageDataSource`
