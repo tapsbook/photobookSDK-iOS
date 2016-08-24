@@ -10,6 +10,7 @@
 
 extern NSString * const kTBSocialUserID;
 extern NSString * const kTBSocialUserNickName;
+extern NSString * const kTBSocialUserUnionID;
 extern NSString * const kTBSocialUserEmail;
 extern NSString * const kTBSocialUserAvatar;
 

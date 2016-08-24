@@ -345,10 +345,10 @@ static CGSize AssetGridThumbnailSize;
 //                self.shouldCreateCanvas = YES
                 if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
                     NSDictionary *albumOption = nil;
-                    NSDictionary *subTypeDict = @{@(TBSDKRegion_UnitedStates):WZProductType_8x8layflat,
-                                                  @(TBSDKRegion_China):WZProductType_8x8layflat};
+//                    NSDictionary *subTypeDict = @{@(TBSDKRegion_UnitedStates):WZProductType_8x8layflat,
+//                                                  @(TBSDKRegion_China):WZProductType_8x8layflat};
                     
-                    albumOption = @{kTBProductSubType:subTypeDict};
+//                    albumOption = @{kTBProductSubType:subTypeDict};
                     [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:tbImages identifier:nil title:@"Album" tag:0 options:albumOption completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
                         [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum presentOnViewController:self.navigationController shouldPrintDirectly:NO];
                         
