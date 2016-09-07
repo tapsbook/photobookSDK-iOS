@@ -23,6 +23,7 @@ DerivedData
 #AppleDoc
 *.docset
 docset-installed.txt
+TapsbookSDK/
 
 #SDK Binary
 #TapsbookSDK_Binary/TapsbookSDK.bundle
