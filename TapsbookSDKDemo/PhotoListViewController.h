@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TapsbookSDK/TapsbookSDK.h>
 
 typedef NS_ENUM(NSInteger, PhotoListViewControllerMode) {
     PhotoListViewControllerMode_CreateAlbum,
@@ -16,5 +17,8 @@ typedef NS_ENUM(NSInteger, PhotoListViewControllerMode) {
 @interface PhotoListViewController : UIViewController
 
 @property (assign, nonatomic) PhotoListViewControllerMode mode;
+@property (strong, nonatomic) TBSDKAlbum *sdkAlbum;
+@property (strong, nonatomic) NSArray *existingTBImages;
+@property (strong, nonatomic) void (^tb_completionBlock)(NSArray *newImages);
 
 @end

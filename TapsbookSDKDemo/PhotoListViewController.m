@@ -11,7 +11,6 @@
 #import <Photos/Photos.h>
 #import "PhotoCell.h"
 
-#import <TapsbookSDK/TapsbookSDK.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreLogin.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreOrderList.h>
 #import "MBProgressHUD.h"
@@ -21,6 +20,7 @@
 #import "extobjc.h"
 #import "CheckoutViewController.h"
 #import "TBPSSizeUtil.h"
+#import "PhotoBookListViewController.h"
 
 #define WZProductType_8x8softcover @"SOFT88"
 #define WZProductType_8x8hardcover @"HARD88"
@@ -47,10 +47,6 @@
 @property (strong, nonatomic) UIBarButtonItem *createAlbumOrAddPhotoButton;
 
 // SDK
-@property (strong, nonatomic) TBSDKAlbum *sdkAlbum;
-@property (strong, nonatomic) NSArray *existingTBImages;
-
-@property (strong, nonatomic) void (^tb_completionBlock)(NSArray *newImages);
 
 @property (assign, nonatomic) BOOL shouldCreateCanvas;
 
@@ -124,10 +120,13 @@ static CGSize AssetGridThumbnailSize;
     UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
     
     UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
-    
+
+    UIBarButtonItem *bookListButton = [[UIBarButtonItem alloc] initWithTitle:@"Books" style:UIBarButtonItemStylePlain target:self action:@selector(handleBookListViewControllerButton:)];
+
     self.createAlbumOrAddPhotoButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(handleCreateAlbumOrAddPhotoButton:)];
     self.navigationItem.rightBarButtonItems = @[
                                                 self.createAlbumOrAddPhotoButton,
+                                                bookListButton,
 //                                                sdkOrderListButton,
 //                                                sdkLoginButton,
                                                 ];
@@ -210,6 +209,11 @@ static CGSize AssetGridThumbnailSize;
 }
 
 #pragma mark - Album
+- (void)handleBookListViewControllerButton:(id)sender {
+    PhotoBookListViewController *vc = [PhotoBookListViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)handleShowSDKStoreLoginViewControllerButton:(id)sender {
     [[TBSDKAlbumManager sharedInstance] presentStoreLoginViewControllerOnViewController:self completionBlock:nil];
 }
@@ -257,8 +261,8 @@ static CGSize AssetGridThumbnailSize;
         
         // Saving assetes to disk
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Cache image to disk
             
+            // Cache image to disk
             NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
             NSFileManager *fileManager = [NSFileManager defaultManager];
             
@@ -288,7 +292,7 @@ static CGSize AssetGridThumbnailSize;
                     else {
                         NSAssert(NO, @"asset should have a size");
                     }
-
+                    
                     NSString *sPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_s", name]];
                     NSString *lPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_l", name]];
                     
@@ -296,9 +300,8 @@ static CGSize AssetGridThumbnailSize;
                     PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
                     requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
                     requestOptions.networkAccessAllowed = YES;
-//                    requestOptions.synchronous = YES;
                     requestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-
+                    
                     if (![fileManager fileExistsAtPath:sPath]) {
                         
                         [[PHImageManager defaultManager] requestImageForAsset:asset
@@ -308,7 +311,7 @@ static CGSize AssetGridThumbnailSize;
                                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
                                                                     [result writeToFile:sPath withCompressQuality:1];
                                                                 }];
-
+                        
                     }
                     
                     if (![fileManager fileExistsAtPath:lPath]) {
@@ -321,39 +324,32 @@ static CGSize AssetGridThumbnailSize;
                                                                 }];
                     }
                     
-//                    if (![fileManager fileExistsAtPath:xxlPath]) {
-//                        CGImageRef xxlImageRef = [rep fullResolutionImage];
-//                        UIImage *xxlImage = [UIImage imageWithCGImage:xxlImageRef scale:1 orientation:(UIImageOrientation)rep.orientation];
-//                        [xxlImage writeToFile:xxlPath withCompressQuality:1];
-//                    }
-                    
                     TBImage *tbImage = [[TBImage alloc] initWithIdentifier:name];
                     
                     [tbImage setImagePath:sPath size:TBImageSize_s];
                     [tbImage setImagePath:lPath size:TBImageSize_l];
                     [tbImage setDesc:@(counter++).description];
-//                    [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
-                    
-//                    [tbImage setXxlSizeInPixel:xxlSize];
-                    
                     [tbImages addObject:tbImage];
-                }
-            }
+                }//end of autorelease
+            }//enf of for loop
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [hud hide:YES];
-//                self.shouldCreateCanvas = YES
                 if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
-                    NSDictionary *albumOption = nil;
-//                    NSDictionary *subTypeDict = @{@(TBSDKRegion_UnitedStates):WZProductType_8x8layflat,
-//                                                  @(TBSDKRegion_China):WZProductType_8x8layflat};
-                    
-//                    albumOption = @{kTBProductSubType:subTypeDict};
+                    //private API demo here for enterprise clients, consulting before use.
+                    NSDictionary * albumOption = @{
+                                    kTBProductPreferredTheme:   @"200",  //200 is for square book
+                                    kTBPreferredProductSKU:     @"1003", //sku=1003 is a layflat book
+                                    kTBProductMaxPageCount:     @"24",   //set max=min will limit the page count
+                                    kTBProductMinPageCount:     @"24",
+                                    kTBPreferredUIDirection:    @"LTR"
+                                    };
                     [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:tbImages identifier:nil title:@"Album" tag:0 options:albumOption completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
                         [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum presentOnViewController:self.navigationController shouldPrintDirectly:NO];
                         
                     }];
                     
+//                self.shouldCreateCanvas = YES
 //                    [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithProductType:self.shouldCreateCanvas ? TBProductType_Canvas : TBProductType_Photobook images:tbImages identifier:nil title:@"Album" tag:0 completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
 //                        [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum presentOnViewController:self.navigationController shouldPrintDirectly:NO];
 //                    }];
