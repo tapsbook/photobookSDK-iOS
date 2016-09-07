@@ -58,6 +58,9 @@
  */
 @property (strong, nonatomic) NSDate *printedDate;
 
+//private API as placeholder
+@property (strong, nonatomic) NSDictionary * productOptions;
+
 ///---------------------------------------
 /// @name Book Photo Contents
 ///---------------------------------------

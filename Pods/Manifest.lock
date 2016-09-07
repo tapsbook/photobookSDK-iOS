@@ -152,6 +152,7 @@ PODS:
     - MZAppearance
   - MZFormSheetPresentationController (2.1.2):
     - MZAppearance
+  - objective-zip (1.0.3)
   - pop (1.0.8)
   - Qiniu (7.0.15):
     - AFNetworking (~> 2.0)
@@ -202,6 +203,7 @@ DEPENDENCIES:
   - MOBFoundation
   - MZFormSheetController (~> 3.1)
   - MZFormSheetPresentationController (~> 2.1)
+  - objective-zip
   - pop (~> 1.0)
   - Qiniu (~> 7.0)
   - Reachability (~> 3.2)
@@ -246,6 +248,7 @@ SPEC CHECKSUMS:
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
   MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
+  objective-zip: 2f4eba2ed4a06ed74c7e6e4e7b80e6cacf212217
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
   Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

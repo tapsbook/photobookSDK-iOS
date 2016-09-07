@@ -10,6 +10,10 @@
 
 @interface TBSDKAlbumManager (Delete)
 
+///---------------------------------------
+/// @name Delete a specific photo book
+///---------------------------------------
+
 /** Remove a album
  *  @param sdkAlbum
  */

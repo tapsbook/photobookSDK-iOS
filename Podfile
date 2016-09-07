@@ -39,6 +39,7 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'LMDropdownView'
 pod 'leveldb'
+pod 'objective-zip'
 
 pod 'ShareSDK3'
 pod 'MOBFoundation'
