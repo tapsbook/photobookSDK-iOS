@@ -56,9 +56,7 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
      @{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Regular" size:18]}];
     
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 30, 0)];
-    
-    [self.noBookLabel setText:NSLocalizedString(@"booklist-no-book", @"")];
-    
+        
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithImage:[UIImage imageNamed:@"nav-back"]
                                              style:UIBarButtonItemStylePlain
