@@ -97,7 +97,6 @@ extern NSString * const kTBMaxNumberofImagesPerSpread;
 extern NSString * const kTBMinNumberofImagesPerSpread;
 extern NSString * const kTBAllowAddOrRemovePage;
 
-
 // 0
 extern NSString * const kTBBehaviorCustomization;
 // 1
@@ -116,6 +115,10 @@ extern NSString * const kTBSendAlbumJSONDictToHostingApp;
 extern NSString * const kTBGeneratePageImagesInDebugMode;
 extern NSString * const kTBPreferredProductSKU;
 extern NSString * const kTBProductSubType;
+extern NSString * const kTBProductPreferredTheme;
+extern NSString * const kTBProductMaxPageCount;
+extern NSString * const kTBProductMinPageCount;
+extern NSString * const kTBPreferredUIDirection;
 extern NSString * const kTBSendOrderInfoToHostingApp;
 extern NSString * const kTBExternalCheckoutType;
 
