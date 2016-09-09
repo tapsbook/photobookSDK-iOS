@@ -43,6 +43,7 @@ slot =
 ````
 
 Here 
+````
       pageHeight/width: the size of the whole page, this number is used as the reference to calcuate the relative size of the slot
       centerX/Y: the center of the slot relative to the page top left
       width/height: the size of the slot
@@ -50,6 +51,6 @@ Here
       contentOffsetX/Y: by default the image is centered at the slot's center, use may choose to move the image off the center to change the crop of the image.
       zIndex: the order of slot need to be respected in case there are overlapping part of the image.
       rotation: the rotation in 360 degrees.
-      
+````
 Notice the w/h x/y number above are all relative to the page w/h, e.g. if when a slot has w/h=190800/93000 and the page has w/h=190800/93000, you can then calcuate the slot width is 100% of the page width. This allows you to easily scale one page layout as long as the page w/h aspect ratio remains the same.
 
