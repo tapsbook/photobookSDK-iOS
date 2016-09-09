@@ -358,4 +358,20 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
     }
 }
 
+//datasource method that helps SDK to recognize an album is new or existing
+- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum {
+    return NO;
+}
+
+//a callback after user click order for an album if the album is new,  the infoDict here only contains the cover page JSON
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+//a callback after user click order for an album if the album is already in the cart, just need to update it, the infoDict here only contains the cover page JSON
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+
 @end

@@ -329,22 +329,30 @@ static CGSize AssetGridThumbnailSize;
                     [tbImage setImagePath:sPath size:TBImageSize_s];
                     [tbImage setImagePath:lPath size:TBImageSize_l];
                     [tbImage setDesc:@(counter++).description];
+                    [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_full.jpg" size:TBImageSize_xxl];
+                    [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_regular.jpg" size:TBImageSize_l];
                     [tbImages addObject:tbImage];
                 }//end of autorelease
             }//enf of for loop
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
                 if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
                     //private API demo here for enterprise clients, consulting before use.
                     NSDictionary * albumOption = @{
                                     kTBProductPreferredTheme:   @"200",  //200 is for square book
                                     kTBPreferredProductSKU:     @"1003", //sku=1003 is a layflat book
-                                    kTBProductMaxPageCount:     @"24",   //set max=min will limit the page count
-                                    kTBProductMinPageCount:     @"24",
-                                    kTBPreferredUIDirection:    @"LTR"
+                                    kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
+                                    kTBProductMinPageCount:     @"20",
+                                    kTBPreferredUIDirection:    @"RTL"   //set this RTL or LTR
                                     };
+                    //the createSDKAlbumWithImages process include facial recognition, which might take sometime..
+                    hud.mode = MBProgressHUDModeIndeterminate;
+                    hud.labelText = @"recognizing faces...";
+
                     [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:tbImages identifier:nil title:@"Album" tag:0 options:albumOption completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
+
+                        [hud hide:YES];
+
                         [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum presentOnViewController:self.navigationController shouldPrintDirectly:NO];
                         
                     }];
@@ -440,6 +448,30 @@ static CGSize AssetGridThumbnailSize;
 
 #pragma mark - Checkout 3
 
+
+//a callback after user click order for an album if the album is new,  the infoDict here only contains the cover page JSON
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    [self.albumsInCart addObject:@(sdkAlbum.ID)];
+    
+    [self.checkoutButton setTitle:[NSString stringWithFormat:@"Checkout(%zd)", self.albumsInCart.count] forState:UIControlStateNormal];
+    
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+//a callback after user click order for an album if the album is already in the cart, just need to update it, the infoDict here only contains the cover page JSON
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
+    // Update your cart view
+    
+    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
+}
+
+//datasource method that helps SDK to recognize an album is new or existing
+- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum {
+    BOOL contains = [self.albumsInCart containsObject:@(sdkAlbum.ID)];
+    return contains;
+}
+
+//event handler when user click the checkout to finalize the purchase
 - (void)handleCheckoutButton:(id)sender {
     if (self.albumsInCart.count == 0) {
         return;
@@ -448,31 +480,14 @@ static CGSize AssetGridThumbnailSize;
     [[TBSDKAlbumManager sharedInstance] checkout3_checkoutAlbumsWithIDs:self.albumsInCart completionBlock:^(BOOL success, id result, NSError *error) {
         [hud hide:YES];
         if (success) {
+            //now you can submit the final JSON to your production
+            NSLog(@"do more with this JSON%@", result);
             
         }
         else {
             [UIAlertView bk_showAlertViewWithTitle:@"Error" message:error.localizedDescription cancelButtonTitle:@"OK" otherButtonTitles:nil handler:nil];
         }
     }];
-}
-
-- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
-    [self.albumsInCart addObject:@(sdkAlbum.ID)];
-    
-    [self.checkoutButton setTitle:[NSString stringWithFormat:@"Cart(%zd)", self.albumsInCart.count] forState:UIControlStateNormal];
-    
-    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
-}
-
-- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
-    // Update your cart view
-    
-    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
-}
-
-- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum {
-    BOOL contains = [self.albumsInCart containsObject:@(sdkAlbum.ID)];
-    return contains;
 }
 
 @end
