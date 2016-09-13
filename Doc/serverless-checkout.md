@@ -1,6 +1,6 @@
 # Private SDK Integration
 
-On a limited basis, Tapsbook SDK provide a private serverless deployment option that allows the developer to use its own private backend instead of the shared Tapsbook backend.
+For approved partners, Tapsbook SDK provides a private serverless deployment option that allows the developer to use its own private backend instead of the shared Tapsbook backend.
 
 The diagram below shows the steps the SDK enabled moile perform for a complete order creation and order checkout process.
 
