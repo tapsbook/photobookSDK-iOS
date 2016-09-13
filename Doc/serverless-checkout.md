@@ -6,7 +6,8 @@ The diagram below shows the steps your TapsbookSDK-enabled app should perform fo
 
 ![image](https://cloud.githubusercontent.com/assets/842068/18487269/9331a440-79c2-11e6-9d46-e0afb132fc18.png)
 
-In this private deployment option, 
+In this private deployment option, (number here refers to the diagram above) 
+
 1. Your TapsbookSDK enabled app will connect to your own server providing APIs to get product spec and feed that to a customized TapsbookSDK. 
 2. The TapsbookSDK behaves as a black box to provide the photo book editing user experience. After user is done editing, the TapsbookSDK saves the users' photo book data to a SDK provied local DB. 
 3. Invoke the checkout flow which will let TapsbookSDK generates the order output JSON and page preview data on the mobile device, you can then freely pass the order output JSON to your product server. It is necessary that your application upload the user selected photo to a cloud storage for later order JPG rendering at your server side.
