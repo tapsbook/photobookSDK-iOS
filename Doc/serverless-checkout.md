@@ -2,7 +2,7 @@
 
 For approved partners, Tapsbook SDK provides a private serverless deployment option that allows the developer to use its own private backend instead of the shared Tapsbook backend.
 
-The diagram below shows the steps the SDK enabled moile perform for a complete order creation and order checkout process.
+The diagram below shows the steps your TapsbookSDK-enabled app should perform for a complete order creation and order checkout process.
 
 ![image](https://cloud.githubusercontent.com/assets/842068/18487269/9331a440-79c2-11e6-9d46-e0afb132fc18.png)
 
