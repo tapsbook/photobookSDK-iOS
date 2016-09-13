@@ -49,12 +49,12 @@ During step 3. Implement the 3 delegate callbacks methods under [TBSDKAlbumManag
 ````
 once this is complete, call the following method to start the final checkout. This async method will return the a dictonary containing the data for you to manufacture the photo book. The dictionary includes a string in “album_JSON” and an array of page image thumbnails in “album_page_thumbnails”. Your app can then sends these data to your backend for final processing.
 ````
-checkout3_checkoutAlbumsWithIDs:completionBlock:
+– checkout3_checkoutAlbumsWithIDs:completionBlock:
 ````
 
 During step 5. Your backend server should load the order JSON and uploaded images to process the final print output for final production.  The JSON format sample and reference can be found below.
-- JSON sample
-- JSON reference
+- [JSON sample](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/sample_album.json)
+- [JSON reference](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/sample_json_info.md)
 
 This step should also include a REST API call to Tapsbook server to notify that the order transaction has been successfuly completed and this record will be used for the billing synchronization. This is a non-blocking API call and does not stop your normal workflow.
 ````
