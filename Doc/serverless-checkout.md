@@ -14,6 +14,9 @@ In this private deployment option, (number here refers to the diagram above)
 4. Your product server should include eCommerce functions that handles payment processing,and optionally notify the user whether the order is successful.
 5. After the payment successful acknolegement from the bank, you can safely start your own production workflow. Your backend should load the order JSON with reference to the uploaded user photos and render the final order output as page JPGs. Once this complete, feed the final output JPGs to your own printing ERP for manufacturing. It is a required step that your backend also send an order notification to Tapsbook server for billing syncrhonization. 
 
+## Integration details
+You should follow the integration steps as documented for [TBSDKAlbumManager](http://tapsbook.com/doc/Classes/TBSDKAlbumManager.html), e.g. prepare the TBImages etc, plus also perform the following additional preparation steps.
+
 To enable this workflow, set the SDK configurator as the following
 ````
     NSDictionary * checkout = @{
