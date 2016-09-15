@@ -1,4 +1,19 @@
-{
+
+"album_page_thumbnails" : [
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/cover_0.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_0.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_1.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_2.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_3.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_4.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_5.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_6.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_7.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_8.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_9.jpg",
+            "/Users/yoda/Library/Developer/CoreSimulator/Devices/14FB733B-1476-4D46-8CDE-6A7FE4DFDA50/data/Containers/Data/Application/056C900A-95AE-46E1-A1AC-3600265FA27B/Library/Caches/TBSDKPreorderPageImages/7/page_10.jpg"
+        ],
+"album_JSON" :{
   "localID" : 4,
   "coverPages" : [
     {
