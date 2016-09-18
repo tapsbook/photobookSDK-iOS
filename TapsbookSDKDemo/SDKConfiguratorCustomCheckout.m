@@ -28,11 +28,6 @@ extern NSString * const kTBUseExternalCheckout;
                                 
                                 // Only pick one of the following
                                 kTBSendAlbumJSONDictToHostingApp : @YES,
-                                kTBSendAlbumKeyToHostingAppWhenCheckout : @NO,
-                                
-                                
-                                kTBUseExternalPrintProductInfo : @NO,
-                                kTBUseExternalCheckout : @YES,
                                 kTBSendOrderInfoToHostingApp : @YES,
                                 };
     

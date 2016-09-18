@@ -130,7 +130,7 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                                @(TBProductType_Card) : @YES,
                                                },
                                        kTBSendAlbumJSONDictToHostingApp : @NO,          // (Optional) YES when you want to generate page image on your own.
-                                       kTBGeneratePageImagesInDebugMode : @NO,          // (Optional) Helps you debug when kTBSendAlbumJSONDictToHostingApp is YES
+                                       kTBGeneratePageImagesToHostingApp : @NO,          // (Optional) Helps you debug when kTBSendAlbumJSONDictToHostingApp is YES
                                        },
                                };
     
