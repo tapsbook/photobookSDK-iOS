@@ -102,28 +102,6 @@
  */
 
 //Once you are ready to print from these source data, typically after you have cleared the payment from your customer, you can retrieve the JSON data via the order API as such
-//
-//{
-//    "order_type" : "claim_only",
-//    "album_key" : "THE_ALBUM_KEY",
-//    “api_key":"YOUR_API_KEY ",
-//    "external_order_id":"YOUR ORDER ID",
-//    "currency": "CNY",
-//    "total_price": "1.00",
-//    "customer": {
-//        "address": {
-//            "phone": "",
-//            "address1": "",
-//            "lastname": "",
-//            "firstname": "",
-//            "email": "",
-//            "state_id": "99",
-//            "country_id": "48",
-//        }
-//    },
-//    "action": "create",
-//    "controller": "api/v1/preorder"
-//}
 
 
 @interface TBSDKAlbumManager : NSObject
