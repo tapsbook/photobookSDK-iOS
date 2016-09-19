@@ -6,7 +6,7 @@ Hey, we are glad you are here. Customizing the Tapsbook SDK's template DB is the
 
 Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer)
 
-The page template metadata is organized as a tree structure where The top level node isthemewhich creates multiple significantly different page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme.id=200 and it is a square book type. The std_ratio_type value current in the default DB has the following
+The page template metadata is organized as a tree structure where The top level node is theme which represents multiple page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme_id=200 and it is a square book type. The std_ratio_type value current in the default DB has the following
 ````
 TBStdPageRatio_11x8_5 = 1,
 TBStdPageRatio_10_5x8 = 2,
@@ -14,7 +14,7 @@ TBStdPageRatio_5x4    = 3,
 TBStdPageRatio_1x1    = 4,
 ````
 
-If you need more than these predefined aspect ratios, you need to create a new std_ratio_type ID and refer to this ID anywhere else when std_ratio_type is used. and yes, you only need to have one aspect ratio for the simplified aspect ratio, i.e. 3x2 and 15x10 should share one std_ratio_type, for example
+If you have customized book size other than these predefined aspect ratios, you need to create a new std_ratio_type ID and refer to this ID anywhere else when std_ratio_type is used. and yes, you only need to have one aspect ratio for the simplified aspect ratio, i.e. 3x2 and 15x10 should share one std_ratio_type, for example
 ````
 TBStdPageRatio_3x2    = 5,
 ````
