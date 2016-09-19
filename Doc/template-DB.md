@@ -25,7 +25,7 @@ TBStdPageRatio_3x2    = 5,
 At the run time, when user chooses to auto-generate all book pages, the engine first loads all templates data from the default local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
-So, now comes the fun part. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to build your own template.
+So, now comes the fun part to get hands on experience. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
 1. Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
 ````
