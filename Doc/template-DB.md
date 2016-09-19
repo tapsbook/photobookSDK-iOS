@@ -6,7 +6,7 @@ Hey, we are glad you are here. Customizing the Tapsbook SDK's template DB is the
 
 Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer)
 
-The page template metadata is organized as a tree structure where The top level node is theme which represents multiple page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme_id=200 and it is a square book type. The std_ratio_type value current in the default DB has the following
+1.1 The page template metadata is organized as a tree structure where The top level node is theme which represents multiple page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme_id=200 and it is a square book type. The std_ratio_type value current in the default DB has the following
 ````
 TBStdPageRatio_11x8_5 = 1,
 TBStdPageRatio_10_5x8 = 2,
@@ -18,20 +18,20 @@ If you have customized book size other than these predefined aspect ratios, you 
 ````
 TBStdPageRatio_3x2    = 5,
 ````
-2. Each Theme includes multiple page layouts. Page layout dictate how many photos to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
+1.2 Each Theme includes multiple page layouts. Page layout dictate how many photos to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
 
-3. Each page layouts include multiple slots, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
+1.3 Each page layouts include multiple slots, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
 
 At the run time, when user chooses to auto-generate all book pages, the engine first loads all templates data from the default local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
 So, now comes the fun part to get hands on experience. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
-1. Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
+2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
 ````
 ruby convert.rb > myTemplate.sql
 ````
-2. Add new product data to your existing Template sqlite. product info is identified as SKU (server_id). You must define the product property for each SKU, the SDK current requires all product info also stored in the template DB. The following SQL script is an example of one SKU product definition.
+2.2 Add new product data to your existing Template sqlite. product info is identified as SKU (server_id). You must define the product property for each SKU, the SDK current requires all product info also stored in the template DB. The following SQL script is an example of one SKU product definition.
 ````
 INSERT INTO print_infos (server_id, provider_name, product_type, name, description, preview_path, std_ratio_type, std_width, std_height, min_pages_count, max_pages_count, file_name, min_ppi, max_ppi) VALUES ($SKU_NUMBER, '$COMPANY_NAME', 1, '$PRODUCT_NAME', '$PRODUCT_DESC', '', $std_ratio_type, $PAGE_W, $PAGE_H, $MIN_PAGE, $MAX_PAGE,  '', 180, 300);
 ````
@@ -42,7 +42,7 @@ std_ratio_type must use a predefined ratio_type value (see section 1.1)
 MIN_PAGE, MAX_PAGE is number of pages this product supports (user can add or remove pages, and these two numbers will be used as the limit),
 MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the image resolution when user scales the image.
 
-3. Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. You need to create new cover layout, which is 1:1 mapped to print_info as you introduced at step 2.2, because each product will have different cover design. The fastest approach to add a cover C1 to an product (ID=100, SKU=1001) is to 1) select an existing layout, clone it and its slots, and 2) assign this layout's print_info_id  a value (100) refers to the product.       
+2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. You need to create new cover layout, which is 1:1 mapped to print_info as you introduced at step 2.2, because each product will have different cover design. The fastest approach to add a cover C1 to an product (ID=100, SKU=1001) is to 1) select an existing layout, clone it and its slots, and 2) assign this layout's print_info_id  a value (100) refers to the product.       
 
 Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK.
 
