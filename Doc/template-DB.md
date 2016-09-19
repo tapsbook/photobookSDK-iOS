@@ -28,9 +28,9 @@ At the run time, when user chooses to auto-generate all book pages, the engine f
 So, now comes the fun part. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to build your own template.
 
 1. Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
-
+````
 ruby convert.rb > myTemplate.sql
-
+````
 2. Add new product data to your existing Template sqlite. product info is identified as SKU (server_id). You must define the product property for each SKU, the SDK current requires all product info also stored in the template DB. The following SQL script is an example of one SKU product definition.
 ````
 INSERT INTO print_infos (server_id, provider_name, product_type, name, description, preview_path, std_ratio_type, std_width, std_height, min_pages_count, max_pages_count, file_name, min_ppi, max_ppi) VALUES ($SKU_NUMBER, '$COMPANY_NAME', 1, '$PRODUCT_NAME', '$PRODUCT_DESC', '', $std_ratio_type, $PAGE_W, $PAGE_H, $MIN_PAGE, $MAX_PAGE,  '', 180, 300);
