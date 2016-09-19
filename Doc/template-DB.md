@@ -42,9 +42,9 @@ std_ratio_type must use a predefined ratio_type value (see section 1.1)
 MIN_PAGE, MAX_PAGE is number of pages this product supports (user can add or remove pages, and these two numbers will be used as the limit),
 MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the image resolution when user scales the image.
 
-2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. You need to create new cover layout, which is 1:1 mapped to print_info as you introduced at step 2.2, because each product will have different cover design. The fastest approach to add a cover C1 to an product (ID=100, SKU=1001) is to 1) select an existing layout, clone it and its slots, and 2) assign this layout's print_info_id  a value (100) refers to the product.       
+2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because each product will have different cover, you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to 1) select an existing layout, clone it and its slots as a new layout, and 2) link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
 
-Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK.
+Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
 
 ## 3. Load the new SDK template to your app
 
