@@ -1,4 +1,4 @@
-# SDK Template DB Document
+# SDK Template DB Development
 
 Hey, we are glad you are here. Customizing the Tapsbook SDK's template DB is probably the most advanced customization, yet the most rewarding experience, on your journey using the Tapsbook SDK. After completing this step, you will be able to fully control your product type and style that you can offer to your customers.
 
