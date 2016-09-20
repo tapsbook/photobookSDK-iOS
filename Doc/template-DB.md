@@ -22,40 +22,44 @@ If you have customized book size other than these predefined aspect ratios, you 
 ````
 TBStdPageRatio_3x2    = 9,
 ````
-1.2 Each Theme includes multiple page layouts. Page layout dictate how many photos to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
+1.2 Each Theme includes multiple **page layouts**. Page layout dictate how many photos to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
 
-1.3 Each page layouts include multiple slots, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
+1.3 Each page layouts include multiple **slots**, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
 
 At the run time, when user chooses to auto-generate all book pages, the engine first loads all templates data from the default local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
-So, now comes the fun part to get hands on experience. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
+So, now comes the fun part to get hands on experience. We suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
 - [convert.rb](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/convert.rb)
 - [model.rb](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/model.rb)
 - [Template data](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/Templates.sample.xml)
-- [Template converted SQL](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/Templates.sample-output.sql)
+- [converted Template data import](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/Templates.sample-output.sql)
 - [Base template DB](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/TBTemplate_MultiProduct_02_example.sqlite)
 
-2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
+2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the convert.rb config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data, which map to the concept in section 1.
 ````
 ruby convert.rb > myTemplate.sql
 ````
-2.2 Add new product data to your existing Template sqlite. product info is identified as SKU (server_id). You must define the product property for each SKU, the SDK current requires all product info also stored in the template DB. The following SQL script is an example of one SKU product definition.
+2.2 Add new product data to your existing Template sqlite. Product is identified as SKU (server_id). You must create a new line in the sql scripted by step 1 to define the product for each SKU, the SDK current requires all product info stored in the template DB. The following SQL script shows an example of product creation.
 ````
 INSERT INTO print_infos (server_id, provider_name, product_type, name, description, preview_path, std_ratio_type, std_width, std_height, min_pages_count, max_pages_count, file_name, min_ppi, max_ppi, type) VALUES ($SKU_NUMBER, '$COMPANY_NAME', 1, '$PRODUCT_NAME', '$PRODUCT_DESC', '', $std_ratio_type, $PAGE_W, $PAGE_H, $MIN_PAGE, $MAX_PAGE,  '', 180, 300, 101);
 ````
 where
 - server_id: SKU (server side defined)
 - product_type: 1 (photo book) 
-- std_ratio_type must use a predefined ratio_type value (see section 1.1)
+- std_ratio_type must use a predefined std_ratio_type value or use a custom std_ratio_type value (defined in section 1.1),
 - MIN_PAGE, MAX_PAGE is number of pages this product supports (user can add or remove pages, and these two numbers will be used as the limit),
-- MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the image resolution when user scales the image.
+- MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the printed image resolution when user scales the image and gives user warning when the image resolution falls below the MIN_PPI.
 - type: use 101 for editable cover page
 
-2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because different product type tend to have have different cover design (e.g. soft cover and hard cover will have very different cover), you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to 1) select an existing layout, clone it and its slots as a new layout, and 2) link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
+2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because different product type tend to have have different cover design (e.g. soft cover and hard cover will have very different cover), you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to identify an existing layout (should be a spread page) you want to use as cover and link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
 
-Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
+Import the generated sql scripts to your existing Template sqlite. 
+````
+cat myTemplate.sql |sqlite3 TBTemplate_MultiProduct_02_example.sqlite
+````
+By now, you should have a new template database ready for SDK consumption.
 
 ## 3. Load the new SDK template to your app
 
