@@ -31,7 +31,11 @@ At the run time, when user chooses to auto-generate all book pages, the engine f
 ## 2. Importing your Template data to SDK Template
 So, now comes the fun part to get hands on experience. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
-- https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/convert.rb
+- [convert.rb](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/convert.rb)
+- [model.rb](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/model.rb)
+- [Template data](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/Templates.sample.xml)
+- [Template converted SQL](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/Templates.sample-output.sql)
+- [Base template DB](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/TBTemplate_MultiProduct_02_example.sqlite)
 
 2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
 ````
