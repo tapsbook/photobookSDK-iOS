@@ -8,6 +8,7 @@
 
 #import "TBContent.h"
 #import "TBPriority.h"
+#import <UIKit/UIKit.h>
 
 /// Size of the image
 typedef NS_ENUM(NSInteger, TBImageSize) {

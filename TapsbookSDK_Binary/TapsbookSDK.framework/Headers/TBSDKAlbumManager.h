@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TapsbookSDK/TBSDKAlbum.h>
+#import <UIKit/UIKit.h>
 
 @protocol TBImageDataSource;
 @protocol TBSDKAlbumManagerDelegate;

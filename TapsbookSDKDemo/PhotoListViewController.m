@@ -338,12 +338,14 @@ static CGSize AssetGridThumbnailSize;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
                     //private API demo here for enterprise clients, consulting before use.
+                    //note that SKU and Theme must share the common std_ratio_type, otherwise you will get error "No availble product"
                     NSDictionary * albumOption = @{
-                                    kTBProductPreferredTheme:   @"200",  //200 is for square book
-                                    kTBPreferredProductSKU:     @"1003", //sku=1003 is a layflat book
+                                    kTBProductPreferredTheme:   @"201",  //200 is for square book
+                                    kTBPreferredProductSKU:     @"998", //sku=1003 is a layflat square book
                                     kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
                                     kTBProductMinPageCount:     @"20",
-                                    kTBPreferredUIDirection:    @"RTL"   //set this RTL or LTR
+                                    kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
+                                    @"preferSpread":            @(YES)
                                     };
                     //the createSDKAlbumWithImages process include facial recognition, which might take sometime..
                     hud.mode = MBProgressHUDModeIndeterminate;
