@@ -43,7 +43,7 @@ where
 - MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the image resolution when user scales the image.
 - type: use 101 for editable cover page
 
-2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because each product will have different cover, you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to 1) select an existing layout, clone it and its slots as a new layout, and 2) link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
+2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because different product type tend to have have different cover design (e.g. soft cover and hard cover will have very different cover), you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to 1) select an existing layout, clone it and its slots as a new layout, and 2) link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
 
 Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
 
