@@ -30,31 +30,33 @@ TBStdPageRatio_3x2    = 9,
 
 1.4 In a typical Object Oriented programming paradigm, a class can be instantiated to an instance. Similarly the theme needs to be instantiated to a real product before it can be used by the SDK. As designed, one product must have a specific std_ratio_type, but one std_ratio_type may have multiple products matching it. In TapsbookSDK, we use PrintInfo object to track prodcuts, each printInfo needs to have a SKU, ID. and it is linked to Theme via std_ratio_type. 
 
-At the run time, when user chooses to auto-generate all book pages, the engine first loads the ProductInfo and all templates data from the local sqlite database and intelligently match the appropriate page template based on the photo selections 
+At the run time, when user chooses to auto-generate all book pages, the engine first loads the PrintInfo and all templates data from the local sqlite database and then use an algorithm that computes an optimal per-page photo placement, then match the appropriate page layout template based on the photo placement.
 
 ## 2. Importing your Template data to SDK Template
-Chance is that you already have some templates to use for your book, we provide sample script to converts your data to SDK-ready SQL scripts. Before you try to importing your data,we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
+Chance is that you already have some templates design to use for your book, we provide sample script to converts your data to SDK-ready SQL scripts. Before you try to importing your data, we suggest you use the attached sample data and convert script first to get familiar with the concept, then you are free to import your own template data.
 
 [Sample data and script](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/templates-convert-sample.zip)
 
-2.1 Convert page template Data. 
+### 2.1 Convert page template Data. 
 
-Assume you have existing set of page template data in an XML format, you can then use the convert.rb (ruby) script to convert your data to the SDK-ready SQL data. Before you run this script, you must update the script config options inside the ruby script. Refer to the script header for the detailed instruction. 
+Assume you have a set of page template data in an XML format, you can then use the convert.rb (ruby) script to convert your data to the SDK-ready SQL data. Before you run this script, you must update the script config options inside the ruby script to match your XML schema. Refer to the script header for the detailed instruction. If your data is in other structural (relational) data format, you can easily convert it to the XML, then apply the conversion script. 
 ````
 ruby convert.rb > myTemplate.sql
 ````
-Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
+Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format. 
 
-2.2 Add product specific book cover layouts. (optional)
+*Tip: Remember start simple! It is recommended that you break your data importing into multiple steps by different themes (page aspect ratio), only load one theme at each step. Try the theme and make sure it loads successfully by the app before you import another theme. *
 
-Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3
+### 2.2 [Optiona) Add product specific book cover layouts. 
+
+*Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3*
 
 By default, layouts created by step 2.1 are for page layouts only. If you directly use that data as is, your book will not have a cover. The cover page layout is like regular page layouts, but it needs to be created separately. This is because different product type tends to have have different cover specification (e.g. soft cover and hard cover will have very different cover size), you need to have a designated cover layout, mapping to the different Product type (print_info). Assume you have a product (print_info_id=8), tthe fastest approach to set its cover layout is to pick an existing spread page layout and set its print_info_id = 8.  
 ````
 INSERT INTO 'page_layouts' ('id','theme_id','std_ratio_type','width','height','thumb_path','is_spread', 'print_info_id') VALUES (2505,202,9,63750,82500,'Tapsbook/Layouts/8.5x11/layout_2505.png',0, 8);
 ````
 
-2.3 Import the generated sql scripts to your existing Template SQLite.  
+### 2.3 Import the generated sql scripts to your existing Template SQLite.  
 
 Use the command below to import the data. Replace the sqlite DB name below with the actual SQlite file name.
 
@@ -69,7 +71,7 @@ Once you have an updated SQLite, you need to make your SDK-enabled app to load y
 ````
 kTBTemplateDatabaseName : @"YOUR_sqlite_file",
 ````
-Tip:  When you have an app upgrade that features a new SQLite template update, and your client is doing an upgrade to its existing app install, iOS will not overwrite the SQLite if the SQLite file name is the same. So we recommend you add a version number to your SQLite file name and update the SDKconfiguration.m to sync with the new name every time you introduce changes to your template DB.
+*Tip:  When you have an app upgrade that features a new SQLite template update, and your client is doing an upgrade to its existing app install, iOS will not overwrite the SQLite if the SQLite file name is the same. So we recommend you add a version number to your SQLite file name and update the SDKconfiguration.m to sync with the new name every time you introduce changes to your template DB.*
 
 You are almost done! Now at the app runtime, you can present a product menu that let the user choose which product (SKU) to use, you can specify that SKU selection as albumOption. You should also specify a Theme ID that matches the selected product std_ratio_type 
 
