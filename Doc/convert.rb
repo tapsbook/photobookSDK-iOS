@@ -4,24 +4,35 @@ require 'nokogiri'
 require_relative 'model.rb'
 
 # ====================== Input Parameters Starts =====================
-config_path = 'Templates.sample.xml'
-# XML contains my sizes, this example filters to include only aspect ratio of 11x8.5 and 1x1
-std_page_ratios = [11/8.5, 1/1]
-# in SDK database, give each aspect ratio above an theme_id
-std_ratio_types = [1, 4]
-# Theme_id start index
-theme_start_id = 200
-# Each template page is a layout, here is its start index
-layout_start_id = 2000
-# Each page contains multiple slots
-slot_star_id = 20000
-# A large base number to convert the float number to integer, doing this to avoid saving integer to DB
+config_path = 'Templates.all.xml'
+# XML contains many sizes, this example filters to include only aspect ratio of 8.5x11, ignoring anything else in the xml
+std_page_ratios = [8.5/11]
+# the ID(s) that maps to the size filter above, each aspect ratio has an std_ratio_type ID, here 8.5x11's ratio_type is 9
+std_ratio_types = [9]
+# check your DB's themes table, enter the last 's ID + 1 here, this is the theme_id you will need to specify in app to chose 8.5x11 book
+theme_start_id = 202
+# print_info id for the new product, each theme should have at least 1 product
+poroduct_print_info_id = 9
+# product sku for the new product
+product_sku = 999
+# check your DB's bgs table,  enter the last bgs's ID+1 here, this is used to set the default page background color for the theme
+background_start_id = 79
+# check your DB's page_layouts table,  enter the last layout's ID+1 here, 
+layout_start_id = 2500
+# check your DB's slots table,  enter the last slot's ID+1 here, 
+slot_star_id = 3100
+# A large base number to convert the float number to integer, doing this so that we only need to save integers in DB.
 dimension_scale_ratio = 7500
+# Output page image size, usually this should be 300dpi*print size (inch)
+page_image_size = [2550, 3300]
+cover_image_size = [2550, 3300]
 # ====================== Input Parameters Ends =====================
 
 tb_themes = []
 tb_layouts = []
 tb_slots = []
+tb_printinfo = []
+tb_bgimgs = []
 
 def trim num
   i, f = num.to_i, num.to_f
@@ -144,9 +155,6 @@ templates_doc.each do |template_node|
   
   tb_layouts << tb_layout
   
-  # puts tb_layout
-  # gets
-  
   # slots
   dropzones_doc = template_node.xpath('./DropZones/DropZone')
   
@@ -178,17 +186,47 @@ templates_doc.each do |template_node|
     
     tb_slots << tb_slot
     
-    # puts slot_top
-    # puts slot_left
-    # puts slot_width
-    # puts slot_height
-    #
-    # puts tb_slot
-    # gets
   end
+
 end
 
-puts "/* Processed #{tb_themes.count} themes, including #{tb_layouts.count} layouts and #{tb_slots.count} slots */"
+#background image for the theme
+tb_themes.each do |theme|
+  tb_bgimg = TBBg.new
+  tb_bgimg.id = background_start_id 
+  tb_bgimg.theme_id = tb_themes[0].id
+  background_start_id = background_start_id + 1
+  default_background_color = 4294965739
+  tb_bgimg.color = default_background_color
+  tb_bgimgs << tb_bgimg
+end
+
+#printinfo for this theme
+printinfo = TBPrintInfo.new
+printinfo.id = poroduct_print_info_id
+printinfo.server_id = product_sku
+printinfo.provider_name = "ABC App"
+printinfo.name = "8.5x11"
+printinfo.description = "8.5x11"
+printinfo.std_ratio_type = std_ratio_types[0]
+printinfo.std_width = tb_themes[0].std_page_width
+printinfo.std_height = tb_themes[0].std_page_height
+printinfo.min_pages_count = 20
+printinfo.max_pages_count = 40
+printinfo.product_type = 1
+printinfo.type = 101
+printinfo.page_output_type = 0
+printinfo.cover_output_type = 1
+printinfo.min_ppi = 180
+printinfo.max_ppi = 300
+printinfo.spine_width = 80
+printinfo.std_page_print_width = page_image_size[0]
+printinfo.std_page_print_height = page_image_size[1]
+printinfo.cover_print_width = cover_image_size[0]
+printinfo.cover_print_height = cover_image_size[1]
+tb_printinfo << printinfo
+
+puts "/* Generated #{tb_themes.count} themes, including #{tb_layouts.count} layouts and #{tb_slots.count} slots */"
 
 puts '/* === Theme inserts === */'
 tb_themes.each do |obj|
@@ -204,4 +242,15 @@ puts '/* === Slot inserts  === */'
 tb_slots.each do |obj|
   puts obj.to_sql
 end
+
+puts '/* === PrintInfo inserts  === */'
+tb_printinfo.each do |obj|
+  puts obj.to_sql
+end
+
+puts '/* === Background inserts  === */'
+tb_bgimgs.each do |obj|
+  puts obj.to_sql
+end
+
   

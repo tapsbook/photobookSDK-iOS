@@ -4,7 +4,7 @@ Hey, we are glad you are here. Customizing the Tapsbook SDK's template DB is pro
 
 ## 1. Concept
 
-Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer)
+Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer). To finish the tasks in this doc, we suggest use a tool such as SQLiteStudio(Mac) to view the SQLite data.
 
 1.1 The page template metadata is organized as a tree structure where The top level node is **theme** which represents page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme_id=200 and it is a square book type. The available std_ratio_type value current in the default DB has the following
 ````
@@ -16,6 +16,8 @@ TBStdPageRatio_22x30  = 5,
 TBStdPageRatio_30x22  = 6,
 TBStdPageRatio_4x3    = 7,
 TBStdPageRatio_3x4    = 8,
+TBStdPageRatio_8_5x11 = 9,
+TBStdPageRatio_8x10_5 = 10,
 ````
 
 If you have customized book size other than these predefined aspect ratios, you need to create a new std_ratio_type ID and refer to this ID anywhere else when std_ratio_type is used. and yes, you only need to have one aspect ratio for the simplified aspect ratio, i.e. 3x2 and 15x10 should share one std_ratio_type, for example
@@ -26,40 +28,38 @@ TBStdPageRatio_3x2    = 9,
 
 1.3 Each page layouts include multiple slots, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
 
-At the run time, when user chooses to auto-generate all book pages, the engine first loads all templates data from the default local sqlite database and intelligently match the appropriate page template based on the photo selections 
+1.4 Just like a typical Object Oriented programming paradigm where class needs to be instantiated to an instance, the theme needs to be instantiated to a real product before it can be used by the SDK. As designed, one product must have a specific std_ratio_type, but one std_ratio_type may have multiple themes matching it. In TapsbookSDK, we use PrintInfo object to track prodcuts, each printInfo needs to have a SKU, ID. and it is linked to Theme via std_ratio_type. 
+
+At the run time, when user chooses to auto-generate all book pages, the engine first loads the ProductInfo and all templates data from the local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
-So, now comes the fun part to get hands on experience. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
+Now comes the fun part to get your hands dirty. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
-2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you may want to update the script config options inside the ruby script. The output SQL will include THEME, PAGE_LAYOUTS and SLOTS data.
+2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you must update the script config options inside the ruby script. The output SQL will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
 ````
 ruby convert.rb > myTemplate.sql
 ````
-2.2 Add new product data to your existing Template sqlite. product info is identified as SKU (server_id). You must define the product property for each SKU, the SDK current requires all product info also stored in the template DB. The following SQL script is an example of one SKU product definition.
-````
-INSERT INTO print_infos (server_id, provider_name, product_type, name, description, preview_path, std_ratio_type, std_width, std_height, min_pages_count, max_pages_count, file_name, min_ppi, max_ppi, type) VALUES ($SKU_NUMBER, '$COMPANY_NAME', 1, '$PRODUCT_NAME', '$PRODUCT_DESC', '', $std_ratio_type, $PAGE_W, $PAGE_H, $MIN_PAGE, $MAX_PAGE,  '', 180, 300, 101);
-````
-where
-- server_id: SKU (server side defined)
-- product_type: 1 (photo book) 
-- std_ratio_type must use a predefined ratio_type value (see section 1.1)
-- MIN_PAGE, MAX_PAGE is number of pages this product supports (user can add or remove pages, and these two numbers will be used as the limit),
-- MIN_PPI, MAX_PPI: min image pixel density of the source photo needed, SDK dynamically compute the image resolution when user scales the image.
-- type: use 101 for editable cover page
 
-2.3 Add product specific book cover layouts. by default, layouts created by step 1 are for page layouts only. Because different product type tend to have have different cover design (e.g. soft cover and hard cover will have very different cover), you need to create new cover layout, which is 1:1 mapped to Product type (print_info) as you introduced at step 2.2. The fastest approach to add a cover COVER_1 to an product (PRINT_INFO_ID=100) is to 1) select an existing layout, clone it and its slots as a new layout, and 2) link this new layout with the product by assigning Layout's print_info_id a value maps to the product (100).       
+2.2 Add product specific book cover layouts. By default, layouts created by step 2.1 are for page layouts only. If you directly use that data as is, your book will not have a cover. The cover page layout is like regular page layouts, but it needs to be created separately. This is because different product type tends to have have different cover specification (e.g. soft cover and hard cover will have very different cover size), you need to have a designated cover layout, mapping to the different Product type (print_info). Assume you have a product (print_info_id=8), tthe fastest approach to set its cover layout is to pick an existing spread page layout and set its print_info_id = 8.  
+````
+INSERT INTO 'page_layouts' ('id','theme_id','std_ratio_type','width','height','thumb_path','is_spread', 'print_info_id') VALUES (2505,202,9,63750,82500,'Tapsbook/Layouts/8.5x11/layout_2505.png',0, 8);
+````
 
-Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
+2.3 Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
+
+````
+cat myTemplate.sql | sqlite3 TemplateDB.sqlite
+````
 
 ## 3. Load the new SDK template to your app
 
-Once you save the changes to the SQLite, you need to force your SDK-enabled app to load your template. To do that, save the update SQLite to TapsbookSDK.bundle folder, if you renamed your template DB, you must also update the SDKconfiguration.m as the following
+Once you have an updated SQLite, you need to make your SDK-enabled app to load your template. To do that, save the update SQLite to TapsbookSDK_Binary/TapsbookSDK.bundle folder. It is recommended that you check  the SDKconfiguration.m which should have the right DB file name
 ````
 kTBTemplateDatabaseName : @"YOUR_sqlite_file",
 ````
-Tip:  When you have an app upgrade that features a new SQLite template update, and your client is doing an upgrade to its existing app install, iOS will not overwrite the SQLite if the SQLite file name is the same. So we recommend you add a version number to your SQLite file name and update the SDKconfiguration.m every time you have a new template DB.
+Tip:  When you have an app upgrade that features a new SQLite template update, and your client is doing an upgrade to its existing app install, iOS will not overwrite the SQLite if the SQLite file name is the same. So we recommend you add a version number to your SQLite file name and update the SDKconfiguration.m to sync with the new name every time you introduce changes to your template DB.
 
-You are almost done! Now at the app runtime, you can present a product menu that let the user choose which product (SKU) to use, you can specify that SKU selection as albumOption. You should also specify a Theme ID that matches the selected product std_ratio_type (in theory, one std_ratio_type may have multiple themes matching it)
+You are almost done! Now at the app runtime, you can present a product menu that let the user choose which product (SKU) to use, you can specify that SKU selection as albumOption. You should also specify a Theme ID that matches the selected product std_ratio_type 
 
 ````
 NSDictionary * albumOption = @{                                           

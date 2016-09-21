@@ -1,0 +1,1 @@
+INSERT INTO print_infos (server_id, provider_name, product_type, name, description, preview_path, std_ratio_type, std_width, std_height, min_pages_count, max_pages_count, file_name, min_ppi, max_ppi, type) VALUES (999, 'General', 1, '8.5x11', '8.5x11', '', 9, 63750, 87500, 20, 40,  '', 180, 300, 101);

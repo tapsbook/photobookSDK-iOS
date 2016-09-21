@@ -90,6 +90,7 @@ class TBPrintInfoTheme < TBObject
 end
 
 class TBPrintInfo < TBObject
+  attr_accessor :server_id
   attr_accessor :provider_name
   attr_accessor :name
   attr_accessor :description
@@ -100,17 +101,17 @@ class TBPrintInfo < TBObject
   attr_accessor :min_pages_count
   attr_accessor :max_pages_count
   attr_accessor :type
-  attr_accessor :output_type
-  attr_accessor :file_name
+  attr_accessor :product_type
+  attr_accessor :page_output_type
+  attr_accessor :cover_output_type
   attr_accessor :std_page_print_width
   attr_accessor :std_page_print_height
   attr_accessor :cover_print_width
   attr_accessor :cover_print_height
   attr_accessor :min_ppi
   attr_accessor :max_ppi
-  attr_accessor :price
-  attr_accessor :product_id
-  
+  attr_accessor :spine_width
+
   def table_name
     'print_infos'
   end
