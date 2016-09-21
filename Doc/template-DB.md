@@ -33,9 +33,11 @@ TBStdPageRatio_3x2    = 9,
 At the run time, when user chooses to auto-generate all book pages, the engine first loads the ProductInfo and all templates data from the local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
-Now comes the fun part to get your hands dirty. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
+Now comes the fun part to see how it works. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
-2.1 Convert your page template Data. Use the convert.rb script that converts your data to the SQL data import script. Before you run this script, you must update the script config options inside the ruby script. The output SQL will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
+[Sample data and script](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/templates-convert-sample.zip)
+
+2.1 Convert your page template Data. Assume you have existing set of page template data in a structured format, you can then use the convert.rb script to convert your data to the SDK-ready SQL data. Before you run this script, you must update the script config options inside the ruby script. Refer to the script header for the detailed instruction. Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
 ````
 ruby convert.rb > myTemplate.sql
 ````
@@ -44,12 +46,14 @@ ruby convert.rb > myTemplate.sql
 ````
 INSERT INTO 'page_layouts' ('id','theme_id','std_ratio_type','width','height','thumb_path','is_spread', 'print_info_id') VALUES (2505,202,9,63750,82500,'Tapsbook/Layouts/8.5x11/layout_2505.png',0, 8);
 ````
+Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3
 
-2.3 Import the generated sql scripts to your existing Template sqlite. You now should have a new template database ready for SDK consumption.
+2.3 Import the generated sql scripts to your existing Template SQLite.  Replace the sqlite DB name below with the actual SQlite file name.
 
 ````
-cat myTemplate.sql | sqlite3 TemplateDB.sqlite
+cat myTemplate.sql | sqlite3 TemplateDB.sqlite 
 ````
+You now should have a new template database ready for SDK consumption.
 
 ## 3. Load the new SDK template to your app
 
