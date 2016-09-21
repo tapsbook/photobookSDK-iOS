@@ -82,8 +82,8 @@ NSDictionary * albumOption = @{
 ````
 To try the SKU switch in action, you can change the albumOption to the following to load a 11x8.5 sized book to the SDK. 
 ````
-kTBPreferredProductSKU:     @"998",  //sku=998 is a layflat square book
-kTBProductPreferredTheme:   @"201",  //200 is for square book
+kTBPreferredProductSKU:     @"998",  //sku=998 is a layflat 11x8.5 book
+kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 ratio book
 ````
 
 ## That's it!
