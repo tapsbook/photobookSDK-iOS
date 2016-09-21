@@ -45,9 +45,9 @@ ruby convert.rb > myTemplate.sql
 ````
 Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format. 
 
-*Tip: Remember start simple! It is recommended that you break your data importing into multiple steps by different themes (page aspect ratio), only load one theme at each step. Try the theme and make sure it loads successfully by the app before you import another theme. *
+*Tip: Remember start simple! It is recommended that you break your data importing into multiple steps by different themes (page aspect ratio), only load one theme at each step. Try the theme and verify it loads successfully by the SDK before you import another theme.*
 
-### 2.2 [Optiona) Add product specific book cover layouts. 
+### 2.2 [Optional] Add product specific book cover layouts. 
 
 *Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3*
 
