@@ -262,7 +262,7 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
             //private API demo here for enterprise clients, consulting before use.
             NSDictionary * albumOption = @{
                                            kTBProductPreferredTheme:   @"200",  //200 is for square book
-                                           kTBPreferredProductSKU:     @"1003", //sku=1003 is a layflat book
+                                           kTBProductPreferredSKU:     @"1003", //sku=1003 is a layflat book
                                            kTBProductMaxPageCount:     @"24",   //set max=min will limit the page count
                                            kTBProductMinPageCount:     @"24",
                                            kTBPreferredUIDirection:    @"LTR"

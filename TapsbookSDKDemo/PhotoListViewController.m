@@ -339,14 +339,28 @@ static CGSize AssetGridThumbnailSize;
                 if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
                     //private API demo here for enterprise clients, consulting before use.
                     //note that SKU and Theme must share the common std_ratio_type, otherwise you will get error "No availble product"
-                    NSDictionary * albumOption = @{
-                                    kTBProductPreferredTheme:   @"201",  //200 is for square book
-                                    kTBPreferredProductSKU:     @"998", //sku=1003 is a layflat square book
-                                    kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
-                                    kTBProductMinPageCount:     @"20",
-                                    kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
-                                    @"preferSpread":            @(YES)
-                                    };
+                    NSDictionary * albumOptionBase = @{
+                                                       kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
+                                                       kTBProductMinPageCount:     @"20",
+                                                       kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
+                                                       @"preferSpread":            @(YES)
+                                                       };
+                    NSDictionary * albumBookType8x8 =@{
+                                                       kTBProductPreferredTheme:   @"200",  //200 is for square book
+                                                       kTBProductPreferredSKU:     @"1003", //1003 is a layflat square book
+                                                       };
+                    NSDictionary * albumBookType11x85 =@{
+                                                       kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 page
+                                                       kTBProductPreferredSKU:     @"998",  //998 is corresponding book
+                                                       };
+                    NSDictionary * albumBookType85x11 =@{
+                                                       kTBProductPreferredTheme:   @"202",  //202 is for 8.5x11 page
+                                                       kTBProductPreferredSKU:     @"999",  //998 is corresponding book book
+                                                       };
+
+                    NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
+                    [albumOption addEntriesFromDictionary:albumBookType85x11];
+                    
                     //the createSDKAlbumWithImages process include facial recognition, which might take sometime..
                     hud.mode = MBProgressHUDModeIndeterminate;
                     hud.labelText = @"recognizing faces...";
