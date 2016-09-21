@@ -4,9 +4,9 @@ Hey, we are glad you are here. Customizing the Tapsbook SDK's template DB is pro
 
 ## 1. Concept
 
-Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer). To finish the tasks in this doc, we suggest use a tool such as SQLiteStudio(Mac) to view the SQLite data.
+Tapsbook uses its own template engine to combine page template metadata and user-generated images, text, and embellishment to render finished book pages. The template metadata is stored in an SQlite DB that comes with the SDK binary. The SQlite DB enables great offline editing ability. Enterprise Account Developers can also customize their own template to be loaded into their final app (you are here means you are an enterprise account developer). To finish the tasks in this doc, we suggest use a tool such as SQLiteStudio(Mac) to view the SQLite data.
 
-1.1 The page template metadata is organized as a tree structure where The top level node is **theme** which represents page styles. Theme = Function of (aspect ratio type, page color tone). When you want to expose multiple themes to your customers, you can present a theme selection UI to your customer. The default theme loaded in the current SDK is theme_id=200 and it is a square book type. The available std_ratio_type value current in the default DB has the following
+1.1 The page template metadata is organized as groups where the top level group is **theme**. Think theme as the Function of (aspect ratio type, page color tone). For a given aspect ratio type, there should be a theme entry in the DB. The available std_ratio_type value current in the default DB has the following. The default theme loaded in the current SDK is std_ratio_type=4 (theme_id=200) and it is a square book type. 
 ````
 TBStdPageRatio_11x8_5 = 1,
 TBStdPageRatio_10_5x8 = 2,
@@ -20,35 +20,43 @@ TBStdPageRatio_8_5x11 = 9,
 TBStdPageRatio_8x10_5 = 10,
 ````
 
-If you have customized book size other than these predefined aspect ratios, you need to create a new std_ratio_type ID and refer to this ID anywhere else when std_ratio_type is used. and yes, you only need to have one aspect ratio for the simplified aspect ratio, i.e. 3x2 and 15x10 should share one std_ratio_type, for example
+If you have customized book size other than these predefined aspect ratios, you need to create a new std_ratio_type ID and refer to this ID anywhere else when std_ratio_type is used in this doc. You only need to have one aspect ratio for the simplified aspect ratio, e.g. 3x2 and 15x10 should share one std_ratio_type,
 ````
 TBStdPageRatio_3x2    = 9,
 ````
-1.2 Each Theme includes multiple page layouts. Page layout dictate how many photos to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
+1.2 Each Theme includes multiple page layouts. Page layout specify how photos and text label to be arranged on the page, and whether a page is a standard page or a spread page (a spread page is two standard pages combined into one sheet).
 
 1.3 Each page layouts include multiple slots, where a slot can be one of the three types: photo slot, text slot and embellishment slot. These slots all have generic properties such as their positions on the page, the content placement relative to the slot etc.
 
-1.4 Just like a typical Object Oriented programming paradigm where class needs to be instantiated to an instance, the theme needs to be instantiated to a real product before it can be used by the SDK. As designed, one product must have a specific std_ratio_type, but one std_ratio_type may have multiple themes matching it. In TapsbookSDK, we use PrintInfo object to track prodcuts, each printInfo needs to have a SKU, ID. and it is linked to Theme via std_ratio_type. 
+1.4 In a typical Object Oriented programming paradigm, a class can be instantiated to an instance. Similarly the theme needs to be instantiated to a real product before it can be used by the SDK. As designed, one product must have a specific std_ratio_type, but one std_ratio_type may have multiple products matching it. In TapsbookSDK, we use PrintInfo object to track prodcuts, each printInfo needs to have a SKU, ID. and it is linked to Theme via std_ratio_type. 
 
 At the run time, when user chooses to auto-generate all book pages, the engine first loads the ProductInfo and all templates data from the local sqlite database and intelligently match the appropriate page template based on the photo selections 
 
 ## 2. Importing your Template data to SDK Template
-Now comes the fun part to see how it works. we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
+Chance is that you already have some templates to use for your book, we provide sample script to converts your data to SDK-ready SQL scripts. Before you try to importing your data,we suggest you use the attached sample Data and convert script first to get familiar with the concept, then you are free to import your own template.
 
 [Sample data and script](https://github.com/tapsbook/photobookSDK-iOS/blob/master/Doc/templates-convert-sample.zip)
 
-2.1 Convert your page template Data. Assume you have existing set of page template data in a structured format, you can then use the convert.rb script to convert your data to the SDK-ready SQL data. Before you run this script, you must update the script config options inside the ruby script. Refer to the script header for the detailed instruction. Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
+2.1 Convert page template Data. 
+
+Assume you have existing set of page template data in an XML format, you can then use the convert.rb (ruby) script to convert your data to the SDK-ready SQL data. Before you run this script, you must update the script config options inside the ruby script. Refer to the script header for the detailed instruction. 
 ````
 ruby convert.rb > myTemplate.sql
 ````
+Once you complete, the output file will include THEME, PRINT_INFO, PAGE_LAYOUTS, PAGE_BACKGROUNDS and SLOTS data in SQL format.
 
-2.2 Add product specific book cover layouts. By default, layouts created by step 2.1 are for page layouts only. If you directly use that data as is, your book will not have a cover. The cover page layout is like regular page layouts, but it needs to be created separately. This is because different product type tends to have have different cover specification (e.g. soft cover and hard cover will have very different cover size), you need to have a designated cover layout, mapping to the different Product type (print_info). Assume you have a product (print_info_id=8), tthe fastest approach to set its cover layout is to pick an existing spread page layout and set its print_info_id = 8.  
+2.2 Add product specific book cover layouts. (optional)
+
+Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3
+
+By default, layouts created by step 2.1 are for page layouts only. If you directly use that data as is, your book will not have a cover. The cover page layout is like regular page layouts, but it needs to be created separately. This is because different product type tends to have have different cover specification (e.g. soft cover and hard cover will have very different cover size), you need to have a designated cover layout, mapping to the different Product type (print_info). Assume you have a product (print_info_id=8), tthe fastest approach to set its cover layout is to pick an existing spread page layout and set its print_info_id = 8.  
 ````
 INSERT INTO 'page_layouts' ('id','theme_id','std_ratio_type','width','height','thumb_path','is_spread', 'print_info_id') VALUES (2505,202,9,63750,82500,'Tapsbook/Layouts/8.5x11/layout_2505.png',0, 8);
 ````
-Tip: You can skip this step and fix it later by directly modifying the data in the SQLite after step 2.3
 
-2.3 Import the generated sql scripts to your existing Template SQLite.  Replace the sqlite DB name below with the actual SQlite file name.
+2.3 Import the generated sql scripts to your existing Template SQLite.  
+
+Use the command below to import the data. Replace the sqlite DB name below with the actual SQlite file name.
 
 ````
 cat myTemplate.sql | sqlite3 TemplateDB.sqlite 
