@@ -359,7 +359,7 @@ static CGSize AssetGridThumbnailSize;
                                                        };
 
                     NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
-                    [albumOption addEntriesFromDictionary:albumBookType85x11];
+                    [albumOption addEntriesFromDictionary:albumBookType11x85];
                     
                     //the createSDKAlbumWithImages process include facial recognition, which might take sometime..
                     hud.mode = MBProgressHUDModeIndeterminate;
