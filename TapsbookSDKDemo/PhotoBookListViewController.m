@@ -311,7 +311,8 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
 }
 
 - (void)albumManager:(TBSDKAlbumManager *)albumManager didFinishEditingSDKAlbum:(TBSDKAlbum *)sdkAlbum{
-    //do some album clean up, e.g. clean up image cache if needed 
+    //do some album clean up, e.g. clean up image cache if needed
+    NSLog(@"Book data has been saved to the DB, now it is safe to do more with the album object");
 }
 
 #pragma mark -
