@@ -122,6 +122,7 @@ extern NSString * const kTBProductMinPageCount;
 extern NSString * const kTBPreferredUIDirection;
 extern NSString * const kTBSendOrderInfoToHostingApp;
 extern NSString * const kTBExternalCheckoutType;
+extern NSString * const kTBPreferredPageTypeSpread;
 
 // 0
 extern NSString * const kTBSocial;

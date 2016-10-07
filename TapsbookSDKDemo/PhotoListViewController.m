@@ -343,7 +343,7 @@ static CGSize AssetGridThumbnailSize;
                                                        kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
                                                        kTBProductMinPageCount:     @"20",
                                                        kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
-                                                       @"preferSpread":            @(YES)
+                                                       kTBPreferredPageTypeSpread: @(YES)
                                                        };
                     NSDictionary * albumBookType8x8 =@{
                                                        kTBProductPreferredTheme:   @"200",  //200 is for square book
@@ -359,7 +359,7 @@ static CGSize AssetGridThumbnailSize;
                                                        };
 
                     NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
-                    [albumOption addEntriesFromDictionary:albumBookType11x85];
+                    [albumOption addEntriesFromDictionary:albumBookType8x8];
                     
                     //the createSDKAlbumWithImages process include facial recognition, which might take sometime..
                     hud.mode = MBProgressHUDModeIndeterminate;
