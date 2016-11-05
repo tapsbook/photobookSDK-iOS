@@ -392,10 +392,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## GoogleAnalytics
-
-Copyright 2015 Google Inc.
-
 ## HappyDNS
 
 The MIT License (MIT)

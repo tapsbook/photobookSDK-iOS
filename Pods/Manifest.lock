@@ -101,7 +101,6 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - FXBlurView (1.6.4)
   - FXLabel (1.5.8)
-  - GoogleAnalytics (3.14.0)
   - HappyDNS (0.2.3)
   - KVOController (1.0.3)
   - leveldb (1.18)
@@ -193,7 +192,6 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8)
   - FXBlurView (~> 1.6)
   - FXLabel (~> 1.5)
-  - GoogleAnalytics (~> 3.14)
   - KVOController (~> 1.0)
   - leveldb
   - libextobjc (~> 0.4.1)
@@ -236,7 +234,6 @@ SPEC CHECKSUMS:
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   FXLabel: 14f7d4abb0eb531a0824b327a86f5b790171207f
-  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2

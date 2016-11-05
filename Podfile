@@ -24,7 +24,6 @@ pod 'TTTAttributedLabel', '~> 1.13'
 pod 'FXBlurView', '~> 1.6'
 pod "AFNetworking", "~> 2.0"
 pod 'Qiniu', '~> 7.0'
-pod 'GoogleAnalytics', '~> 3.14'
 pod 'MZFormSheetController', '~> 3.1'
 pod 'MZFormSheetPresentationController', '~> 2.1'
 pod 'FMDB', '~> 2.5'
@@ -43,6 +42,9 @@ pod 'objective-zip'
 
 pod 'ShareSDK3'
 pod 'MOBFoundation'
+
+#disabled for China build
+#pod 'GoogleAnalytics', '3.14.0'
 
 end
 
