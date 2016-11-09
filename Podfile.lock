@@ -28,9 +28,15 @@ PODS:
   - AGGeometryKit/CALayerProperties (1.2.2)
   - AGGeometryKit/UIViewProperties (1.2.2)
   - AHEasing (1.2)
-  - AsyncDisplayKit (1.9.1):
-    - AsyncDisplayKit/ASDealloc2MainObject (= 1.9.1)
-  - AsyncDisplayKit/ASDealloc2MainObject (1.9.1)
+  - AsyncDisplayKit (1.9.92):
+    - AsyncDisplayKit/PINRemoteImage (= 1.9.92)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.9.92)
+  - AsyncDisplayKit/Core (1.9.92):
+    - AsyncDisplayKit/ASDealloc2MainObject
+  - AsyncDisplayKit/PINRemoteImage (1.9.92):
+    - AsyncDisplayKit/Core
+    - PINCache (= 3.0.1-beta)
+    - PINRemoteImage/iOS (= 3.0.0-beta.3)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -152,6 +158,11 @@ PODS:
   - MZFormSheetPresentationController (2.1.2):
     - MZAppearance
   - objective-zip (1.0.3)
+  - PINCache (3.0.1-beta)
+  - PINRemoteImage/Core (3.0.0-beta.3):
+    - PINCache (>= 3.0.0-beta)
+  - PINRemoteImage/iOS (3.0.0-beta.3):
+    - PINRemoteImage/Core
   - pop (1.0.8)
   - Qiniu (7.0.15):
     - AFNetworking (~> 2.0)
@@ -180,7 +191,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - AGGeometryKit (~> 1.2)
   - AHEasing (~> 1.2)
-  - AsyncDisplayKit (~> 1.9)
+  - AsyncDisplayKit (~> 1.9.92)
   - BlocksKit (~> 2.2)
   - CocoaLumberjack (~> 2.2)
   - DZNSegmentedControl (~> 1.3)
@@ -221,7 +232,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AGGeometryKit: 46e712c5a3958e23b98fef15e57df1149670f231
   AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
-  AsyncDisplayKit: 7bf2b3fa444284f80fd0c1e36655e324549f79d2
+  AsyncDisplayKit: 49d94f5739669d666ff7cdc3430f43f0b2cfbeaf
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
@@ -246,6 +257,8 @@ SPEC CHECKSUMS:
   MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
   MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
   objective-zip: 2f4eba2ed4a06ed74c7e6e4e7b80e6cacf212217
+  PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
+  PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
   Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

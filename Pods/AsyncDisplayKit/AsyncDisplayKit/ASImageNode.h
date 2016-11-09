@@ -1,13 +1,18 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASImageNode.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASControlNode.h>
 
+#import "ASImageProtocols.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Image modification block.  Use to transform an image before display.
@@ -16,7 +21,7 @@
  *
  * @returns A transformed image.
  */
-typedef UIImage *(^asimagenode_modification_block_t)(UIImage *image);
+typedef UIImage * _Nullable (^asimagenode_modification_block_t)(UIImage *image);
 
 
 /**
@@ -32,12 +37,12 @@ typedef UIImage *(^asimagenode_modification_block_t)(UIImage *image);
  * the layer's contentsCenter property.  Non-stretchable images work too, of
  * course.
  */
-@property (atomic, retain) UIImage *image;
+@property (nullable, nonatomic, strong) UIImage *image;
 
 /**
  @abstract The placeholder color.
  */
-@property (nonatomic, strong) UIColor *placeholderColor;
+@property (nullable, nonatomic, strong) UIColor *placeholderColor;
 
 /**
  * @abstract Indicates whether efficient cropping of the receiver is enabled.
@@ -46,6 +51,14 @@ typedef UIImage *(^asimagenode_modification_block_t)(UIImage *image);
  * information.
  */
 @property (nonatomic, assign, getter=isCropEnabled) BOOL cropEnabled;
+
+/**
+ * @abstract Indicates that efficient downsizing of backing store should *not* be enabled.
+ *
+ * @discussion Defaults to NO. @see ASCroppedImageBackingSizeAndDrawRectInBounds for more
+ * information.
+ */
+@property (nonatomic, assign) BOOL forceUpscaling;
 
 /**
  * @abstract Enables or disables efficient cropping.
@@ -85,7 +98,7 @@ typedef UIImage *(^asimagenode_modification_block_t)(UIImage *image);
  * @discussion Can be used to add image effects (such as rounding, adding
  * borders, or other pattern overlays) without extraneous display calls.
  */
-@property (nonatomic, readwrite, copy) asimagenode_modification_block_t imageModificationBlock;
+@property (nullable, nonatomic, readwrite, copy) asimagenode_modification_block_t imageModificationBlock;
 
 /**
  * @abstract Marks the receiver as needing display and performs a block after
@@ -99,7 +112,45 @@ typedef UIImage *(^asimagenode_modification_block_t)(UIImage *image);
  * `displaySuspended` is YES, `displayCompletionBlock` is will be
  * performed immediately and `YES` will be passed for `canceled`.
  */
-- (void)setNeedsDisplayWithCompletion:(void (^)(BOOL canceled))displayCompletionBlock;
+- (void)setNeedsDisplayWithCompletion:(void (^ _Nullable)(BOOL canceled))displayCompletionBlock;
+
+#if TARGET_OS_TV
+/** 
+ * A bool to track if the current appearance of the node
+ * is the default focus appearance.
+ * Exposed here so the category methods can set it.
+ */
+@property (nonatomic, assign) BOOL isDefaultFocusAppearance;
+#endif
+
+@end
+
+@interface ASImageNode (AnimatedImage)
+
+/**
+ * @abstract The animated image to playback
+ *
+ * @discussion Set this to an object which conforms to ASAnimatedImageProtocol
+ * to have the ASImageNode playback an animated image.
+ */
+@property (nullable, nonatomic, strong) id <ASAnimatedImageProtocol> animatedImage;
+
+/**
+ * @abstract Pause the playback of an animated image.
+ *
+ * @discussion Set to YES to pause playback of an animated image and NO to resume
+ * playback.
+ */
+@property (nonatomic, assign) BOOL animatedImagePaused;
+
+/**
+ * @abstract The runloop mode used to animate the image.
+ *
+ * @discussion Defaults to NSRunLoopCommonModes. Another commonly used mode is NSDefaultRunLoopMode.
+ * Setting NSDefaultRunLoopMode will cause animation to pause while scrolling (if the ASImageNode is
+ * in a scroll view), which may improve scroll performance in some use cases.
+ */
+@property (nonatomic, strong) NSString *animatedImageRunLoopMode;
 
 @end
 
@@ -116,13 +167,13 @@ ASDISPLAYNODE_EXTERN_C_BEGIN
  *
  * @returns An ASImageNode image modification block.
  */
-asimagenode_modification_block_t ASImageNodeRoundBorderModificationBlock(CGFloat borderWidth, UIColor *borderColor);
+asimagenode_modification_block_t ASImageNodeRoundBorderModificationBlock(CGFloat borderWidth, UIColor * _Nullable borderColor);
 
 /**
  * @abstract Image modification block that applies a tint color à la UIImage configured with
  * renderingMode set to UIImageRenderingModeAlwaysTemplate.
  *
- * @param tintColor The color to tint the image.
+ * @param color The color to tint the image.
  *
  * @see <imageModificationBlock>
  *
@@ -131,3 +182,4 @@ asimagenode_modification_block_t ASImageNodeRoundBorderModificationBlock(CGFloat
 asimagenode_modification_block_t ASImageNodeTintColorModificationBlock(UIColor *color);
 
 ASDISPLAYNODE_EXTERN_C_END
+NS_ASSUME_NONNULL_END

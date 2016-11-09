@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  _ASAsyncTransactionGroup.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <UIKit/UIKit.h>
 
@@ -18,7 +20,7 @@
 + (void)commit;
 
 /// Add a transaction container to be committed.
-/// @param containerLayer A layer containing a transaction to be commited. May or may not be a container layer.
+/// @param containerLayer A layer containing a transaction to be committed. May or may not be a container layer.
 /// @see ASAsyncTransactionContainer
 - (void)addTransactionContainer:(CALayer *)containerLayer;
 @end

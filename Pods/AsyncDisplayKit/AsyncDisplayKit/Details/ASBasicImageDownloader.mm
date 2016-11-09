@@ -1,16 +1,16 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASBasicImageDownloader.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASBasicImageDownloader.h"
 
 #import <objc/runtime.h>
-
-#import <UIKit/UIKit.h>
 
 #import "ASBasicImageDownloaderInternal.h"
 #import "ASThread.h"
@@ -31,7 +31,7 @@ NSString * const kASBasicImageDownloaderContextCompletionBlock = @"kASBasicImage
 @interface ASBasicImageDownloaderContext ()
 {
   BOOL _invalid;
-  ASDN::RecursiveMutex _propertyLock;
+  ASDN::RecursiveMutex __instanceLock__;
 }
 
 @property (nonatomic, strong) NSMutableArray *callbackDatas;
@@ -76,7 +76,7 @@ static ASDN::RecursiveMutex currentRequestsLock;
 
 - (void)cancel
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
 
   NSURLSessionTask *sessionTask = self.sessionTask;
   if (sessionTask) {
@@ -90,19 +90,19 @@ static ASDN::RecursiveMutex currentRequestsLock;
 
 - (BOOL)isCancelled
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   return _invalid;
 }
 
 - (void)addCallbackData:(NSDictionary *)callbackData
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   [self.callbackDatas addObject:callbackData];
 }
 
 - (void)performProgressBlocks:(CGFloat)progress
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   for (NSDictionary *callbackData in self.callbackDatas) {
     ASBasicImageDownloaderContextProgressBlock progressBlock = callbackData[kASBasicImageDownloaderContextProgressBlock];
     dispatch_queue_t callbackQueue = callbackData[kASBasicImageDownloaderContextCallbackQueue];
@@ -117,7 +117,7 @@ static ASDN::RecursiveMutex currentRequestsLock;
 
 - (void)completeWithImage:(UIImage *)image error:(NSError *)error
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   for (NSDictionary *callbackData in self.callbackDatas) {
     ASBasicImageDownloaderContextCompletionBlock completionBlock = callbackData[kASBasicImageDownloaderContextCompletionBlock];
     dispatch_queue_t callbackQueue = callbackData[kASBasicImageDownloaderContextCallbackQueue];
@@ -135,7 +135,7 @@ static ASDN::RecursiveMutex currentRequestsLock;
 
 - (NSURLSessionTask *)createSessionTaskIfNecessaryWithBlock:(NSURLSessionTask *(^)())creationBlock {
   {
-    ASDN::MutexLocker l(_propertyLock);
+    ASDN::MutexLocker l(__instanceLock__);
 
     if (self.isCancelled) {
       return nil;
@@ -149,7 +149,7 @@ static ASDN::RecursiveMutex currentRequestsLock;
   NSURLSessionTask *newTask = creationBlock();
 
   {
-    ASDN::MutexLocker l(_propertyLock);
+    ASDN::MutexLocker l(__instanceLock__);
 
     if (self.isCancelled) {
       return nil;
@@ -205,14 +205,14 @@ static const char *kContextKey = NSStringFromClass(ASBasicImageDownloaderContext
   static ASBasicImageDownloader *sharedImageDownloader = nil;
   static dispatch_once_t once = 0;
   dispatch_once(&once, ^{
-    sharedImageDownloader = [[ASBasicImageDownloader alloc] init];
+    sharedImageDownloader = [[ASBasicImageDownloader alloc] _init];
   });
   return sharedImageDownloader;
 }
 
 #pragma mark Lifecycle.
 
-- (instancetype)init
+- (instancetype)_init
 {
   if (!(self = [super init]))
     return nil;
@@ -240,7 +240,7 @@ static const char *kContextKey = NSStringFromClass(ASBasicImageDownloaderContext
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     // associate metadata with it
     NSMutableDictionary *callbackData = [NSMutableDictionary dictionary];
-    callbackData[kASBasicImageDownloaderContextCallbackQueue] = callbackQueue ?: dispatch_get_main_queue();
+    callbackData[kASBasicImageDownloaderContextCallbackQueue] = callbackQueue ? : dispatch_get_main_queue();
 
     if (downloadProgressBlock) {
       callbackData[kASBasicImageDownloaderContextProgressBlock] = [downloadProgressBlock copy];

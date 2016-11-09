@@ -1,12 +1,16 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASTextNode.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASControlNode.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol ASTextNodeDelegate;
 
@@ -32,30 +36,31 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 @interface ASTextNode : ASControlNode
 
 /**
- @abstract The attributed string to show.
+ @abstract The styled text displayed by the node.
  @discussion Defaults to nil, no text is shown.
  For inline image attachments, add an attribute of key NSAttachmentAttributeName, with a value of an NSTextAttachment.
  */
-@property (nonatomic, copy) NSAttributedString *attributedString;
+@property (nullable, nonatomic, copy) NSAttributedString *attributedText;
 
 #pragma mark - Truncation
 
 /**
- @abstract The attributedString to use when the text must be truncated.
+ @abstract The attributedText to use when the text must be truncated.
  @discussion Defaults to a localized ellipsis character.
  */
-@property (nonatomic, copy) NSAttributedString *truncationAttributedString;
+@property (nullable, nonatomic, copy) NSAttributedString *truncationAttributedText;
 
 /**
  @summary The second attributed string appended for truncation.
  @discussion This string will be highlighted on touches.
  @default nil
  */
-@property (nonatomic, copy) NSAttributedString *additionalTruncationMessage;
+@property (nullable, nonatomic, copy) NSAttributedString *additionalTruncationMessage;
 
 /**
  @abstract Determines how the text is truncated to fit within the receiver's maximum size.
  @discussion Defaults to NSLineBreakByWordWrapping.
+ @note Setting a truncationMode in attributedString will override the truncation mode set here.
  */
 @property (nonatomic, assign) NSLineBreakMode truncationMode;
 
@@ -68,14 +73,14 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  @abstract The maximum number of lines to render of the text before truncation.
  @default 0 (No limit)
  */
-@property (nonatomic, assign) NSUInteger maximumLineCount;
+@property (nonatomic, assign) NSUInteger maximumNumberOfLines;
 
 /**
  @abstract The number of lines in the text. Text must have been sized first.
  */
 @property (nonatomic, readonly, assign) NSUInteger lineCount;
 
-@property (nonatomic, strong) NSArray *exclusionPaths;
+@property (nullable, nonatomic, strong) NSArray<UIBezierPath *> *exclusionPaths;
 
 #pragma mark - Placeholders
 
@@ -91,7 +96,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 /**
  @abstract The placeholder color.
  */
-@property (nonatomic, strong) UIColor *placeholderColor;
+@property (nullable, nonatomic, strong) UIColor *placeholderColor;
 
 /**
  @abstract Inset each line of the placeholder.
@@ -103,10 +108,10 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 /**
  @abstract When you set these ASDisplayNode properties, they are composited into the bitmap instead of being applied by CA.
 
- @property (atomic, assign) CGColorRef shadowColor;
- @property (atomic, assign) CGFloat    shadowOpacity;
- @property (atomic, assign) CGSize     shadowOffset;
- @property (atomic, assign) CGFloat    shadowRadius;
+ @property (nonatomic, assign) CGColorRef shadowColor;
+ @property (nonatomic, assign) CGFloat    shadowOpacity;
+ @property (nonatomic, assign) CGSize     shadowOffset;
+ @property (nonatomic, assign) CGFloat    shadowRadius;
  */
 
 /**
@@ -127,7 +132,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  a line break, the rects returned will be on opposite sides and different lines). The rects returned
  are in the coordinate system of the receiver.
  */
-- (NSArray *)rectsForTextRange:(NSRange)textRange;
+- (NSArray<NSValue *> *)rectsForTextRange:(NSRange)textRange;
 
 /**
  @abstract Returns an array of rects used for highlighting the characters in a given text range.
@@ -138,7 +143,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  are in the coordinate system of the receiver. This method is useful for visual coordination with a
  highlighted range of text.
  */
-- (NSArray *)highlightRectsForTextRange:(NSRange)textRange;
+- (NSArray<NSValue *> *)highlightRectsForTextRange:(NSRange)textRange;
 
 /**
  @abstract Returns a bounding rect for the given text range.
@@ -162,7 +167,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 /**
  @abstract The set of attribute names to consider links.  Defaults to NSLinkAttributeName.
  */
-@property (nonatomic, copy) NSArray *linkAttributeNames;
+@property (nonatomic, copy) NSArray<NSString *> *linkAttributeNames;
 
 /**
  @abstract Indicates whether the receiver has an entity at a given point.
@@ -171,7 +176,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  @param rangeOut The ultimate range of the found text. Can be NULL.
  @result YES if an entity exists at `point`; NO otherwise.
  */
-- (id)linkAttributeValueAtPoint:(CGPoint)point attributeName:(out NSString **)attributeNameOut range:(out NSRange *)rangeOut;
+- (nullable id)linkAttributeValueAtPoint:(CGPoint)point attributeName:(out NSString * _Nullable * _Nullable)attributeNameOut range:(out NSRange * _Nullable)rangeOut;
 
 /**
  @abstract The style to use when highlighting text.
@@ -194,6 +199,9 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 
 /**
  @abstract Responds to actions from links in the text node.
+ @discussion The delegate must be set before the node is loaded, and implement
+             textNode:longPressedLinkAttribute:value:atPoint:textRange: in order for
+             the long press gesture recognizer to be installed.
  */
 @property (nonatomic, weak) id<ASTextNodeDelegate> delegate;
 
@@ -206,7 +214,6 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  @abstract if YES will not intercept touches for non-link areas of the text. Default is NO.
  */
 @property (nonatomic, assign) BOOL passthroughNonlinkTouches;
-
 
 @end
 
@@ -233,6 +240,8 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  @param value The value of the tapped attribute.
  @param point The point within textNode, in textNode's coordinate system, that was tapped.
  @param textRange The range of highlighted text.
+ @discussion In addition to implementing this method, the delegate must be set on the text
+             node before it is loaded (the recognizer is created in -didLoad)
  */
 - (void)textNode:(ASTextNode *)textNode longPressedLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point textRange:(NSRange)textRange;
 
@@ -245,7 +254,7 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
  @param attribute The attribute that was tapped. Will not be nil.
  @param value The value of the tapped attribute.
  @param point The point within textNode, in textNode's coordinate system, that was touched to trigger a highlight.
- @discussion If not implemented, the default value is NO.
+ @discussion If not implemented, the default value is YES.
  @return YES if the entity attribute should be a link, NO otherwise.
  */
 - (BOOL)textNode:(ASTextNode *)textNode shouldHighlightLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point;
@@ -262,3 +271,29 @@ typedef NS_ENUM(NSUInteger, ASTextNodeHighlightStyle) {
 - (BOOL)textNode:(ASTextNode *)textNode shouldLongPressLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point;
 
 @end
+
+/**
+ * @abstract Text node deprecated properties
+ */
+@interface ASTextNode (Deprecated)
+
+/**
+ The attributedString and attributedText properties are equivalent, but attributedText is now the standard API
+ name in order to match UILabel and ASEditableTextNode.
+ 
+ @see attributedText
+ */
+@property (nullable, nonatomic, copy) NSAttributedString *attributedString;
+
+
+/**
+ The truncationAttributedString and truncationAttributedText properties are equivalent, but attributedText is now the
+ standard API name in order to match UILabel and ASEditableTextNode.
+ 
+ @see truncationAttributedText
+ */
+@property (nullable, nonatomic, copy) NSAttributedString *truncationAttributedString;
+
+@end
+
+NS_ASSUME_NONNULL_END

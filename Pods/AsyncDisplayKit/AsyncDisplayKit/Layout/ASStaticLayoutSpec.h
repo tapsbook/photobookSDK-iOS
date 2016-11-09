@@ -1,15 +1,17 @@
-/*
- *  Copyright (c) 2014-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASStaticLayoutSpec.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASLayoutSpec.h>
 #import <AsyncDisplayKit/ASRelativeSize.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A layout spec that positions children at fixed positions.
@@ -21,6 +23,8 @@
 /**
  @param children Children to be positioned at fixed positions, each conforms to ASStaticLayoutable
  */
-+ (instancetype)staticLayoutSpecWithChildren:(NSArray *)children;
++ (instancetype)staticLayoutSpecWithChildren:(NSArray<id<ASStaticLayoutable>> *)children;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,13 +1,16 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASMutableAttributedStringBuilder.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 /*
  * Use this class to compose new attributed strings.  You may use the normal
@@ -38,14 +41,14 @@
  */
 @interface ASMutableAttributedStringBuilder : NSMutableAttributedString
 
-- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary *)attrs;
+- (instancetype)initWithString:(NSString *)str attributes:(nullable NSDictionary<NSString *, id> *)attrs;
 - (instancetype)initWithAttributedString:(NSAttributedString *)attrStr;
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;
-- (void)setAttributes:(NSDictionary *)attrs range:(NSRange)range;
+- (void)setAttributes:(nullable NSDictionary<NSString *, id> *)attrs range:(NSRange)range;
 
 - (void)addAttribute:(NSString *)name value:(id)value range:(NSRange)range;
-- (void)addAttributes:(NSDictionary *)attrs range:(NSRange)range;
+- (void)addAttributes:(NSDictionary<NSString *, id> *)attrs range:(NSRange)range;
 - (void)removeAttribute:(NSString *)name range:(NSRange)range;
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedString:(NSAttributedString *)attrString;
@@ -57,3 +60,5 @@
 - (NSMutableAttributedString *)composedAttributedString;
 
 @end
+
+NS_ASSUME_NONNULL_END

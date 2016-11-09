@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASBatchContext.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASBatchContext.h"
 
@@ -19,7 +21,7 @@ typedef NS_ENUM(NSInteger, ASBatchContextState) {
 @interface ASBatchContext ()
 {
   ASBatchContextState _state;
-  ASDN::RecursiveMutex _propertyLock;
+  ASDN::RecursiveMutex __instanceLock__;
 }
 @end
 
@@ -35,33 +37,33 @@ typedef NS_ENUM(NSInteger, ASBatchContextState) {
 
 - (BOOL)isFetching
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   return _state == ASBatchContextStateFetching;
 }
 
 - (BOOL)batchFetchingWasCancelled
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   return _state == ASBatchContextStateCancelled;
+}
+
+- (void)beginBatchFetching
+{
+  ASDN::MutexLocker l(__instanceLock__);
+  _state = ASBatchContextStateFetching;
 }
 
 - (void)completeBatchFetching:(BOOL)didComplete
 {
   if (didComplete) {
-    ASDN::MutexLocker l(_propertyLock);
+    ASDN::MutexLocker l(__instanceLock__);
     _state = ASBatchContextStateCompleted;
   }
 }
 
-- (void)beginBatchFetching
-{
-  ASDN::MutexLocker l(_propertyLock);
-  _state = ASBatchContextStateFetching;
-}
-
 - (void)cancelBatchFetching
 {
-  ASDN::MutexLocker l(_propertyLock);
+  ASDN::MutexLocker l(__instanceLock__);
   _state = ASBatchContextStateCancelled;
 }
 
