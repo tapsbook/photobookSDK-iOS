@@ -34,6 +34,7 @@
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (strong, nonatomic) NSMutableArray *assets;
+@property (strong, nonatomic) NSMutableArray *selectedPhotoIdentifiers;
 
 @property (strong, nonatomic) dispatch_queue_t cellImageLoadingQueue;
 
@@ -66,6 +67,8 @@ static CGSize AssetGridThumbnailSize;
     if (self) {
         _mode = PhotoListViewControllerMode_CreateAlbum;
         
+        _allowMultipleSelection = YES;
+
         _imageManager = [[PHCachingImageManager alloc] init];
 
         _cellImageLoadingQueue = dispatch_queue_create("cellImageLoadingQueue", NULL);
@@ -124,12 +127,6 @@ static CGSize AssetGridThumbnailSize;
     UIBarButtonItem *bookListButton = [[UIBarButtonItem alloc] initWithTitle:@"Books" style:UIBarButtonItemStylePlain target:self action:@selector(handleBookListViewControllerButton:)];
 
     self.createAlbumOrAddPhotoButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(handleCreateAlbumOrAddPhotoButton:)];
-    self.navigationItem.rightBarButtonItems = @[
-                                                self.createAlbumOrAddPhotoButton,
-                                                bookListButton,
-//                                                sdkOrderListButton,
-//                                                sdkLoginButton,
-                                                ];
     
     UIButton *checkoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [checkoutButton setTitle:@"Cart(0)" forState:UIControlStateNormal];
@@ -137,7 +134,24 @@ static CGSize AssetGridThumbnailSize;
     [checkoutButton sizeToFit];
     self.checkoutButton = checkoutButton;
     UIBarButtonItem *checkoutButtonItem = [[UIBarButtonItem alloc] initWithCustomView:checkoutButton];
-    self.navigationItem.leftBarButtonItem = checkoutButtonItem;
+    
+    if (self.allowMultipleSelection){
+        self.navigationItem.rightBarButtonItems = @[
+                                                    self.createAlbumOrAddPhotoButton,
+                                                    bookListButton,
+                                                    //                                                sdkOrderListButton,
+                                                    //                                                sdkLoginButton,
+                                                    ];
+        self.navigationItem.leftBarButtonItem = checkoutButtonItem;
+    }
+    
+    if (self.mode == PhotoListViewControllerMode_AddPhoto) {
+        self.selectedPhotoIdentifiers = [NSMutableArray array];
+        for (TBImage * image in self.existingTBImages) {
+            [self.selectedPhotoIdentifiers addObject:image.identifier];
+        }
+    }
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -182,14 +196,26 @@ static CGSize AssetGridThumbnailSize;
 //                                  }
                                   
                               }];
-
-    
+    NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
+    [cell setImageAlreadyUsed:[self.selectedPhotoIdentifiers containsObject:name]];
     
     return cell;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self refreshNavButton];
+    //in the simple page editor mode, return immediately when user select an image
+    if (self.allowMultipleSelection){
+        [self refreshNavButton];
+    } else {
+        [self createProductWithType:TBProductType_Photobook];
+    }
+}
+
+- (BOOL) collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    //should only allow select non-previously-selected photo to the book
+    PHAsset * asset = self.assets[indexPath.row];
+    NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
+    return ![self.selectedPhotoIdentifiers containsObject:name];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -342,7 +368,7 @@ static CGSize AssetGridThumbnailSize;
                     NSDictionary * albumOptionBase = @{
                                                        kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
                                                        kTBProductMinPageCount:     @"20",
-                                                       kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
+                                                       kTBPreferredUIDirection:    @"LTR",   //set this RTL or LTR
                                                        kTBPreferredPageTypeSpread: @(YES)
                                                        };
                     NSDictionary * albumBookType8x8 =@{
@@ -397,13 +423,14 @@ static CGSize AssetGridThumbnailSize;
 
 #pragma mark - TBSDKAlbumManagerDelegate
 
-- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages completionBlock:(void (^)(NSArray *newImages))completionBlock {
+- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount allowMultiple:(BOOL)allowMultiple completionBlock:(void (^)(NSArray *newImages))completionBlock {
     PhotoListViewController *vc = [PhotoListViewController new];
     vc.mode = PhotoListViewControllerMode_AddPhoto;
     vc.sdkAlbum = sdkAlbum;
     vc.existingTBImages = existingTBImages;
     vc.tb_completionBlock = completionBlock;
-    
+    vc.allowMultipleSelection = allowMultiple;
+
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     return nav;

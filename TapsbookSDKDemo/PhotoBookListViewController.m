@@ -292,13 +292,14 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
 #pragma mark - TBSDK
 
 //handle the + (add photo) function of the SDK
-- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount completionBlock:(void (^)(NSArray *))completionBlock
+- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount allowMultiple:(BOOL)allowMultiple completionBlock:(void (^)(NSArray *))completionBlock
 {
     PhotoListViewController *vc = [PhotoListViewController new];
     vc.mode = PhotoListViewControllerMode_AddPhoto;
     vc.sdkAlbum = sdkAlbum;
     vc.existingTBImages = existingTBImages;
     vc.tb_completionBlock = completionBlock;
+    vc.allowMultipleSelection = allowMultiple;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     

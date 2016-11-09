@@ -11,6 +11,7 @@
 @interface PhotoCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *checkMarkImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageOverlayView;
 
 @end
 
@@ -20,6 +21,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.imageOverlayView.hidden = YES;
     }
     return self;
 }
@@ -28,5 +30,11 @@
     [super setSelected:selected];
     self.checkMarkImageView.hidden = !selected;
 }
+
+- (void)setImageAlreadyUsed:(BOOL)used {
+    self.imageOverlayView.hidden = !used;
+    self.checkMarkImageView.hidden = !used;
+}
+
 
 @end

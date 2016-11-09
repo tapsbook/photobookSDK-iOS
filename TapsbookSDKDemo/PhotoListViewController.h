@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, PhotoListViewControllerMode) {
 
 @property (assign, nonatomic) PhotoListViewControllerMode mode;
 @property (strong, nonatomic) TBSDKAlbum *sdkAlbum;
+@property (assign, nonatomic) BOOL allowMultipleSelection;
 @property (strong, nonatomic) NSArray *existingTBImages;
 @property (strong, nonatomic) void (^tb_completionBlock)(NSArray *newImages);
 
