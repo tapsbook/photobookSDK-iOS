@@ -18,7 +18,7 @@ iOS 8.0 or higher
 	
 	复制 `TapsbookSDK.framework` and `TapsbookSDK.bundle` 到你的项目中.
 	
-	![FinderImageForSDK](https://github.com/sherwoodyao/tapsbook-SDK/raw/master/Documentation/FinderImageForSDK.png)
+	![FinderImageForSDK](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copyfilesforsdk.png)
 	
 2. 连接苹果官方 libiraries
 	
@@ -41,7 +41,7 @@ iOS 8.0 or higher
 	
 	检查Xcode里项目的 "build phase" => "Copy Bundle Resources", 在项目中加入 `TapsbookSDK.bundle` 
 	
-	![XcodeImageForCopyBundleResources](https://github.com/sherwoodyao/tapsbook-SDK/raw/master/Documentation/XcodeImageForCopyBundleResources.png)
+	![XcodeImageForCopyBundleResources](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copybundle.png)
 	
 4. 加 `-ObjC` 到 "Build Settings" > "Other Linker Flags"
 
@@ -113,7 +113,7 @@ iOS 8.0 or higher
 	
 ## TapsbookSDK 使用流程
 
-![GenreralMechanism](GenreralMechanism.png)
+![GenreralMechanism](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-overview.png)
 
 * 你的app传入一组照片到TapsbookSDK, TapsbookSDK 会自动导入制定模版，生成相册并保存相册。
 
