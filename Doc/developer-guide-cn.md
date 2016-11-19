@@ -1,8 +1,8 @@
 ## 概述
 
-The Tapsbook (Cleen) iOS SDK 通过整合了后端的SaaS管理平台，为移动应用开发者提供了一套快速实现的照片打印产品定制和购买的解决方案。其主要功能包括
+The Tapsbook (Cleen) iOS SDK 通过整合了后端的SaaS管理平台，为移动应用开发者提供了一套快速实现照片打印产品定制和购买的解决方案。其主要功能包括
 
-1. 通过分析照片数据，利用模版数据实现的的照片书内容快速生成
+1. 通过分析照片数据，利用模版实现的的照片书内容快速生成
 2. 功能强大的包括可变的布局，背景，文字修改在内的简单易用页面编辑
 3. 利用手机本机输出节省流量的打印版内容输出，直接整合至后台生产
 
@@ -131,11 +131,11 @@ iOS 8.0 or higher
 
 * 通常的使用场景是用户通过照片选择UI先挑选照片，然后将这些照片做成照片书。如果app里用户所选的的照片来自于云端，你需要提前下载照片到app的一个缓存目录下面，并生成不同大小的版本， 然后将缓存下的照片路径保存到TBImage(使用`setImagePath:size:`).SDK将会依据TBImage里保存的路径来读取照片。
 	
-	提示：由于照片会非常消耗内存，我们建议你除非必要，不要直接在app里用UIImage导入照片。
+	提示：由于照片会非常消耗内存，我们不建议直接在app里用UIImage导入照片后直接传给SDK。
 	
 * 最后提交打印前，SDK需要依据页面布局中的照片大小来检查图片是否有足够的清晰度。 所以你需要获取照片原图的尺寸，然后利用 `setXxlSizeInPixel:` 方法设置`TBImage` 的像素大小. 如果清晰度不足时，SDK UI 会显示‘像素不足’的提示信息.
 
-	提示：建议你在初始化TBImage时就设置`xxlSizeInPixel`，如果你没有设置这个尺寸，像素检查就不会被执行，这样会导致照片的模糊会影响用户的满意度。
+	提示：建议你在初始化TBImage时就设置`xxlSizeInPixel`，如果你没有设置这个尺寸，像素检查就不会被执行，这样会导致照片的模糊会进而影响用户对产品的满意度。
 
 * 建议照片的下载和TBImage初始化
 
@@ -145,7 +145,7 @@ iOS 8.0 or higher
 
 		* 如果希望减少等待时间，你也可以只下载缩略图和显示尺寸大小的照片，只有在用户最后确定下单时再下载照片原图。这种情况下，需要实现 TBImage delegate 方法来下载大图。 （详情见下面）
 
-	2. **Method 2**: Lazy load 只在显示页面时动态下载图片.
+	2. **方法2**: Lazy load 只在显示页面时动态下载图片.
 
 		* 尽管这个方法可以减少用户等待时间，这种实现方法需要较复杂的实现环节来实现完美的用户体验，总体工作量会较大，例如你可能需要使用iOS异步多线程Operations管理方法。 当TapsbookSDK需要某一张图片时，app需要实现dataSource delegate method(`tbimageRequestImage:size:priority:`). 下载完成后，调用再调用 `gotImageWithSize:`来告诉SDK下载完成.
 
@@ -161,146 +161,36 @@ iOS 8.0 or higher
 
 ### 普通流程
 
-1. 调整SDK设置。建议第一次开发者跳过这一步，除了AppKey之外，保留缺省设置可以满足绝大多数初次开发的需求。
-	
-	1. 采用 `TBSDKConfiguratorProtocol`创建一个新的Configurator, implement the protocol methods that you want to have a different behavior, here's a sample implementation:
-	
-			- (NSDictionary *)basicSettings {
-			    NSDictionary *basicSettings = @{
-			                                     kTBSDKBasics : @{
-			                                             kTBAppName : [NSNull null],                      // (Required) Your app name, this name will show up in app UI messages
-			                                             kTBAppKey : [NSNull null],                       // (Required)
-			                                             kTBAppSecret : [NSNull null],                    // (Required)
-			                                             
-			                                             kTBSupportedRegions : @[             // (Optional) TBSDKRegions, customize the SDK to support multiple ship to regions (countries)
-			                                                     // TBSDKRegions
-			                                                     @(TBSDKRegion_UnitedStates)
-			                                                     ],
-			                                             
-			                                             kTBMerchantKeys : @{                 // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server
-			                                                     // Region : merchantKey
-			                                                     kTBMerchantKeyDefault : [NSNull null],   // (Optional) The default key
-			                                                     },
-			                                             kTBStripeKeys : @{                   // (Required) Stripe uses this key to create a charge token to make the charge on the tapsbook eCommerce server.
-			                                                     // Region : stripeKey
-			                                                     kTBStripeKeyDefault : [NSNull null],     // (Optional) The default key
-			                                                     },
-			                                             },
-			                                     
-			                                     kTBAppLogoPaths : @{                         // (Optional) Your app logo that will be printed on the back cover, assuming the back cover has a design include the app logo
-			                                             kTBImageSizeS : [NSNull null],
-			                                             kTBImageSizeL : [NSNull null],
-			                                             kTBImageSizeXXL : [NSNull null],
-			                                             },
-			                                     
-			                                     kTBAWSS3 : @{
-			                                             kTBAWSS3AppKey : [NSNull null],                  // (Optional) Your AWS s3 cloud storage account, SDK will upload the rendered images to the AWS s3 location, you may need to set your own clean up policy to remove these images routinely
-			                                             kTBAWSS3AppSecret : [NSNull null],               // (Optional) Your AWS s3 cloud storage account secret
-			                                             kTBAWSS3BucketName : [NSNull null],              // (Optional) AWS uses bucket name to organize your uploaded images, your images will be uploaded to this URL pattern
-			                                             },
-			                                     
-			                                     kTBBookGeneration : @{                       // (Optional)
-			                                             kTBTemplateDatabaseName : @"TBTemplate_Test_01.sqlite", // (Optional) The name of the template database
-			                                             kTBDefaultThemeID : @{
-			                                                     @(TBProductType_Photobook) : @1,
-			                                                     
-			                                                     },
-			                                             kTBUseSameBackgroundImageOnTheSameSpread : @{    // (Optional) Retrun YES is you want SDK's page generation use the same background image on the same spread
-			                                                     @(TBProductType_Photobook) : @NO,
-			                                                     @(TBProductType_Canvas) : @NO,
-			                                                     @(TBProductType_Calendar) : @NO,
-			                                                     @(TBProductType_Card) : @NO,
-			                                                     },
-			                                             kTBMaxNumberofImagesPerPage : @{                 // (Optional)
-			                                                     @(TBProductType_Photobook) : @4,
-			                                                     @(TBProductType_Canvas) : @4,
-			                                                     @(TBProductType_Calendar) : @4,
-			                                                     @(TBProductType_Card) : @4,
-			                                                     },
-			                                             kTBMinNumberofImagesPerPage : @{                 // (Optional)
-			                                                     @(TBProductType_Photobook) : @1,
-			                                                     @(TBProductType_Canvas) : @1,
-			                                                     @(TBProductType_Calendar) : @1,
-			                                                     @(TBProductType_Card) : @1,
-			                                                     },
-			                                             kTBMaxNumberofImagesPerSpread : @{               // (Optional)
-			                                                     @(TBProductType_Photobook) : @4,
-			                                                     @(TBProductType_Canvas) : @4,
-			                                                     @(TBProductType_Calendar) : @4,
-			                                                     @(TBProductType_Card) : @4,
-			                                                     },
-			                                             kTBMinNumberofImagesPerSpread : @{               // (Optional)
-			                                                     @(TBProductType_Photobook) : @2,
-			                                                     @(TBProductType_Canvas) : @1,
-			                                                     @(TBProductType_Calendar) : @1,
-			                                                     @(TBProductType_Card) : @1,
-			                                                     },
-			                                             kTBAllowAddOrRemovePage : @{                     // (Optional)
-			                                                     @(TBProductType_Photobook) : @YES,
-			                                                     @(TBProductType_Canvas) : @NO,
-			                                                     @(TBProductType_Calendar) : @NO,
-			                                                     @(TBProductType_Card) : @NO,
-			                                                     },
-			                                             },
-			                                     
-			                                     kTBBehaviorCustomization : @{
-			                                             kTBRemindUserToOrderWhenClosingBooks : @NO,      // (Optional) Whether to remind a user they will lose their work in progress if they close.
-			                                             kTBEnableAddingText : @NO,                       // (Optional)
-			                                             kTBShowOptionsOfBuildingPagesManuallyOrAutomatically : @{  // (Optional)
-			                                                     @(TBProductType_Photobook) : @NO,
-			                                                     @(TBProductType_Canvas) : @NO,
-			                                                     @(TBProductType_Calendar) : @NO,
-			                                                     @(TBProductType_Card) : @NO,
-			                                                     },
-			                                             kTBUseEmptyTemplateForPageWithNoContent : @NO,   // (Optional)
-			                                             kTBLoadProductFromServerWhenPreparingLocalAlbum : @YES,    // (Optional) load prodcut from server, currently should be always be YES
-			                                             },
-			                                     
-			                                     kTBCheckoutCustomization : @{                    // (Optional)
-			                                             kTBNoCover : @{                                  // (Optional) YES if you don't need a cover or the cover is not customizable
-			                                                     @(TBProductType_Photobook) : @NO,
-			                                                     @(TBProductType_Canvas) : @YES,
-			                                                     @(TBProductType_Calendar) : @YES,
-			                                                     @(TBProductType_Card) : @YES,
-			                                                     },
-			                                             kTBSendAlbumJSONDictToHostingApp : @NO,  // (Optional) YES when you want to generate page image on your own.
-			                                             kTBGeneratePageImagesInDebugMode : @NO,  // (Optional) Helps you debug when kTBSendAlbumJSONDictToHostingApp is YES
-			                                             kTBSendOrderInfoToHostingApp     : @NO,  // (Optional) YES when you want to use your checkout method
-			                                             },
-			                                     };
-			    
-			    return basicSettings;
-			}
+1. 配置SDKConfigurator
+	1. 复制SDK缺省设置到一个新的TBSDKConfigurator.m。填入kTBAppKey。除此之外建议初次开发者保留缺省设置
 		
 	2. 在`AppDelegate.m`中使用这个设置 `application:didFinishLaunchingWithOptions:`:
-	
-			// In your appDelegate.m
 			
 			[TBSDKConfiguration initializeWithConfiguratorClassName:@"EGTBSDKConfiguritor"];
 			
-	3. Register notification types, TaspbookSDK may send local notifications to tell users keep the application activate while uploading.
+	3. 注册如下系统通知以便让SDK给用户发出通知。由于图片上传会需要1-2分钟等待时间，用户如果退出应用，SDK会发出通知提醒用户。
 	
 			UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
     		[[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
 		
-2. Setup `TBSDKAlbumManager` before creating/accessing a album.
+2. 设定 `TBSDKAlbumManager` 的代理和datasource
 
 		[TBSDKAlbumManager sharedInstance].imageDataSource = self;
 		[TBSDKAlbumManager sharedInstance].delegate = self;
 
-3. Create some `TBImage`:
+3. 如果你希望让用户手动选择照片，你需要实现或使用第三方的photo picker供用户选择照片，然后将用户所选的照片现有照片打包为 `TBImage`:
 	
 		TBImage *tbImage = [[TBImage alloc] initWithIdentifier:identifier];
 		
-	If the image is already avaliable in file system:
+	下载图片后，将在应用内能直接访问的照片路径设置好:
 		
 		[tbImage setImagePath:path size:size];
 		
-	If you've got the size of the printing-size image:
+	设置打印照片原图尺寸:
 		
 		[tbImage setXxlSizeInPixel:xxlSize];
 			
-3. Create new `TBSDKAlbum` with images:
+3. 用这些所选的图片创建新的照片产品:
 	
 		[[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:images identifier:identifier title:title tag:tag completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
 	        if (success) {
@@ -316,54 +206,54 @@ iOS 8.0 or higher
 	* `identifier` can be nil or an uniq string to help you recognize your album
 	* `tag` is another property to help you recognize your album, pass `0` if you don't need that value 
 	
-	You should not create TBSDKAlbum yourself, only TBSDKAlbum instance returned from TapsbookSDK can work properly.
+	注意这是唯一可以创建TBSDKAlbum的方法，一旦创建好之后，SDK提供API供App查询已有的照片产品。
 		
-4. Add images to `TBSDKAlbum`
+4. 也可以将这些照片加入一个已有的TBSDKAlbum中
 		
 		[[TBSDKAlbumManager sharedInstance] addImages:images toSDKAlbum:album completionBlock:nil];
+		
+	TaspbookSDK  会自动依据照片 `identifier`来判定照片是否以前已经被使用过。
 
-	here `images` is an arry of `TBImage`.
-	
-	TaspbookSDK will recognize duplicate images by the `identifier`
-
-5. Open or print a `TBSDKAlbum`
+5. 打开`TBSDKAlbum`进行编辑或打印
 	
 		BOOL success = [[TBSDKAlbumManager sharedInstance] openSDKAlbum:album presentOnViewController:viewController shouldPrintDirectly:shouldPrintDirectly];
 		
-	The `navigationController` you passed to TapsbookSDK should be a full screen `UINavigationController`. ViewController of TapsbookSDK will be pushed on this navigationController.
+	这里需要你的 `navigationController` 必须是一个全屏的`UINavigationController`. TapsbookSDK ViewController将会被推至这个 navigationController.
 	
-6. Update your sdkAlbum list view/table view/collection view (optional)
-
-* A callback when user finish editing a sdkAlbum, and press the back button to get back to your viewController from SDK's viewController. You can refresh a specific tableView/collectionView cell because some properties of the sdkAlbum might be modified.
+6. 如果你还有一个用户创作的SDKAlbum列表，你需要在用户编辑完之后利用TBSDKAlbum的数据更新产品的状态 （比如封面等）。如果你不需要次列表，可以跳过本节
 	
 		- (void)albumManager:(TBSDKAlbumManager *)albumManager didFinishEditingSDKAlbum:(TBSDKAlbum *)sdkAlbum {
-		
 		}
 	
-6. Implement xxl size image preloading methods, (This is necessary if you choose to use **Method 1.5**)
+6. 如果一开始没有下载照片的原图照片，SDK会在用户提交打印时弹出一个进度条高速用户app正在下载原图。app需要实现如下原图的代理下载方法
 
 		- (void)albumManager:(TBSDKAlbumManager *)albumManager
 		preloadXXLSizeImages:(NSArray *)tbImages
           		  ofSDKAlbum:(TBSDKAlbum *)sdkAlbum
           	   progressBlock:(void (^)(NSInteger currentIdx, NSInteger total, float currentProgress))progressBlock
           	 completionBlock:(void (^)(NSInteger successCount, NSInteger total, NSError *error))completionBlock {
-		    
-		    // Create some download tasks to download all the xxl-size images
-		    // Set the path of xxl-size and xxlSizeInPixel to the TBImage instance 
-		    // If you can get the downloading progresses, pass the progress to the progressBlock. 
-		    // If you can't get the downloading progresses, just pass 1 to currentProgress when you've finished downloading a image.
-		    // Call completionBlock when all the downloading tasks are finished.
-		    // If some error happen and you cannot download all the images, call completionBlock with the success count and the error you want to show to your user.
 		}		
-		
-		
-		// Optional, sdk will also tell you to stop the downloading tasks if the user give up downloading.
-		
+
+	如果需要给用户选项取消下载，实现如下代理方法
+
 		- (void)albumManager:(TBSDKAlbumManager *)albumManager cancelPreloadingXXLSizeImages:(NSArray *)tbImages ofSDKAlbum:(TBSDKAlbum *)sdkAlbum {
 		    
 		}
 		
-7. Implement TBImageDataSource methods, (This is necessary only if you choose to use **Method 2**)
+	如果一开始不知道照片原图的大小，而在后来才下载。这时需要设置 `xxlSizeInPixel` 
+
+		- (void)tbimageRequestImage:(TBImage *)tbimage size:(TBImageSize)size priority:(TBPriority)priority {
+		
+			[SomeImageDownloadingQueue downloadImage:tbImage size:size priority:priority completion:^{
+				[tbImage setXxlSizeInPixel:xxlSize];
+				[tbImage gotImageWithSize:size];
+			}];
+		}
+	
+
+
+		
+7. 如果照片初始化时采用了Lazy load 只在显示页面时动态下载图片，需要实现如下 TBImageDataSource methods
 	
 		- (void)tbimageRequestImage:(TBImage *)tbimage size:(TBImageSize)size priority:(TBPriority)priority {
 		
@@ -388,50 +278,15 @@ iOS 8.0 or higher
 		    return NO;
 		}
 		
-		
-### If you can't set `xxlSizeInPixel` at the beginning
+8. 支持让用户在以前做好的产品中加入更多照片
 
-1. set `xxlSizeInPixel` for a TBImage before you call `[TBImage gotImageWithSize:]` as shown below:
-
-		- (void)tbimageRequestImage:(TBImage *)tbimage size:(TBImageSize)size priority:(TBPriority)priority {
-		
-			[SomeImageDownloadingQueue downloadImage:tbImage size:size priority:priority completion:^{
-				[tbImage setXxlSizeInPixel:xxlSize];
-				[tbImage gotImageWithSize:size];
-			}];
-		}
-	
-### Other TBSDKAlbum operations
-
-1. To get all albums of a tag
-
-		[[TBSDKAlbumManager sharedInstance] allSDKAlbumsOfTag:tag completionBlock:^(BOOL success, NSArray *sdkAlbums, NSError *error) {
-	        if (success) {
-	            // handle success
-	        }
-	        else {
-	            // handle error
-	        }
-	    }];
-	    
-9. To rename a album
-	
-		[[TBSDKAlbumManager sharedInstance] renameSDKAlbum:album title:title];
-	
-10. To remove a album
-		
-		[[TBSDKAlbumManager sharedInstance] removeSDKAlbum:album];
-		
-		
-## Usage (Extra)
-
-1. Add images to a existing album while editing album in SDK
-
-	In TapsbookSDK's Page editing view, there is a optional add photo button on the photo list view. When you implement the delegate method below, this button will show up.
+	在TapsbookSDK编辑页面中，如果需要支持加入新照片，你需要实现以下代理方法弹出app自己提供的的照片选取界面。
 	
 		- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages completionBlock:(void (^)(NSArray *newImages))completionBlock 
 		
-	Tapsbook will call this method to get a `UIViewController` and present it. The work flow of this view controller is designed by you. In general, you will provide some images to your user, mark existing images as selected and cannot be deselected(optional, SDK will ignore duplicated images automatically). Your user may choose some new images and tap a done button, then you should convert these new images to a array of `TBImage`s and call `completionBlock(newImages)` on main thread to pass new images to TapsbookSDK. After that, these new images can be added to the album book. 
+	注意这个界面中你需要提示用户那些照片一经以前就被选中，existingTBImages 是一个TBImages数组，当用户结束选择后，你需要重复上面的TBImage初始化的过程。
+		
+
 	
 ## Usage (Checkout/Store)
 
@@ -458,25 +313,7 @@ iOS 8.0 or higher
 
 
 
-## DEPRECATED
-	
-7. Provide your product info (If you return YES in `useExternalPrintProductInfo`):
 
-		- (void)albumManager:(TBSDKAlbumManager *)albumManager loadPrintInfosForSDKAlbum:(TBSDKAlbum *)sdkAlbum standardSize:(CGSize)size completionBlock:(void (^)(NSArray *printInfos))completionBlock {
-		    
-		    // 1. Load your print info asynchronously
-		    // 2. Convert your product info to TBPrintInfo
-		    // 3. Pass an array of TBPrintInfos to the completionBlock
-		}
-		
-	Here, TBPrintInfo should have these value being set:
-	
-	* outputType
-	* name
-	* previewPath or previewURL
-	* productID
-	* price
-	* stdPagePrintSize
 
 7. Handle checkout (If you return YES in `userExternalCheckout`):
 
@@ -510,7 +347,4 @@ iOS 8.0 or higher
 	
 	**Note**: You should limit the number of page images being loaded (by calling `identifierAndImageForPageOfSDKAlbum:pageIndex:`) at the same time to avoid using too much memory.
 
-	
-##Known Issues
 
-1. If a xxl-size image is corrupt or incomplete, user can only find this problem in SDK's print preview, and SDK hasn't provied a delegate method to redownload this image. User can only solve this by removing this image from page. This issue will be solved in the future. For now, you'd better check the MD5 of the image to make sure it's not corrupted.
