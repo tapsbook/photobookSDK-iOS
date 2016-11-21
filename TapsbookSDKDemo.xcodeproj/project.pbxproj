@@ -1001,7 +1001,6 @@
 					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
 					"$(PROJECT_DIR)/SDKVendor/AliSDK",
 					"$(PROJECT_DIR)/SDKVendor",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1015,13 +1014,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
-					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/GAI",
-					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
@@ -1049,7 +1041,6 @@
 					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
 					"$(PROJECT_DIR)/SDKVendor/AliSDK",
 					"$(PROJECT_DIR)/SDKVendor",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1063,13 +1054,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
-					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/GAI",
-					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";

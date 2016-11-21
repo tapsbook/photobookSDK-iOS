@@ -120,9 +120,9 @@ static CGSize AssetGridThumbnailSize;
     
     NSString *buttonTitle = self.mode == PhotoListViewControllerMode_CreateAlbum ? @"Create" : @"Add";
     
-    UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
-    
-    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
+//    UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
+//    
+//    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
 
     UIBarButtonItem *bookListButton = [[UIBarButtonItem alloc] initWithTitle:@"Books" style:UIBarButtonItemStylePlain target:self action:@selector(handleBookListViewControllerButton:)];
 
@@ -230,7 +230,7 @@ static CGSize AssetGridThumbnailSize;
         [self.createAlbumOrAddPhotoButton setEnabled:YES];
     }
     else {
-        self.title =[NSString stringWithFormat:@"Select Photos", selectedIndexes.count];
+        self.title =[NSString stringWithFormat:@"Select Photos"];
         [self.createAlbumOrAddPhotoButton setEnabled:NO];
     }
 }
@@ -376,14 +376,14 @@ static CGSize AssetGridThumbnailSize;
                                                        kTBProductPreferredTheme:   @"200",  //200 is for square book
                                                        kTBProductPreferredSKU:     @"1003", //1003 is a layflat square book
                                                        };
-                    NSDictionary * albumBookType11x85 =@{
-                                                       kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 page
-                                                       kTBProductPreferredSKU:     @"998",  //998 is corresponding book
-                                                       };
-                    NSDictionary * albumBookType85x11 =@{
-                                                       kTBProductPreferredTheme:   @"202",  //202 is for 8.5x11 page
-                                                       kTBProductPreferredSKU:     @"999",  //998 is corresponding book book
-                                                       };
+//                    NSDictionary * albumBookType11x85 =@{
+//                                                       kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 page
+//                                                       kTBProductPreferredSKU:     @"998",  //998 is corresponding book
+//                                                       };
+//                    NSDictionary * albumBookType85x11 =@{
+//                                                       kTBProductPreferredTheme:   @"202",  //202 is for 8.5x11 page
+//                                                       kTBProductPreferredSKU:     @"999",  //998 is corresponding book book
+//                                                       };
 
                     NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
                     [albumOption addEntriesFromDictionary:albumBookType8x8];
