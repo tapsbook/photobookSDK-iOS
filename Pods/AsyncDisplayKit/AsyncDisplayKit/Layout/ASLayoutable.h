@@ -1,12 +1,12 @@
-/*
- *  Copyright (c) 2014-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASLayoutable.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <AsyncDisplayKit/ASDimension.h>
 #import <AsyncDisplayKit/ASRelativeSize.h>
@@ -15,9 +15,18 @@
 #import <AsyncDisplayKit/ASStaticLayoutable.h>
 
 #import <AsyncDisplayKit/ASLayoutablePrivate.h>
+#import <AsyncDisplayKit/ASEnvironment.h>
+#import <AsyncDisplayKit/ASLayoutableExtensibility.h>
 
 @class ASLayout;
 @class ASLayoutSpec;
+
+typedef NS_ENUM(NSUInteger, ASLayoutableType) {
+  ASLayoutableTypeLayoutSpec,
+  ASLayoutableTypeDisplayNode
+};
+
+NS_ASSUME_NONNULL_BEGIN
 
 /** 
  * The ASLayoutable protocol declares a method for measuring the layout of an object. A layout
@@ -33,9 +42,19 @@
  * These layout options are all stored in an ASLayoutOptions class (that is defined in ASLayoutablePrivate).
  * Generally you needn't worry about the layout options class, as the layoutable protocols allow all direct
  * access to the options via convenience properties. If you are creating custom layout spec, then you can
- * extend the backing layout options class to accomodate any new layout options.
+ * extend the backing layout options class to accommodate any new layout options.
  */
-@protocol ASLayoutable <ASStackLayoutable, ASStaticLayoutable, ASLayoutablePrivate>
+@protocol ASLayoutable <ASEnvironment, ASStackLayoutable, ASStaticLayoutable, ASLayoutablePrivate, ASLayoutableExtensibility>
+
+/**
+ * @abstract Returns type of layoutable
+ */
+@property (nonatomic, readonly) ASLayoutableType layoutableType;
+
+/**
+ * @abstract Returns if the layoutable can be used to layout in an asynchronous way on a background thread.
+ */
+@property (nonatomic, readonly) BOOL canLayoutAsynchronous;
 
 /**
  * @abstract Calculate a layout based on given size range.
@@ -45,7 +64,6 @@
  * @return An ASLayout instance defining the layout of the receiver and its children.
  */
 - (ASLayout *)measureWithSizeRange:(ASSizeRange)constrainedSize;
-
 
 #pragma mark - Layout options from the Layoutable Protocols
 
@@ -107,3 +125,5 @@
 @property (nonatomic, assign) CGPoint layoutPosition;
 
 @end
+
+NS_ASSUME_NONNULL_END

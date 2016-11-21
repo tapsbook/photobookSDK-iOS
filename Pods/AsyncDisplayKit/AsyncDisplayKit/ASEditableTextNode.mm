@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASEditableTextNode.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASEditableTextNode.h"
 
@@ -12,20 +14,85 @@
 
 #import "ASDisplayNode+Subclasses.h"
 #import "ASEqualityHelpers.h"
-#import "ASTextNodeTextKitHelpers.h"
 #import "ASTextNodeWordKerner.h"
-#import "ASThread.h"
 
-//! @abstract This subclass exists solely to ensure the text view's panGestureRecognizer never begins, because it's sporadically enabled by UITextView. It will be removed pending rdar://14729288.
-@interface _ASDisabledPanUITextView : UITextView
+/**
+ @abstract Object to hold UITextView's pending UITextInputTraits
+**/
+@interface _ASTextInputTraitsPendingState : NSObject
+
+@property (nonatomic, readwrite, assign) UITextAutocapitalizationType autocapitalizationType;
+@property (nonatomic, readwrite, assign) UITextAutocorrectionType autocorrectionType;
+@property (nonatomic, readwrite, assign) UITextSpellCheckingType spellCheckingType;
+@property (nonatomic, readwrite, assign) UIKeyboardAppearance keyboardAppearance;
+@property (nonatomic, readwrite, assign) UIKeyboardType keyboardType;
+@property (nonatomic, readwrite, assign) UIReturnKeyType returnKeyType;
+@property (nonatomic, readwrite, assign) BOOL enablesReturnKeyAutomatically;
+@property (nonatomic, readwrite, assign, getter=isSecureTextEntry) BOOL secureTextEntry;
+
 @end
 
-@implementation _ASDisabledPanUITextView
+@implementation _ASTextInputTraitsPendingState
+
+- (instancetype)init
+{
+  if (!(self = [super init]))
+    return nil;
+  
+  // set default values, as defined in Apple's comments in UITextInputTraits.h
+  _autocapitalizationType = UITextAutocapitalizationTypeSentences;
+  _autocorrectionType = UITextAutocorrectionTypeDefault;
+  _spellCheckingType = UITextSpellCheckingTypeDefault;
+  _keyboardAppearance = UIKeyboardAppearanceDefault;
+  _keyboardType = UIKeyboardTypeDefault;
+  _returnKeyType = UIReturnKeyDefault;
+  
+  return self;
+}
+
+@end
+
+/**
+ @abstract As originally reported in rdar://14729288, when scrollEnabled = NO,
+   UITextView does not calculate its contentSize. This makes it difficult 
+   for a client to embed a UITextView inside a different scroll view with 
+   other content (setting scrollEnabled = NO on the UITextView itself,
+   because the containing scroll view will handle the gesture)...
+   because accessing contentSize is typically necessary to perform layout.
+   Apple later closed the issue as expected behavior. This works around
+   the issue by ensuring that contentSize is always calculated, while
+   still providing control over the UITextView's scrolling.
+
+ See issue: https://github.com/facebook/AsyncDisplayKit/issues/1063
+ */
+@interface ASPanningOverriddenUITextView : UITextView
+{
+  BOOL _shouldBlockPanGesture;
+}
+@end
+
+@implementation ASPanningOverriddenUITextView
+
+#if TARGET_OS_IOS
+ // tvOS doesn't support self.scrollsToTop
+- (BOOL)scrollEnabled
+{
+  return _shouldBlockPanGesture;
+}
+
+- (void)setScrollEnabled:(BOOL)scrollEnabled
+{
+  _shouldBlockPanGesture = !scrollEnabled;
+  self.scrollsToTop = scrollEnabled;
+
+  [super setScrollEnabled:YES];
+}
+#endif
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-  // Never allow our pans to begin.
-  if (gestureRecognizer == self.panGestureRecognizer)
+  // Never allow our pans to begin when _shouldBlockPanGesture is true.
+  if (_shouldBlockPanGesture && gestureRecognizer == self.panGestureRecognizer)
     return NO;
 
   // Otherwise, proceed as usual.
@@ -53,6 +120,10 @@
   ASTextKitComponents *_placeholderTextKitComponents;
   // Forwards NSLayoutManagerDelegate methods related to word kerning
   ASTextNodeWordKerner *_wordKerner;
+  
+  // UITextInputTraits
+  ASDN::RecursiveMutex _textInputTraitsLock;
+  _ASTextInputTraitsPendingState *_textInputTraits;
 
   // Misc. State.
   BOOL _displayingPlaceholder; // Defaults to YES.
@@ -61,6 +132,8 @@
   NSRange _previousSelectedRange;
 }
 
+@property (nonatomic, strong, readonly) _ASTextInputTraitsPendingState *textInputTraits;
+
 @end
 
 @implementation ASEditableTextNode
@@ -68,22 +141,29 @@
 #pragma mark - NSObject Overrides
 - (instancetype)init
 {
+  return [self initWithTextKitComponents:[ASTextKitComponents componentsWithAttributedSeedString:nil textContainerSize:CGSizeZero]
+            placeholderTextKitComponents:[ASTextKitComponents componentsWithAttributedSeedString:nil textContainerSize:CGSizeZero]];
+}
+
+- (instancetype)initWithTextKitComponents:(ASTextKitComponents *)textKitComponents
+             placeholderTextKitComponents:(ASTextKitComponents *)placeholderTextKitComponents
+{
   if (!(self = [super init]))
     return nil;
 
   _displayingPlaceholder = YES;
+  _scrollEnabled = YES;
 
   // Create the scaffolding for the text view.
-  _textKitComponents = [ASTextKitComponents componentsWithAttributedSeedString:nil textContainerSize:CGSizeZero];
+  _textKitComponents = textKitComponents;
   _textKitComponents.layoutManager.delegate = self;
   _wordKerner = [[ASTextNodeWordKerner alloc] init];
-  _returnKeyType = UIReturnKeyDefault;
   _textContainerInset = UIEdgeInsetsZero;
   
   // Create the placeholder scaffolding.
-  _placeholderTextKitComponents = [ASTextKitComponents componentsWithAttributedSeedString:nil textContainerSize:CGSizeZero];
+  _placeholderTextKitComponents = placeholderTextKitComponents;
   _placeholderTextKitComponents.layoutManager.delegate = self;
-
+  
   return self;
 }
 
@@ -111,8 +191,6 @@
 {
   [super didLoad];
 
-  ASDN::MutexLocker l(_textKitLock);
-
   void (^configureTextView)(UITextView *) = ^(UITextView *textView) {
     if (!_displayingPlaceholder || textView != _textKitComponents.textView) {
       // If showing the placeholder, don't propagate backgroundColor/opaque to the editable textView.  It is positioned over the placeholder to accept taps to begin editing, and if it's opaque/colored then it'll obscure the placeholder.
@@ -124,41 +202,64 @@
       textView.opaque = NO;
     }
     textView.textContainerInset = self.textContainerInset;
-    textView.clipsToBounds = NO; // We don't want selection handles cut off.
+    
+    // Configure textView with UITextInputTraits
+    {
+      ASDN::MutexLocker l(_textInputTraitsLock);
+      if (_textInputTraits) {
+        textView.autocapitalizationType         = _textInputTraits.autocapitalizationType;
+        textView.autocorrectionType             = _textInputTraits.autocorrectionType;
+        textView.spellCheckingType              = _textInputTraits.spellCheckingType;
+        textView.keyboardType                   = _textInputTraits.keyboardType;
+        textView.keyboardAppearance             = _textInputTraits.keyboardAppearance;
+        textView.returnKeyType                  = _textInputTraits.returnKeyType;
+        textView.enablesReturnKeyAutomatically  = _textInputTraits.enablesReturnKeyAutomatically;
+        textView.secureTextEntry                = _textInputTraits.isSecureTextEntry;
+      }
+    }
+    
+    [self.view addSubview:textView];
   };
+
+  ASDN::MutexLocker l(_textKitLock);
 
   // Create and configure the placeholder text view.
   _placeholderTextKitComponents.textView = [[UITextView alloc] initWithFrame:CGRectZero textContainer:_placeholderTextKitComponents.textContainer];
   _placeholderTextKitComponents.textView.userInteractionEnabled = NO;
   _placeholderTextKitComponents.textView.accessibilityElementsHidden = YES;
   configureTextView(_placeholderTextKitComponents.textView);
-  [self.view addSubview:_placeholderTextKitComponents.textView];
 
   // Create and configure our text view.
-  _textKitComponents.textView = self.textView;
-  //_textKitComponents.textView = NO; // Unfortunately there's a bug here with iOS 7 DP5 that causes the text-view to only be one line high when scrollEnabled is NO. rdar://14729288
+  _textKitComponents.textView = [[ASPanningOverriddenUITextView alloc] initWithFrame:CGRectZero textContainer:_textKitComponents.textContainer];
+  _textKitComponents.textView.scrollEnabled = _scrollEnabled;
   _textKitComponents.textView.delegate = self;
+  #if TARGET_OS_IOS
   _textKitComponents.textView.editable = YES;
+  #endif
   _textKitComponents.textView.typingAttributes = _typingAttributes;
-  _textKitComponents.textView.returnKeyType = _returnKeyType;
   _textKitComponents.textView.accessibilityHint = _placeholderTextKitComponents.textStorage.string;
   configureTextView(_textKitComponents.textView);
-  [self.view addSubview:_textKitComponents.textView];
+
   [self _updateDisplayingPlaceholder];
+    
+  // once view is loaded, setters set directly on view
+  _textInputTraits = nil;
 }
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize
 {
   ASTextKitComponents *displayedComponents = [self isDisplayingPlaceholder] ? _placeholderTextKitComponents : _textKitComponents;
   CGSize textSize = [displayedComponents sizeForConstrainedWidth:constrainedSize.width];
-  textSize = ceilSizeValue(textSize);
-  return CGSizeMake(constrainedSize.width, fminf(textSize.height, constrainedSize.height));
+  CGFloat width = ceilf(textSize.width + _textContainerInset.left + _textContainerInset.right);
+  CGFloat height = ceilf(textSize.height + _textContainerInset.top + _textContainerInset.bottom);
+  return CGSizeMake(fminf(width, constrainedSize.width), fminf(height, constrainedSize.height));
 }
 
 - (void)layout
 {
   ASDisplayNodeAssertMainThread();
 
+  [super layout];
   [self _layoutTextView];
 }
 
@@ -208,12 +309,18 @@
 #pragma mark - Configuration
 @synthesize delegate = _delegate;
 
+- (void)setScrollEnabled:(BOOL)scrollEnabled
+{
+  ASDN::MutexLocker l(_textKitLock);
+  _scrollEnabled = scrollEnabled;
+  [_textKitComponents.textView setScrollEnabled:_scrollEnabled];
+}
+
 - (UITextView *)textView
 {
   ASDisplayNodeAssertMainThread();
-  if (!_textKitComponents.textView) {
-    _textKitComponents.textView = [[_ASDisabledPanUITextView alloc] initWithFrame:CGRectZero textContainer:_textKitComponents.textContainer];
-  }
+  [self view];
+  ASDisplayNodeAssert(_textKitComponents.textView != nil, @"UITextView must be created in -[ASEditableTextNode didLoad]");
   return _textKitComponents.textView;
 }
 
@@ -274,7 +381,7 @@
   if (ASObjectIsEqual(_placeholderTextKitComponents.textStorage, attributedPlaceholderText))
     return;
 
-  [_placeholderTextKitComponents.textStorage setAttributedString:attributedPlaceholderText ?: [[NSAttributedString alloc] initWithString:@""]];
+  [_placeholderTextKitComponents.textStorage setAttributedString:attributedPlaceholderText ? : [[NSAttributedString alloc] initWithString:@""]];
   _textKitComponents.textView.accessibilityHint = attributedPlaceholderText.string;
 }
 
@@ -297,7 +404,7 @@
 
   // If we (_cmd) are called while the text view itself is updating (-textViewDidUpdate:), you cannot update the text storage and expect perfect propagation to the text view.
   // Thus, we always update the textview directly if it's been created already.
-  if (ASObjectIsEqual((_textKitComponents.textView.attributedText ?: _textKitComponents.textStorage), attributedText))
+  if (ASObjectIsEqual((_textKitComponents.textView.attributedText ? : _textKitComponents.textStorage), attributedText))
     return;
 
   // If the cursor isn't at the end of the text, we need to preserve the selected range to avoid moving the cursor.
@@ -375,13 +482,6 @@
   return [_textKitComponents.textView textInputMode];
 }
 
-- (void)setReturnKeyType:(UIReturnKeyType)returnKeyType
-{
-  ASDN::MutexLocker l(_textKitLock);
-  _returnKeyType = returnKeyType;
-  [_textKitComponents.textView setReturnKeyType:_returnKeyType];
-}
-
 - (BOOL)isFirstResponder
 {
   ASDN::MutexLocker l(_textKitLock);
@@ -408,6 +508,176 @@
 {
   ASDN::MutexLocker l(_textKitLock);
   return [_textKitComponents.textView resignFirstResponder];
+}
+
+#pragma mark - UITextInputTraits
+
+- (_ASTextInputTraitsPendingState *)textInputTraits
+{
+  if (!_textInputTraits) {
+    _textInputTraits = [[_ASTextInputTraitsPendingState alloc] init];
+  }
+  return _textInputTraits;
+}
+
+- (void)setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setAutocapitalizationType:autocapitalizationType];
+  } else {
+    [self.textInputTraits setAutocapitalizationType:autocapitalizationType];
+  }
+}
+
+- (UITextAutocapitalizationType)autocapitalizationType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView autocapitalizationType];
+  } else {
+    return [self.textInputTraits autocapitalizationType];
+  }
+}
+
+- (void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setAutocorrectionType:autocorrectionType];
+  } else {
+    [self.textInputTraits setAutocorrectionType:autocorrectionType];
+  }
+}
+
+- (UITextAutocorrectionType)autocorrectionType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView autocorrectionType];
+  } else {
+    return [self.textInputTraits autocorrectionType];
+  }
+}
+
+- (void)setSpellCheckingType:(UITextSpellCheckingType)spellCheckingType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setSpellCheckingType:spellCheckingType];
+  } else {
+    [self.textInputTraits setSpellCheckingType:spellCheckingType];
+  }
+}
+
+- (UITextSpellCheckingType)spellCheckingType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView spellCheckingType];
+  } else {
+    return [self.textInputTraits spellCheckingType];
+  }
+}
+
+- (void)setEnablesReturnKeyAutomatically:(BOOL)enablesReturnKeyAutomatically
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setEnablesReturnKeyAutomatically:enablesReturnKeyAutomatically];
+  } else {
+    [self.textInputTraits setEnablesReturnKeyAutomatically:enablesReturnKeyAutomatically];
+  }
+}
+
+- (BOOL)enablesReturnKeyAutomatically
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView enablesReturnKeyAutomatically];
+  } else {
+    return [self.textInputTraits enablesReturnKeyAutomatically];
+  }
+}
+
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)setKeyboardAppearance
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setKeyboardAppearance:setKeyboardAppearance];
+  } else {
+    [self.textInputTraits setKeyboardAppearance:setKeyboardAppearance];
+  }
+}
+
+- (UIKeyboardAppearance)keyboardAppearance
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView keyboardAppearance];
+  } else {
+    return [self.textInputTraits keyboardAppearance];
+  }
+}
+
+- (void)setKeyboardType:(UIKeyboardType)keyboardType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setKeyboardType:keyboardType];
+  } else {
+    [self.textInputTraits setKeyboardType:keyboardType];
+  }
+}
+
+- (UIKeyboardType)keyboardType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView keyboardType];
+  } else {
+    return [self.textInputTraits keyboardType];
+  }
+}
+
+- (void)setReturnKeyType:(UIReturnKeyType)returnKeyType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setReturnKeyType:returnKeyType];
+  } else {
+    [self.textInputTraits setReturnKeyType:returnKeyType];
+  }
+}
+
+- (UIReturnKeyType)returnKeyType
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView returnKeyType];
+  } else {
+    return [self.textInputTraits returnKeyType];
+  }
+}
+
+- (void)setSecureTextEntry:(BOOL)secureTextEntry
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    [self.textView setSecureTextEntry:secureTextEntry];
+  } else {
+    [self.textInputTraits setSecureTextEntry:secureTextEntry];
+  }
+}
+
+- (BOOL)isSecureTextEntry
+{
+  ASDN::MutexLocker l(_textInputTraitsLock);
+  if (self.isNodeLoaded) {
+    return [self.textView isSecureTextEntry];
+  } else {
+    return [self.textInputTraits isSecureTextEntry];
+  }
 }
 
 #pragma mark - UITextView Delegate

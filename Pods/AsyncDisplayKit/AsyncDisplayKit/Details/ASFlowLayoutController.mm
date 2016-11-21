@@ -1,21 +1,21 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASFlowLayoutController.mm
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASFlowLayoutController.h"
 #import "ASAssert.h"
 #import "ASDisplayNode.h"
 #import "ASIndexPath.h"
+#import "CGRect+ASConvenience.h"
 
 #include <map>
 #include <vector>
-#include <cassert>
-
-static const CGFloat kASFlowLayoutControllerRefreshingThreshold = 0.3;
 
 @interface ASFlowLayoutController()
 {
@@ -39,31 +39,6 @@ static const CGFloat kASFlowLayoutControllerRefreshingThreshold = 0.3;
 
 #pragma mark - Visible Indices
 
-- (BOOL)shouldUpdateForVisibleIndexPaths:(NSArray *)indexPaths viewportSize:(CGSize)viewportSize rangeType:(ASLayoutRangeType)rangeType
-{
-  if (!indexPaths.count || rangeType >= _rangesByType.size()) {
-    return NO;
-  }
-
-  ASIndexPathRange existingRange = _rangesByType[rangeType];
-  ASIndexPathRange newRange = [self indexPathRangeForIndexPaths:indexPaths];
-  
-  ASIndexPath maximumStart = ASIndexPathMaximum(existingRange.start, newRange.start);
-  ASIndexPath minimumEnd = ASIndexPathMinimum(existingRange.end, newRange.end);
-  
-  if (ASIndexPathEqualToIndexPath(maximumStart, existingRange.start) || ASIndexPathEqualToIndexPath(minimumEnd, existingRange.end)) {
-    return YES;
-  }
-
-  NSInteger newStartDelta       = [self flowLayoutDistanceForRange:ASIndexPathRangeMake(_visibleRange.start, newRange.start)];
-  NSInteger existingStartDelta  = [self flowLayoutDistanceForRange:ASIndexPathRangeMake(_visibleRange.start, existingRange.start)] * kASFlowLayoutControllerRefreshingThreshold;
-  
-  NSInteger newEndDelta         = [self flowLayoutDistanceForRange:ASIndexPathRangeMake(_visibleRange.end, newRange.end)];
-  NSInteger existingEndDelta    = [self flowLayoutDistanceForRange:ASIndexPathRangeMake(_visibleRange.end, existingRange.end)] * kASFlowLayoutControllerRefreshingThreshold;
-  
-  return (newStartDelta > existingStartDelta) || (newEndDelta > existingEndDelta);
-}
-
 - (void)setVisibleNodeIndexPaths:(NSArray *)indexPaths
 {
   _visibleRange = [self indexPathRangeForIndexPaths:indexPaths];
@@ -73,30 +48,35 @@ static const CGFloat kASFlowLayoutControllerRefreshingThreshold = 0.3;
  * IndexPath array for the element in the working range.
  */
 
-- (NSSet *)indexPathsForScrolling:(ASScrollDirection)scrollDirection viewportSize:(CGSize)viewportSize rangeType:(ASLayoutRangeType)rangeType
+- (NSSet *)indexPathsForScrolling:(ASScrollDirection)scrollDirection rangeMode:(ASLayoutRangeMode)rangeMode rangeType:(ASLayoutRangeType)rangeType
 {
-  CGFloat viewportScreenMetric;
-  ASScrollDirection leadingDirection;
+  CGSize viewportSize = [self viewportSize];
+
+  CGFloat viewportDirectionalSize = 0.0;
+  ASDirectionalScreenfulBuffer directionalBuffer = { 0, 0 };
+  ASRangeTuningParameters      tuningParameters  = [self tuningParametersForRangeMode:rangeMode rangeType:rangeType];
 
   if (_layoutDirection == ASFlowLayoutDirectionHorizontal) {
-    ASDisplayNodeAssert(scrollDirection == ASScrollDirectionNone || scrollDirection == ASScrollDirectionLeft || scrollDirection == ASScrollDirectionRight, @"Invalid scroll direction");
+    ASDisplayNodeAssert(scrollDirection == ASScrollDirectionNone ||
+                        scrollDirection == ASScrollDirectionLeft ||
+                        scrollDirection == ASScrollDirectionRight, @"Invalid scroll direction");
 
-    viewportScreenMetric = viewportSize.width;
-    leadingDirection = ASScrollDirectionLeft;
+    viewportDirectionalSize = viewportSize.width;
+    directionalBuffer = ASDirectionalScreenfulBufferHorizontal(scrollDirection, tuningParameters);
   } else {
-    ASDisplayNodeAssert(scrollDirection == ASScrollDirectionNone || scrollDirection == ASScrollDirectionUp || scrollDirection == ASScrollDirectionDown, @"Invalid scroll direction");
+    ASDisplayNodeAssert(scrollDirection == ASScrollDirectionNone ||
+                        scrollDirection == ASScrollDirectionUp   ||
+                        scrollDirection == ASScrollDirectionDown, @"Invalid scroll direction");
 
-    viewportScreenMetric = viewportSize.height;
-    leadingDirection = ASScrollDirectionUp;
+    viewportDirectionalSize = viewportSize.height;
+    directionalBuffer = ASDirectionalScreenfulBufferVertical(scrollDirection, tuningParameters);
   }
-
-  ASRangeTuningParameters tuningParameters = [self tuningParametersForRangeType:rangeType];
-  CGFloat backScreens = scrollDirection == leadingDirection ? tuningParameters.leadingBufferScreenfuls : tuningParameters.trailingBufferScreenfuls;
-  CGFloat frontScreens = scrollDirection == leadingDirection ? tuningParameters.trailingBufferScreenfuls : tuningParameters.leadingBufferScreenfuls;
-
   
-  ASIndexPath startPath = [self findIndexPathAtDistance:(-backScreens * viewportScreenMetric) fromIndexPath:_visibleRange.start];
-  ASIndexPath endPath = [self findIndexPathAtDistance:(frontScreens * viewportScreenMetric) fromIndexPath:_visibleRange.end];
+  ASIndexPath startPath = [self findIndexPathAtDistance:(-directionalBuffer.negativeDirection * viewportDirectionalSize)
+                                          fromIndexPath:_visibleRange.start];
+  
+  ASIndexPath endPath   = [self findIndexPathAtDistance:(directionalBuffer.positiveDirection * viewportDirectionalSize)
+                                          fromIndexPath:_visibleRange.end];
 
   ASDisplayNodeAssert(startPath.section <= endPath.section, @"startPath should never begin at a further position than endPath");
   
@@ -111,12 +91,12 @@ static const CGFloat kASFlowLayoutControllerRefreshingThreshold = 0.3;
     currPath.row++;
 
     // Once we reach the end of the section, advance to the next one.  Keep advancing if the next section is zero-sized.
-    while (currPath.row >= [(NSArray *)completedNodes[currPath.section] count] && currPath.section < completedNodes.count - 1) {
+    while (currPath.row >= [(NSArray *)completedNodes[currPath.section] count] && currPath.section < endPath.section) {
       currPath.row = 0;
       currPath.section++;
-      ASDisplayNodeAssert(currPath.section <= endPath.section, @"currPath should never reach a further section than endPath");
     }
   }
+  ASDisplayNodeAssert(currPath.section <= endPath.section, @"currPath should never reach a further section than endPath");
 
   [indexPathSet addObject:[NSIndexPath indexPathWithASIndexPath:endPath]];
   
@@ -133,11 +113,11 @@ static const CGFloat kASFlowLayoutControllerRefreshingThreshold = 0.3;
   range.start = currentIndexPath;
   range.end = currentIndexPath;
   
-  [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger idx, BOOL *stop) {
+  for (NSIndexPath *indexPath in indexPaths) {
     currentIndexPath = [indexPath ASIndexPathValue];
     range.start = ASIndexPathMinimum(range.start, currentIndexPath);
     range.end = ASIndexPathMaximum(range.end, currentIndexPath);
-  }];
+  }
   return range;
 }
 

@@ -1,12 +1,12 @@
-/*
- *  Copyright (c) 2014-present, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- *
- */
+//
+//  ASStackLayoutSpecUtilities.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASStackLayoutSpec.h"
 
@@ -66,5 +66,65 @@ inline ASStackLayoutAlignItems alignment(ASStackLayoutAlignSelf childAlignment, 
     case ASStackLayoutAlignSelfAuto:
     default:
       return stackAlignment;
+  }
+}
+
+inline ASStackLayoutAlignItems alignment(ASHorizontalAlignment alignment, ASStackLayoutAlignItems defaultAlignment)
+{
+  switch (alignment) {
+    case ASHorizontalAlignmentLeft:
+      return ASStackLayoutAlignItemsStart;
+    case ASHorizontalAlignmentMiddle:
+      return ASStackLayoutAlignItemsCenter;
+    case ASHorizontalAlignmentRight:
+      return ASStackLayoutAlignItemsEnd;
+    case ASHorizontalAlignmentNone:
+    default:
+      return defaultAlignment;
+  }
+}
+
+inline ASStackLayoutAlignItems alignment(ASVerticalAlignment alignment, ASStackLayoutAlignItems defaultAlignment)
+{
+  switch (alignment) {
+    case ASVerticalAlignmentTop:
+      return ASStackLayoutAlignItemsStart;
+    case ASVerticalAlignmentCenter:
+      return ASStackLayoutAlignItemsCenter;
+    case ASVerticalAlignmentBottom:
+      return ASStackLayoutAlignItemsEnd;
+    case ASVerticalAlignmentNone:
+    default:
+      return defaultAlignment;
+  }
+}
+
+inline ASStackLayoutJustifyContent justifyContent(ASHorizontalAlignment alignment, ASStackLayoutJustifyContent defaultJustifyContent)
+{
+  switch (alignment) {
+    case ASHorizontalAlignmentLeft:
+      return ASStackLayoutJustifyContentStart;
+    case ASHorizontalAlignmentMiddle:
+      return ASStackLayoutJustifyContentCenter;
+    case ASHorizontalAlignmentRight:
+      return ASStackLayoutJustifyContentEnd;
+    case ASHorizontalAlignmentNone:
+    default:
+      return defaultJustifyContent;
+  }
+}
+
+inline ASStackLayoutJustifyContent justifyContent(ASVerticalAlignment alignment, ASStackLayoutJustifyContent defaultJustifyContent)
+{
+  switch (alignment) {
+    case ASVerticalAlignmentTop:
+      return ASStackLayoutJustifyContentStart;
+    case ASVerticalAlignmentCenter:
+      return ASStackLayoutJustifyContentCenter;
+    case ASVerticalAlignmentBottom:
+      return ASStackLayoutJustifyContentEnd;
+    case ASVerticalAlignmentNone:
+    default:
+      return defaultJustifyContent;
   }
 }

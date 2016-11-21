@@ -67,17 +67,16 @@
 
 /**
  * Callback when it is ready to present your own checkout and eCommerce views
- * Do NOT use this unless you are an enterprise SDK customer
- * @param checkoutInfo returns you the required data for you to submit your order
+ * @param orderNumber returns you the orderNumber where you need to refer to when you are ready to confirm the order
  */
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withOrderNumber:(NSString *)orderNumber viewControllerToPresentOn:(UIViewController *)viewController;
+
+//deprecated
 - (void)albumManager:(TBSDKAlbumManager *)albumManager
  didCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum
     withCheckoutInfo:(NSDictionary *)checkoutInfo;
 
-/**
- * Callback when you want to present your own checkout and eCommerce views
- * Do NOT use this unless you are an enterprise SDK customer
- */
+//deprecated
 - (void)albumManager:(TBSDKAlbumManager *)albumManager
 loadPrintInfosForSDKAlbum:(TBSDKAlbum *)sdkAlbum
         standardSize:(CGSize)size completionBlock:(void (^)(NSArray *printInfos))completionBlock;

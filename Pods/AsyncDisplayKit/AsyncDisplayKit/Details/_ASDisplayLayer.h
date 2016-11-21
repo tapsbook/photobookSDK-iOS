@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  _ASDisplayLayer.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import <UIKit/UIKit.h>
 
@@ -22,7 +24,7 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 
  @default YES (note that this might change for subclasses)
  */
-@property (atomic, assign) BOOL displaysAsynchronously;
+@property (nonatomic, assign) BOOL displaysAsynchronously;
 
 /**
  @summary Cancels any pending async display.
@@ -46,7 +48,7 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 
  @desc The asyncDelegate will have the opportunity to override the methods related to async display.
  */
-@property (atomic, weak) id<_ASDisplayLayerDelegate> asyncDelegate;
+@property (nonatomic, weak) id<_ASDisplayLayerDelegate> asyncDelegate;
 
 /**
  @summary Suspends both asynchronous and synchronous display of the receiver if YES.
@@ -56,7 +58,7 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 
  @default NO
  */
-@property (atomic, assign, getter=isDisplaySuspended) BOOL displaySuspended;
+@property (nonatomic, assign, getter=isDisplaySuspended) BOOL displaySuspended;
 
 /**
  @summary Bypasses asynchronous rendering and performs a blocking display immediately on the current thread.
@@ -81,7 +83,7 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 /**
  @summary Delegate method to draw layer contents into a CGBitmapContext. The current UIGraphics context will be set to an appropriate context.
  @param parameters An object describing all of the properties you need to draw. Return this from -drawParametersForAsyncLayer:
- @param isCancelled Execute this block to check whether the current drawing operation has been cancelled to avoid unnecessary work. A return value of YES means cancel drawing and return.
+ @param isCancelledBlock Execute this block to check whether the current drawing operation has been cancelled to avoid unnecessary work. A return value of YES means cancel drawing and return.
  @param isRasterizing YES if the layer is being rasterized into another layer, in which case drawRect: probably wants to avoid doing things like filling its bounds with a zero-alpha color to clear the backing store.
  */
 + (void)drawRect:(CGRect)bounds withParameters:(id<NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock isRasterizing:(BOOL)isRasterizing;
@@ -89,10 +91,22 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 /**
  @summary Delegate override to provide new layer contents as a UIImage.
  @param parameters An object describing all of the properties you need to draw. Return this from -drawParametersForAsyncLayer:
- @param isCancelled Execute this block to check whether the current drawing operation has been cancelled to avoid unnecessary work. A return value of YES means cancel drawing and return.
+ @param isCancelledBlock Execute this block to check whether the current drawing operation has been cancelled to avoid unnecessary work. A return value of YES means cancel drawing and return.
  @return A UIImage with contents that are ready to display on the main thread. Make sure that the image is already decoded before returning it here.
  */
 + (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock;
+
+/**
+ * @abstract instance version of drawRect class method
+ * @see drawRect:withParameters:isCancelled:isRasterizing class method
+ */
+- (void)drawRect:(CGRect)bounds withParameters:(id <NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock isRasterizing:(BOOL)isRasterizing;
+
+/**
+ * @abstract instance version of display class method
+ * @see displayWithParameters:isCancelled class method
+ */
+- (UIImage *)displayWithParameters:(id <NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelled;
 
 // Called on the main thread only
 

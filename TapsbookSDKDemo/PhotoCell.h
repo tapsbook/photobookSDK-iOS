@@ -12,4 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (void)setImageAlreadyUsed:(BOOL)used;
+
 @end

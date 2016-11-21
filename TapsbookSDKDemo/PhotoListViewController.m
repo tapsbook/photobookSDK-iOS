@@ -34,6 +34,7 @@
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (strong, nonatomic) NSMutableArray *assets;
+@property (strong, nonatomic) NSMutableArray *selectedPhotoIdentifiers;
 
 @property (strong, nonatomic) dispatch_queue_t cellImageLoadingQueue;
 
@@ -66,6 +67,8 @@ static CGSize AssetGridThumbnailSize;
     if (self) {
         _mode = PhotoListViewControllerMode_CreateAlbum;
         
+        _allowMultipleSelection = YES;
+
         _imageManager = [[PHCachingImageManager alloc] init];
 
         _cellImageLoadingQueue = dispatch_queue_create("cellImageLoadingQueue", NULL);
@@ -103,7 +106,7 @@ static CGSize AssetGridThumbnailSize;
     
     self.imagePreloadingOperationQueue = [NSOperationQueue mainQueue];
     self.diskIOQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    AssetGridThumbnailSize =  CGSizeMake(120, 120);
+    AssetGridThumbnailSize =  CGSizeMake(90, 90);
 
     if (self.mode == PhotoListViewControllerMode_CreateAlbum) {
         [[TBSDKAlbumManager sharedInstance] setDelegate:self];
@@ -117,19 +120,13 @@ static CGSize AssetGridThumbnailSize;
     
     NSString *buttonTitle = self.mode == PhotoListViewControllerMode_CreateAlbum ? @"Create" : @"Add";
     
-    UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
-    
-    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
+//    UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
+//    
+//    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
 
     UIBarButtonItem *bookListButton = [[UIBarButtonItem alloc] initWithTitle:@"Books" style:UIBarButtonItemStylePlain target:self action:@selector(handleBookListViewControllerButton:)];
 
     self.createAlbumOrAddPhotoButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(handleCreateAlbumOrAddPhotoButton:)];
-    self.navigationItem.rightBarButtonItems = @[
-                                                self.createAlbumOrAddPhotoButton,
-                                                bookListButton,
-//                                                sdkOrderListButton,
-//                                                sdkLoginButton,
-                                                ];
     
     UIButton *checkoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [checkoutButton setTitle:@"Cart(0)" forState:UIControlStateNormal];
@@ -137,7 +134,24 @@ static CGSize AssetGridThumbnailSize;
     [checkoutButton sizeToFit];
     self.checkoutButton = checkoutButton;
     UIBarButtonItem *checkoutButtonItem = [[UIBarButtonItem alloc] initWithCustomView:checkoutButton];
-    self.navigationItem.leftBarButtonItem = checkoutButtonItem;
+    
+    if (self.allowMultipleSelection){
+        self.navigationItem.rightBarButtonItems = @[
+                                                    self.createAlbumOrAddPhotoButton,
+                                                    bookListButton,
+                                                    //                                                sdkOrderListButton,
+                                                    //                                                sdkLoginButton,
+                                                    ];
+        self.navigationItem.leftBarButtonItem = checkoutButtonItem;
+    }
+    
+    if (self.mode == PhotoListViewControllerMode_AddPhoto) {
+        self.selectedPhotoIdentifiers = [NSMutableArray array];
+        for (TBImage * image in self.existingTBImages) {
+            [self.selectedPhotoIdentifiers addObject:image.identifier];
+        }
+    }
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -182,14 +196,26 @@ static CGSize AssetGridThumbnailSize;
 //                                  }
                                   
                               }];
-
-    
+    NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
+    [cell setImageAlreadyUsed:[self.selectedPhotoIdentifiers containsObject:name]];
     
     return cell;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self refreshNavButton];
+    //in the simple page editor mode, return immediately when user select an image
+    if (self.allowMultipleSelection){
+        [self refreshNavButton];
+    } else {
+        [self createProductWithType:TBProductType_Photobook];
+    }
+}
+
+- (BOOL) collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    //should only allow select non-previously-selected photo to the book
+    PHAsset * asset = self.assets[indexPath.row];
+    NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
+    return ![self.selectedPhotoIdentifiers containsObject:name];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -201,9 +227,10 @@ static CGSize AssetGridThumbnailSize;
     
     if (selectedIndexes.count>0) {
         self.title =[NSString stringWithFormat:@"%zd Selected", selectedIndexes.count];
+        [self.createAlbumOrAddPhotoButton setEnabled:YES];
     }
     else {
-        self.title =[NSString stringWithFormat:@"Select Photos", selectedIndexes.count];
+        self.title =[NSString stringWithFormat:@"Select Photos"];
         [self.createAlbumOrAddPhotoButton setEnabled:NO];
     }
 }
@@ -342,21 +369,21 @@ static CGSize AssetGridThumbnailSize;
                     NSDictionary * albumOptionBase = @{
                                                        kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
                                                        kTBProductMinPageCount:     @"20",
-                                                       kTBPreferredUIDirection:    @"RTL",   //set this RTL or LTR
+                                                       kTBPreferredUIDirection:    @"LTR",   //set this RTL or LTR
                                                        kTBPreferredPageTypeSpread: @(YES)
                                                        };
                     NSDictionary * albumBookType8x8 =@{
                                                        kTBProductPreferredTheme:   @"200",  //200 is for square book
                                                        kTBProductPreferredSKU:     @"1003", //1003 is a layflat square book
                                                        };
-                    NSDictionary * albumBookType11x85 =@{
-                                                       kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 page
-                                                       kTBProductPreferredSKU:     @"998",  //998 is corresponding book
-                                                       };
-                    NSDictionary * albumBookType85x11 =@{
-                                                       kTBProductPreferredTheme:   @"202",  //202 is for 8.5x11 page
-                                                       kTBProductPreferredSKU:     @"999",  //998 is corresponding book book
-                                                       };
+//                    NSDictionary * albumBookType11x85 =@{
+//                                                       kTBProductPreferredTheme:   @"201",  //201 is for 11x8.5 page
+//                                                       kTBProductPreferredSKU:     @"998",  //998 is corresponding book
+//                                                       };
+//                    NSDictionary * albumBookType85x11 =@{
+//                                                       kTBProductPreferredTheme:   @"202",  //202 is for 8.5x11 page
+//                                                       kTBProductPreferredSKU:     @"999",  //998 is corresponding book book
+//                                                       };
 
                     NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
                     [albumOption addEntriesFromDictionary:albumBookType8x8];
@@ -397,13 +424,14 @@ static CGSize AssetGridThumbnailSize;
 
 #pragma mark - TBSDKAlbumManagerDelegate
 
-- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages completionBlock:(void (^)(NSArray *newImages))completionBlock {
+- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount allowMultiple:(BOOL)allowMultiple completionBlock:(void (^)(NSArray *newImages))completionBlock {
     PhotoListViewController *vc = [PhotoListViewController new];
     vc.mode = PhotoListViewControllerMode_AddPhoto;
     vc.sdkAlbum = sdkAlbum;
     vc.existingTBImages = existingTBImages;
     vc.tb_completionBlock = completionBlock;
-    
+    vc.allowMultipleSelection = allowMultiple;
+
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     return nav;
@@ -424,48 +452,52 @@ static CGSize AssetGridThumbnailSize;
     TBImage *tbImage = [enumerator nextObject];
     
     if (tbImage) {
-        NSURL *assetsURL = [NSURL URLWithString:tbImage.identifier];
-        dispatch_queue_t diskIOQueue = self.diskIOQueue;
+        NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
+        NSString *xxlPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_l", tbImage.identifier]];
         
-        
-        @weakify(self);
-        [self.assetsLibrary assetForURL:assetsURL resultBlock:^(ALAsset *asset) {
-            dispatch_async(diskIOQueue, ^{
-                @autoreleasepool {
-                    ALAssetRepresentation *rep = [asset defaultRepresentation];
-                    NSString *name = [rep photoId];
-                    
-                    CGImageRef imgRef = [rep fullResolutionImage];
-                    
-                    NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
-                    NSString *xxlPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_xxl", name]];
-                    
-                    UIImage *image = [UIImage imageWithCGImage:imgRef scale:1 orientation:(UIImageOrientation)rep.orientation];
-                    [image writeToFile:xxlPath withCompressQuality:1];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        @strongify(self);
-                        [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
-                        
-                        progressBlock(currentIdx, total, 1);
-                        
-                        [self preloadImageWithEnumerator:enumerator currentIdx:currentIdx + 1 total:total progressBlock:progressBlock completionBlock:completionBlock];
-                    });
-                }
-            });
-        } failureBlock:^(NSError *error) {
-            completionBlock(currentIdx, total, error);
-        }];
+        // Cache image to disk
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:xxlPath]) {
+            NSLog(@"I'm lazy, using L size as XXL images");
+            [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
+            progressBlock(currentIdx, total, 1);
+            
+            [self preloadImageWithEnumerator:enumerator currentIdx:currentIdx + 1 total:total progressBlock:progressBlock completionBlock:completionBlock];
+        }
+        else {
+            NSLog(@"cannot find L size images");
+        }
     }
     else {
         completionBlock(currentIdx, total, nil);
     }
 }
+#pragma mark - Checkout Option 1
+//Use SDK's built-in checkout UI and our eCommerce server to handle payment
+//To use this option, you must setup the 3rd party payment option and update the tapsbook backend
+    
+#pragma mark - Checkout Option 2
+//Use your customer checkout UI and your eCommerce server to handle a single product order
+//To use this option, you must
+//1. set kTBUseExternalCheckout to @YES,
+//2. implement a checkout (payment) view and have your own payment process at your backend via a payment gateway (Stripe, Ping++, Alipay etc).
 
-#pragma mark - Checkout 3
+//It is now time to launch the checkout view
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withOrderNumber:(NSString *)orderNumber viewControllerToPresentOn:(UIViewController *)viewController {
 
+    NSLog(@"preorder is compelte with an order number:%@", orderNumber);
+    
+    //show your checkout view now
+    CheckoutViewController *vc = [CheckoutViewController new];
+    [viewController presentViewController:vc animated:YES completion:nil];
+}
 
-//a callback after user click order for an album if the album is new,  the infoDict here only contains the cover page JSON
+#pragma mark - Checkout Option 3
+//Receive the product output data in JSON and process the data at your own
+//server and manufacturing the product by yourself.
+//this option assumes you have a backend engine that can render the final JPG and manufacturer yourself.
+
+//Implement this callback to handle the event user click order button for an album if the album is decided to be a new, notice the infoDict here only contains the cover page JSON. The full product JSON is only available after you call checkout3_checkoutAlbumsWithIDs
 - (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
     [self.albumsInCart addObject:@(sdkAlbum.ID)];
     
@@ -474,7 +506,7 @@ static CGSize AssetGridThumbnailSize;
     [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
 }
 
-//a callback after user click order for an album if the album is already in the cart, just need to update it, the infoDict here only contains the cover page JSON
+//Implement this callback to handle the event user click order button for an album if the album is already in the cart, just need to update it, the infoDict here only contains the cover page JSON
 - (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
     // Update your cart view
     

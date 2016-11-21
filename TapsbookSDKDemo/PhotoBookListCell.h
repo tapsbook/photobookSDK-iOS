@@ -31,7 +31,6 @@
 
 + (PhotoBookListCell *)createPhotoBookListCell;
 - (void)configureCellWithAlbum:(TBSDKAlbum *)album;
-- (void)setAlbumStatus;
 @end
 
 

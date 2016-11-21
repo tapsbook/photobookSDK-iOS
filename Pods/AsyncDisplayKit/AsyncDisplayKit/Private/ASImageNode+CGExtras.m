@@ -1,10 +1,12 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASImageNode+CGExtras.m
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #import "ASImageNode+CGExtras.h"
 
@@ -36,6 +38,7 @@ void ASCroppedImageBackingSizeAndDrawRectInBounds(CGSize sourceImageSize,
                                                   CGSize boundsSize,
                                                   UIViewContentMode contentMode,
                                                   CGRect cropRect,
+                                                  BOOL forceUpscaling,
                                                   CGSize *outBackingSize,
                                                   CGRect *outDrawRect
                                                   )
@@ -62,7 +65,7 @@ void ASCroppedImageBackingSizeAndDrawRectInBounds(CGSize sourceImageSize,
 
   // If fitting the desired aspect ratio to the image size actually results in a larger buffer, use the input values.
   // However, if there is a pixel savings (e.g. we would have to upscale the image), overwrite the function arguments.
-  if ((scaledSizeForImage.width * scaledSizeForImage.height) < (destinationWidth * destinationHeight)) {
+  if (forceUpscaling == NO && (scaledSizeForImage.width * scaledSizeForImage.height) < (destinationWidth * destinationHeight)) {
     destinationWidth = (size_t)roundf(scaledSizeForImage.width);
     destinationHeight = (size_t)roundf(scaledSizeForImage.height);
     if (destinationWidth == 0 || destinationHeight == 0) {

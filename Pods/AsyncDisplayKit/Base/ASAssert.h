@@ -1,14 +1,17 @@
-/* Copyright (c) 2014-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  ASAssert.h
+//  AsyncDisplayKit
+//
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
 
 #pragma once
 
 #import <Foundation/NSException.h>
+#import <pthread.h>
 
 #define ASDisplayNodeAssertWithSignalAndLogFunction(condition, description, logFunction, ...) NSAssert(condition, description, ##__VA_ARGS__);
 #define ASDisplayNodeCAssertWithSignalAndLogFunction(condition, description, logFunction, ...) NSCAssert(condition, description, ##__VA_ARGS__);
@@ -30,11 +33,11 @@
 #define ASDisplayNodeAssertNotInstantiable() ASDisplayNodeAssertWithSignal(NO, nil, @"This class is not instantiable.");
 #define ASDisplayNodeAssertNotSupported() ASDisplayNodeAssertWithSignal(NO, nil, @"This method is not supported by class %@", [self class]);
 
-#define ASDisplayNodeAssertMainThread() ASDisplayNodeAssertWithSignal([NSThread isMainThread], nil, @"This method must be called on the main thread")
-#define ASDisplayNodeCAssertMainThread() ASDisplayNodeCAssertWithSignal([NSThread isMainThread], nil, @"This function must be called on the main thread")
+#define ASDisplayNodeAssertMainThread() ASDisplayNodeAssertWithSignal(0 != pthread_main_np(), nil, @"This method must be called on the main thread")
+#define ASDisplayNodeCAssertMainThread() ASDisplayNodeCAssertWithSignal(0 != pthread_main_np(), nil, @"This function must be called on the main thread")
 
-#define ASDisplayNodeAssertNotMainThread() ASDisplayNodeAssertWithSignal(![NSThread isMainThread], nil, @"This method must be called off the main thread")
-#define ASDisplayNodeCAssertNotMainThread() ASDisplayNodeCAssertWithSignal(![NSThread isMainThread], nil, @"This function must be called off the main thread")
+#define ASDisplayNodeAssertNotMainThread() ASDisplayNodeAssertWithSignal(0 == pthread_main_np(), nil, @"This method must be called off the main thread")
+#define ASDisplayNodeCAssertNotMainThread() ASDisplayNodeCAssertWithSignal(0 == pthread_main_np(), nil, @"This function must be called off the main thread")
 
 #define ASDisplayNodeAssertFlag(X) ASDisplayNodeAssertWithSignal((1 == __builtin_popcount(X)), nil, nil)
 #define ASDisplayNodeCAssertFlag(X) ASDisplayNodeCAssertWithSignal((1 == __builtin_popcount(X)), nil, nil)
@@ -45,8 +48,8 @@
 #define ASDisplayNodeAssertFalse(condition) ASDisplayNodeAssertWithSignal(!(condition), nil, nil)
 #define ASDisplayNodeCAssertFalse(condition) ASDisplayNodeCAssertWithSignal(!(condition), nil, nil)
 
-#define ASDisplayNodeFailAssert(description, ...) ASDisplayNodeAssertWithSignal(NO, nil, (description), ##__VA_ARGS__)
-#define ASDisplayNodeCFailAssert(description, ...) ASDisplayNodeCAssertWithSignal(NO, nil, (description), ##__VA_ARGS__)
+#define ASDisplayNodeFailAssert(description, ...) ASDisplayNodeAssertWithSignal(NO, (description), ##__VA_ARGS__)
+#define ASDisplayNodeCFailAssert(description, ...) ASDisplayNodeCAssertWithSignal(NO, (description), ##__VA_ARGS__)
 
 #define ASDisplayNodeConditionalAssert(shouldTestCondition, condition, description, ...) ASDisplayNodeAssert((!(shouldTestCondition) || (condition)), nil, (description), ##__VA_ARGS__)
 #define ASDisplayNodeConditionalCAssert(shouldTestCondition, condition, description, ...) ASDisplayNodeCAssert((!(shouldTestCondition) || (condition)), nil, (description), ##__VA_ARGS__)

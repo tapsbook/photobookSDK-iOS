@@ -585,6 +585,7 @@
 				TargetAttributes = {
 					C183CB77195D427E005B68F1 = {
 						DevelopmentTeam = QRRQ9XR4VE;
+						ProvisioningStyle = Automatic;
 					};
 					C183CB92195D427E005B68F1 = {
 						TestTargetID = C183CB77195D427E005B68F1;
@@ -991,6 +992,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QRRQ9XR4VE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -998,7 +1001,6 @@
 					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
 					"$(PROJECT_DIR)/SDKVendor/AliSDK",
 					"$(PROJECT_DIR)/SDKVendor",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1012,13 +1014,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
-					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/GAI",
-					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
@@ -1037,6 +1032,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QRRQ9XR4VE;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1044,7 +1041,6 @@
 					"$(PROJECT_DIR)/SDKVendor/WalgreesQPSDK",
 					"$(PROJECT_DIR)/SDKVendor/AliSDK",
 					"$(PROJECT_DIR)/SDKVendor",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1058,13 +1054,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/GAI",
-					"$(PROJECT_DIR)/SDKVendor/TBSDKExternal/QiniuSDK",
-					"$(PROJECT_DIR)/SDKVendor/BlocksKit",
-					"$(PROJECT_DIR)/SDKVendor/GAI",
-					"$(PROJECT_DIR)/SDKVendor/QiniuSDK",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";

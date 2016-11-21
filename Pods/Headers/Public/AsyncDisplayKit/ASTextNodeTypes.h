@@ -1,1 +1,1 @@
-../../../AsyncDisplayKit/AsyncDisplayKit/Details/ASTextNodeTypes.h
+../../../AsyncDisplayKit/AsyncDisplayKit/TextKit/ASTextNodeTypes.h

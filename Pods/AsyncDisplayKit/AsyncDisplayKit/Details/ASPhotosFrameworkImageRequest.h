@@ -3,9 +3,13 @@
 //  AsyncDisplayKit
 //
 //  Created by Adlai Holler on 9/25/15.
-//  Copyright © 2015 Facebook. All rights reserved.
 //
-
+//  Copyright (c) 2014-present, Facebook, Inc.  All rights reserved.
+//  This source code is licensed under the BSD-style license found in the
+//  LICENSE file in the root directory of this source tree. An additional grant
+//  of patent rights can be found in the PATENTS file in the same directory.
+//
+#if TARGET_OS_IOS
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 
@@ -64,3 +68,4 @@ extern NSString *const ASPhotosURLScheme;
 @end
 
 // NS_ASSUME_NONNULL_END
+#endif
