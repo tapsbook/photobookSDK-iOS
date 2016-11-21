@@ -284,67 +284,9 @@ iOS 8.0 or higher
 	
 		- (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages completionBlock:(void (^)(NSArray *newImages))completionBlock 
 		
-	注意这个界面中你需要提示用户那些照片一经以前就被选中，existingTBImages 是一个TBImages数组，当用户结束选择后，你需要重复上面的TBImage初始化的过程。
+	注意这个界面中你需要标注出用户此前就被选中那些照片，existingTBImages 是一个TBImages数组，当用户结束选择后，你需要重复上面的TBImage初始化的过程。
 		
 
 	
-## Usage (Checkout/Store)
-
-1. Configuration; In your class that adopts `TBSDKConfiguratorProtocol`, in `basicSettings` method, set `kTBSendOrderInfoToHostingApp` `kTBSendAlbumJSONDictToHostingApp`: `@YES`:
-
-
-		kTBCheckoutCustomization : @{                
-		        kTBSendAlbumJSONDictToHostingApp : @YES,  // (Optional) YES when you want to generate page image on your own.
-		        kTBGeneratePageImagesInDebugMode : @NO,  // (Optional) Helps you debug when kTBSendAlbumJSONDictToHostingApp is YES
-		        kTBSendOrderInfoToHostingApp     : @YES,  // (Optional) YES when you want to use your checkout method
-		        },
-		};
-		
-2. Implement `TBSDKAlbumManager` delegate method:
-
-		- (void)albumManager:(TBSDKAlbumManager *)albumManager printAndCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:(UIViewController *)viewController {
-		    CheckoutViewController *vc = [CheckoutViewController new];
-		    vc.albumInfo = infoDict;
-		    [viewController presentViewController:vc animated:YES completion:nil];
-		}
-	
-	The `CheckoutViewController`, is a custom UIViewController where you can have your own checkout flow
-	The `infoDict` contains album info
-
-
-
-
-
-7. Handle checkout (If you return YES in `userExternalCheckout`):
-
-		- (void)albumManager:(TBSDKAlbumManager *)albumManager didCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withCheckoutInfo:(NSDictionary *)checkoutInfo {
-		    [albumManager popAllTBSDKViewControllersAnimated:YES];
-		    
-		    NSInteger numberOfPages = [checkoutInfo[kTBSDKCheckoutInfoNumberOfPages] integerValue];
-		    NSInteger productID = [checkoutInfo[kTBSDKCheckoutInfoProductID] integerValue]; // The product ID tells what kind of product it is.
-		    
-		    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		        for (NSUInteger i = 0; i < numberOfPages; i++) {
-		            @autoreleasepool {
-		            	// identifierAndImage is an array @[identifier, image]
-		                NSArray *identifierAndImage = [albumManager identifierAndImageForPageOfSDKAlbum:sdkAlbum pageIndex:i];
-		                
-		                
-		                // Upload page images and show your own order window
-		                [image rpWriteToFile:[NSString stringWithFormat:@"/Users/ultragtx/Desktop/print_%@_%d.jpg", sdkAlbum.title, i] withCompressQuality:1];
-		            }
-		        }
-		    });
-		}
-		
-	The print info dictionary contains the following entities:
-	
-	* `kTBSDKCheckoutInfoNumberOfPages`, number of pages that the album contains
-	* `kTBSDKPrintInfoProductID`, the product ID, you can know what kind of cover the album use
-	
-	</br>
-	You can get the identifier and image(UIImage *) by calling `[albumManager identifierAndImageForPageOfSDKAlbum:sdkAlbum pageIndex:i]`, here `identifier` is a NSString that can tell you wether the page is modified or not, if the `identifier` is different from the one you get previous, then the page has benn updated and you will need to re-upload the page. If the two identifiers are same, you don't need to upload the same page twice.
-	
-	**Note**: You should limit the number of page images being loaded (by calling `identifierAndImageForPageOfSDKAlbum:pageIndex:`) at the same time to avoid using too much memory.
-
+### 关于订单提交和支付，详情参见关于它的专文
 
