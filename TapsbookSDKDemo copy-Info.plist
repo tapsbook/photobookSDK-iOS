@@ -97,6 +97,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Rating photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TapsbookSDK.bundle/Didona.ttf</string>
