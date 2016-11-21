@@ -41,44 +41,20 @@
 		
 2. 当使用上面的开关后，当用户点击下订单时，SDK即可生成每一页的JPG并上传至Tapsbook服务器，完成后返回一个未支付的订单号。
 
-第四步：App提供页面获取用户地址和支付信息，将之传到App自己的服务器并调用第三方支付工具完成支付
+第四步：使用App页面获取用户地址和支付信息，利用App或其服务器调用第三方支付工具完成支付
 
-1. 上一步成功后即可调用app的订单条，实现 `TBSDKAlbumManager` 代理方法来调用您自己的订单提交页面。
+实现 `TBSDKAlbumManager` 代理方法来调用您自己的订单提交页面。
 
-		- (void)albumManager:(TBSDKAlbumManager *)albumManager printAndCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:(UIViewController *)viewController {
-		    CheckoutViewController *vc = [CheckoutViewController new];
-		    vc.albumInfo = infoDict;
-		    [viewController presentViewController:vc animated:YES completion:nil];
+		- (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withOrderNumber:(NSString *)orderNumber viewControllerToPresentOn:(UIViewController *)viewController {
+
+    		//show your checkout view now
+    		//please save the orderNumber
+		CheckoutViewController *vc = [CheckoutViewController new];
+	    	[viewController presentViewController:vc animated:YES completion:nil];
 		}
 	
-	`CheckoutViewController`, 是你的app的订单提交界面 这个订单界面需要整合第三方支付平台工具，比如微信或支付宝，导引用户最终完成订单的支付. 当用户完成支付后，即可完成app下单用户界面层的工作。
-  
-  `infoDict` 包含了 album info 和订单号。订单号是一个以T开头的数字，你在最后一步确认订单时，需要用到这个订单号来关联到订单。 
-
-		- (void)albumManager:(TBSDKAlbumManager *)albumManager didCheckoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withCheckoutInfo:(NSDictionary *)checkoutInfo {
-		    [albumManager popAllTBSDKViewControllersAnimated:YES];
-		    
-		    NSInteger numberOfPages = [checkoutInfo[kTBSDKCheckoutInfoNumberOfPages] integerValue];
-		    NSInteger productID = [checkoutInfo[kTBSDKCheckoutInfoProductID] integerValue]; // The product ID tells what kind of product it is.
-		    
-		    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		        for (NSUInteger i = 0; i < numberOfPages; i++) {
-		            @autoreleasepool {
-		            	// identifierAndImage is an array @[identifier, image]
-		                NSArray *identifierAndImage = [albumManager identifierAndImageForPageOfSDKAlbum:sdkAlbum pageIndex:i];
-		                
-		                
-		                // Upload page images and show your own order window
-		                [image rpWriteToFile:[NSString stringWithFormat:@"/Users/ultragtx/Desktop/print_%@_%d.jpg", sdkAlbum.title, i] withCompressQuality:1];
-		            }
-		        }
-		    });
-		}
-		
-	print_info 字典里包含了如下信息。:
-	
-	* `kTBSDKCheckoutInfoNumberOfPages`, number of pages that the album contains
-	* `kTBSDKPrintInfoProductID`, the product ID, you can know what kind of cover the album use
+	* `CheckoutViewController`, 是你的app的订单提交界面 这个订单界面需要整合第三方支付平台工具，比如微信或支付宝，导引用户最终完成订单的支付. 当用户完成支付后，即可完成app下单用户界面层的工作。
+	* `orderNumber`, 这是第三步完成后Tapsbook后台服务器上保存的未支付订单信息。当用户在app中完成支付后，你需要发送一个关联到这个订单的确认API
 	
 第五步：当App或其后台确认订单支付完成后，这时您的产品后台最好跟用户发出订单确认的短信或者邮件告诉订单已经确认。同时提交订单确认API告诉Tapsbook生产后台此订单已经确认，并且提供追加信息（包含客户地址）。 tapsbook后台获得这个信息后，将会从您在我们的后台财务账户上扣款后，即可组织生产。
 
