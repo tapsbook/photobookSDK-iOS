@@ -11,6 +11,7 @@
 #import "PhotoListViewController.h"
 #import "TBPSSizeUtil.h"
 #import "MBProgressHUD.h"
+#import "CheckoutViewController.h"
 
 #import "UIImage+Save.h"
 #import <TapsbookSDK/TapsbookSDK.h>
@@ -316,44 +317,40 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
     NSLog(@"Book data has been saved to the DB, now it is safe to do more with the album object");
 }
 
+- (void)albumManager:(TBSDKAlbumManager *)albumManager cancelPreloadingXXLSizeImages:(NSArray *)tbImages ofSDKAlbum:(TBSDKAlbum *)sdkAlbum {
+    
+}
+
+- (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withOrderNumber:(NSString *)orderNumber viewControllerToPresentOn:(UIViewController *)viewController {
+    
+    NSLog(@"preorder is compelte with an order number:%@", orderNumber);
+    
+    //show your checkout view now
+    CheckoutViewController *vc = [CheckoutViewController new];
+    [viewController presentViewController:vc animated:YES completion:nil];
+}
+
 #pragma mark -
 
 - (void)preloadImageWithEnumerator:(NSEnumerator *)enumerator currentIdx:(NSInteger)currentIdx total:(NSInteger)total progressBlock:(void (^)(NSInteger, NSInteger, float))progressBlock completionBlock:(void (^)(NSInteger, NSInteger, NSError *))completionBlock {
     TBImage *tbImage = [enumerator nextObject];
     
     if (tbImage) {
-        NSURL *assetsURL = [NSURL URLWithString:tbImage.identifier];
-        dispatch_queue_t diskIOQueue = self.diskIOQueue;
+        NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
+        NSString *xxlPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_l", tbImage.identifier]];
         
-        
-//        @weakify(self);
-//        [self.assetsLibrary assetForURL:assetsURL resultBlock:^(ALAsset *asset) {
-//            dispatch_async(diskIOQueue, ^{
-//                @autoreleasepool {
-//                    ALAssetRepresentation *rep = [asset defaultRepresentation];
-//                    NSString *name = [rep photoId];
-//                    
-//                    CGImageRef imgRef = [rep fullResolutionImage];
-//                    
-//                    NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
-//                    NSString *xxlPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_xxl", name]];
-//                    
-//                    UIImage *image = [UIImage imageWithCGImage:imgRef scale:1 orientation:(UIImageOrientation)rep.orientation];
-//                    [image writeToFile:xxlPath withCompressQuality:1];
-//                    
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        @strongify(self);
-//                        [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
-//                        
-//                        progressBlock(currentIdx, total, 1);
-//                        
-//                        [self preloadImageWithEnumerator:enumerator currentIdx:currentIdx + 1 total:total progressBlock:progressBlock completionBlock:completionBlock];
-//                    });
-//                }
-//            });
-//        } failureBlock:^(NSError *error) {
-//            completionBlock(currentIdx, total, error);
-//        }];
+        // Cache image to disk
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:xxlPath]) {
+            NSLog(@"I'm lazy, using L size as XXL images");
+            [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
+            progressBlock(currentIdx, total, 1);
+            
+            [self preloadImageWithEnumerator:enumerator currentIdx:currentIdx + 1 total:total progressBlock:progressBlock completionBlock:completionBlock];
+        }
+        else {
+            NSLog(@"cannot find L size images");
+        }
     }
     else {
         completionBlock(currentIdx, total, nil);

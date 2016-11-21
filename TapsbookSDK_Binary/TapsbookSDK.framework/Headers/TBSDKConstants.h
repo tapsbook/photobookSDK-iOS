@@ -102,6 +102,7 @@ extern NSString * const kTBBehaviorCustomization;
 // 1
 extern NSString * const kTBRemindUserToOrderWhenClosingBooks;
 extern NSString * const kTBEnableAddingText;
+extern NSString * const kTBEnablePhotoTray;
 extern NSString * const kTBShowOptionsOfBuildingPagesManuallyOrAutomatically;
 extern NSString * const kTBUseEmptyTemplateForPageWithNoContent;
 extern NSString * const kTBLoadProductFromServerWhenPreparingLocalAlbum;

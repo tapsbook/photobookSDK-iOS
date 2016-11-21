@@ -26,9 +26,16 @@ extern NSString * const kTBUseExternalCheckout;
                                         @(TBProductType_Card) : @YES,
                                         },
                                 
-                                // Only pick one of the following
-                                kTBSendAlbumJSONDictToHostingApp : @YES,
-                                kTBSendOrderInfoToHostingApp : @YES,
+                                // Only set YES to ONE of the following
+                                // option 1, generate album pages and use your own checkout UI
+                                kTBUseExternalCheckout : @YES,
+                                
+                                // option 2, generate album JSON for 1 book
+                                kTBSendAlbumKeyToHostingAppWhenCheckout : @NO,
+                                
+                                // option 3, generate album JSON for all books in a shopping cart
+                                kTBSendAlbumJSONDictToHostingApp : @NO,
+                                kTBSendOrderInfoToHostingApp : @NO,
                                 };
     
     [settings setObject:checkout forKey:kTBCheckoutCustomization];
