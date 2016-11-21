@@ -53,8 +53,8 @@
 	    	[viewController presentViewController:vc animated:YES completion:nil];
 		}
 	
-	* `CheckoutViewController`, 是你的app的订单提交界面 这个订单界面需要整合第三方支付平台工具，比如微信或支付宝，导引用户最终完成订单的支付. 当用户完成支付后，即可完成app下单用户界面层的工作。
-	* `orderNumber`, 这是第三步完成后Tapsbook后台服务器上保存的未支付订单信息。当用户在app中完成支付后，你需要发送一个关联到这个订单的确认API
+ - `CheckoutViewController`, 是你的app的订单提交界面 这个订单界面需要整合第三方支付平台工具，比如微信或支付宝，导引用户最终完成订单的支付. 当用户完成支付后，即可完成app下单用户界面层的工作。
+ - `orderNumber`, 这是第三步完成后Tapsbook后台服务器上保存的未支付订单信息。当用户在app中完成支付后，你需要发送一个关联到这个订单的确认API
 	
 第五步：当App或其后台确认订单支付完成后，这时您的产品后台最好跟用户发出订单确认的短信或者邮件告诉订单已经确认。同时提交订单确认API告诉Tapsbook生产后台此订单已经确认，并且提供追加信息（包含客户地址）。 tapsbook后台获得这个信息后，将会从您在我们的后台财务账户上扣款后，即可组织生产。
 
