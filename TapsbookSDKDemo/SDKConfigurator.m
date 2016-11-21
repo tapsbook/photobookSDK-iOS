@@ -118,7 +118,11 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                                @(TBProductType_Card) : @NO,
                                                },
 //                                       kTBShowPhotoMenuByDefault:@YES,
+                                       
                                        kTBUseEmptyTemplateForPageWithNoContent : @NO,   // (Optional)
+                                       
+                                       kTBRequireBookTitle: @NO,
+                                       
                                        kTBLoadProductFromServerWhenPreparingLocalAlbum : @(NO), // (Optional)
                                        },
                                
