@@ -28,8 +28,7 @@ This article focuses mainly on the first two options.
 ### Hybrid of App UI and Tapsbook backend
 
 See the life cycle view of this option。
-
-![life_cycle](http://7xsnph.com1.z0.glb.clouddn.com/checkout-option2-cn.png)
+![life_cycle](http://7xsnph.com1.z0.glb.clouddn.com/tapsbook-checkout.png)
 
 1. App offers product selection for user to pick the product type
 2. SDK loads product template and customize the editor
@@ -40,7 +39,7 @@ See the life cycle view of this option。
 
 Now let's look at step 3-5 in more details.
 
-3. User completes the work and save the order to server，including saving the book page edit result and getting a pre-order number
+Step 3. User completes the work and save the order to server，including saving the book page edit result and getting a pre-order number
 
 First, update SDKConfigurator to use External Checkout
 
@@ -48,10 +47,11 @@ First, update SDKConfigurator to use External Checkout
 		        kTBUseExternalCheckout : @YES
 		};
 		
-Once enabled, when user click Order button on the SDK editor UI, SDK will start rendering print quality image as JPGs for each book pages, then 
-uploads these JPGs to Tapsbook server, once completed, this editing is saved on the server and having a pre-order number for pending confirmation.
+Once enabled, when user click Order button on the SDK editor UI, SDK will start rendering print quality image as JPGs for each book pages, then uploads these JPGs to Tapsbook server, once completed, this editing is saved on the server and having a pre-order number for pending confirmation. The screen below shows the uploading progress view
 
-4. App presents checkout UI to collect shipping address and payments, here you presents your UI wizard to walk through the user for the checkout process
+![life_cycle](http://7xsnph.com1.z0.glb.clouddn.com/tapsbook-upload.png)
+
+Step 4. App presents checkout UI to collect shipping address and payments, here you presents your UI wizard to walk through the user for the checkout process
 
 Implement `TBSDKAlbumManager` delegate method to launch your checkout flow. This method will be invoked automatically as a callback after the product data is saved at the server
 
@@ -66,9 +66,8 @@ Implement `TBSDKAlbumManager` delegate method to launch your checkout flow. This
  - `CheckoutViewController`, is your checkout UI, a typical checkout flow includes a form collecting shipping address and payment options, for app with existing eCommerce options, you can just reuse your existing views. Typically you will use payment gateway such as Stripe or Paypal to collect payment.
  - `orderNumber`, is a pre-order number that you can later refer to in order to confirm in the next step
 
-5. Confirm the order is complete after payment is received. After payment is cleared, update the order with address and 
-confirm the order release for production. Once the order is confirmed, we can send notification to you or your customer via a webhook or email.
-Order not confirmed within 3 days will be deleted.
+Step 5. Confirm the order is complete after payment is received. After payment is cleared, update the order with address and 
+confirm the order release for production. Order not confirmed within 3 days will be deleted.
 
 In order to confirm the order, you need to POST to this API
 
@@ -101,7 +100,7 @@ with the following data, notice you need to provide the API_KEY and order's preo
 
 ````
 
-### Post order notifications
+## Post order notifications
 
 Once the order is confirmed at the Tapsbook manufacturing system:
 
