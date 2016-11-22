@@ -58,9 +58,11 @@
 	
 第五步：当App或其后台确认订单支付完成后，这时您的产品后台最好跟用户发出订单确认的短信或者邮件告诉订单已经确认。同时提交订单确认API告诉Tapsbook生产后台此订单已经确认，并且提供追加信息（包含客户地址）。 tapsbook后台获得这个信息后，将会从您在我们的后台财务账户上扣款后，即可组织生产。
 
-这个API的格式为
+这个API的格式为 POST 
 
-POST http://dashboard.shiyi.co/api/v1/orders
+API 测试服务器 http://search.tapsbook.com/api/v1/orders
+
+API 生产服务器 https://dashboard.shiyi.co/api/v1/orders
 
 如下所示API需要包含的JSON数据范本，注意到这里的必须替换的三个变量
 
