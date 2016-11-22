@@ -62,28 +62,35 @@
 
 POST http://dashboard.shiyi.co/api/v1/orders
 
-API 包含的JSON数据范本，注意到这里的订单号必须与上面的第三步获得订单号匹配。
+如下所示API需要包含的JSON数据范本，注意到这里的必须替换的三个变量
+
+- `YOUR_ORDER_NUMBER`必须与上面的第三步获得订单号匹配。
+- `YOUR_APP_KEY`必须使用这个应用所对应的APP_key。
+- 'address' 里包含的客户收件地址信息，保留缺省值state_id=0，country_id=48, 不需替换
+
+注意`order_type` 和 ｀payment_method` 保留缺省值 'confirm'，'MERCHANT_ACCOUNT' 不需替换
 
 ````
 {
-  "api_key": "YOUR_KEY",
+  "api_key": "YOUR_APP_KEY",
+  "order_number": "YOUR_ORDER_NUMBER",
   "order_type": "CONFIRM",
-  "order_number": "订单号",
+  "payment_method" : "MERCHANT_ACCOUNT",
   "customer": {
     "address": {
       "phone": "寄送联系电话",
       "state": "寄送省",
       "city": "寄送城市",
       "address1": "地址第一行",
-      "address2": "地址第一行"
+      "address2": "地址第一行",
       "zipcode": "邮编",
       "firstname": "",
       "lastname": "客户名字",
       "email": "客户邮件",
       "state_id": "0",
-      "country_id": "48",
+      "country_id": "48"
     }
-  },
+  }
 }
 
 ````
