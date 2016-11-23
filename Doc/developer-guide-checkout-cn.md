@@ -39,7 +39,9 @@
 		        kTBUseExternalCheckout : @YES
 		};
 		
-2. 当使用上面的开关后，当用户点击下订单时，SDK即可生成每一页的JPG并上传至Tapsbook服务器，完成后返回一个未支付的订单号。
+2. 当使用上面的开关后，当用户点击下订单时，SDK即可生成每一页的JPG并上传至Tapsbook服务器，此时SDK会弹出如下的上传界面，完成上传后返回一个未支付的订单号。
+
+![life_cycle](http://7xsnph.com1.z0.glb.clouddn.com/tapsbook-upload.png)
 
 第四步：使用App页面获取用户地址和支付信息，利用App或其服务器调用第三方支付工具完成支付
 
