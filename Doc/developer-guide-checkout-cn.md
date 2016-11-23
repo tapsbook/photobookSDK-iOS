@@ -19,6 +19,7 @@
 ### 全部使用Tapsbook电商后台
 
 在这种模式下，整个系统的交互周期如下所示。
+
 ![life_cycle](http://7xsnph.com1.z0.glb.clouddn.com/checkout-option1.png)
 
 1. app 提供用户产品选择界面，依据用户的选择，从生产服务器获得当前所选产品（sku）数据和模版
