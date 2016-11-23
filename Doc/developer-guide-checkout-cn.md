@@ -29,6 +29,7 @@
 5. 当App或其后台确认订单支付完成后，SDK负责生成可供生产的JPG并上传至Tapsbook服务器完成提交
 
 为了使用这种支付整合方式，
+
 1. 将`kTBCheckoutCustomization`下面所有选项都被设为NO，或者确认移除下面所有选项。
 2. 设定SDK后台服务器所在的国家，如果服务于中国地区用户，请务必选用`TBSDKRegion_China`，否则支付选项将无法使用支付宝
      kTBSupportedRegions : @[   
