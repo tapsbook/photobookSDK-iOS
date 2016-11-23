@@ -30,7 +30,8 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        
                                        kTBSupportedRegions : @[               // (Optional) TBSDKRegions, customize the SDK to support multiple ship to regions (countries)
                                                // TBSDKRegions
-                                               @(TBSDKRegion_UnitedStates),
+                                               //@(TBSDKRegion_UnitedStates),
+                                               @(TBSDKRegion_China),
                                                ],
                                        
                                        kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server
