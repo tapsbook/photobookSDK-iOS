@@ -39,7 +39,7 @@ See the life cycle view of this option。
 
 Now let's look at step 3-5 in more details.
 
-Step 3. User completes the work and save the order to server，including saving the book page edit result and getting a pre-order number
+Step 3. After user completes the editing and click the "order" button, the SDK will save the order to server，and then execute step 4 via the callback in step 4.
 
 First, update SDKConfigurator to use External Checkout
 
@@ -69,25 +69,27 @@ Implement `TBSDKAlbumManager` delegate method to launch your checkout flow. This
 Step 5. Confirm the order is complete after payment is received. After payment is cleared, update the order with address and 
 confirm the order release for production. Order not confirmed within 3 days will be deleted.
 
-In order to confirm the order, you need to POST to this API
+In order to confirm the order, you need to POST the following JSON data to the server
 
-     POST http://dashboard.shiyi.co/api/v1/orders
+Test Server: https://search.tapsbook.com/api/v1/orders
 
-with the following data, notice you need to provide the API_KEY and order's preorder number as obtained from step 4 above.
+Prod Server: https://dashboard.tapsbook.com/api/v1/orders
 
+notice you need to provide the API_KEY and order's PREORDER_NUMBER as obtained from step 4 above.
 
 ````
 {
   "api_key": "YOUR_KEY",
   "order_type": "CONFIRM",
   "order_number": "PREORDER_NUMBER",
+  "payment_method" : "MERCHANT_ACCOUNT",  
   "customer": {
     "address": {
       "phone": "PHONE",
       "state": "STATE",
       "city": "CITY",
       "address1": "ADDRESS",
-      "address2": "ADDRESS line 2"
+      "address2": "ADDRESS line 2",
       "zipcode": "ZIP",
       "firstname": "",
       "lastname": "FULL NAME",
@@ -95,7 +97,7 @@ with the following data, notice you need to provide the API_KEY and order's preo
       "state_id": "0",
       "country_id": "48",
     }
-  },
+  }
 }
 
 ````
