@@ -2,6 +2,12 @@ platform :ios, 8.0
 
 def available_pods
 
+#disable for China build
+#pod 'AFAmazonS3Manager', '~> 3.2'
+pod 'AFNetworking', '~> 3.0'
+pod 'HappyDNS'
+pod 'Qiniu', '7.1'
+
 pod 'AGGeometryKit', '~> 1.2'
 pod 'SDWebImage', '~> 3.7'
 pod 'SlackTextViewController', '~> 1.7'
@@ -22,15 +28,12 @@ pod 'Reachability', '~> 3.2'
 pod 'BlocksKit', '~> 2.2'
 pod 'TTTAttributedLabel', '~> 1.13'
 pod 'FXBlurView', '~> 1.6'
-pod "AFNetworking", "~> 2.0"
-pod 'Qiniu', '~> 7.0'
 pod 'MZFormSheetController', '~> 3.1'
 pod 'MZFormSheetPresentationController', '~> 2.1'
 pod 'FMDB', '~> 2.5'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'TTTRandomizedEnumerator', '~> 0.0'
 pod 'libextobjc', '~>0.4.1'
-pod 'AFAmazonS3Manager', '~> 3.2'
 pod 'Masonry', '~> 0.6'
 pod 'UICKeyChainStore', '~> 2.1'
 pod 'FBSDKCoreKit'
