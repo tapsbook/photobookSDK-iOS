@@ -42,10 +42,10 @@ pod 'objective-zip'
 pod 'CocoaLumberjack', '~> 2.2'
 pod 'UICKeyChainStore', '~> 2.1'
 
-#Payment integration
+#Payment integration (Alipay, Wechat supported via their framework)
 pod 'Stripe', '~> 6.0'
 
-#Social share (wechat is outside Pod)
+#Social share (Wechat supported via their framework)
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
