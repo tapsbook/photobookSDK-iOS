@@ -29,6 +29,9 @@ PODS:
     - AsyncDisplayKit/Core
     - PINCache (= 3.0.1-beta)
     - PINRemoteImage/iOS (= 3.0.0-beta.3)
+  - AWSCore (2.4.12)
+  - AWSS3 (2.4.12):
+    - AWSCore (= 2.4.12)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -140,7 +143,6 @@ PODS:
   - LMDropdownView (1.0.3)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
-  - MOBFoundation (2.0.1)
   - MZAppearance (1.1.6)
   - MZFormSheetController (3.1.2):
     - MZAppearance
@@ -164,9 +166,6 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
-  - ShareSDK3 (3.3.2):
-    - ShareSDK3/ShareSDK (= 3.3.2)
-  - ShareSDK3/ShareSDK (3.3.2)
   - SlackTextViewController (1.7.2)
   - smc-runtime (6.3.0)
   - Stripe (6.0.1):
@@ -183,6 +182,7 @@ DEPENDENCIES:
   - AGGeometryKit (~> 1.2)
   - AHEasing (~> 1.2)
   - AsyncDisplayKit (~> 1.9.92)
+  - AWSS3
   - BlocksKit (~> 2.2)
   - CocoaLumberjack (~> 2.2)
   - DZNSegmentedControl (~> 1.3)
@@ -201,7 +201,6 @@ DEPENDENCIES:
   - LMDropdownView
   - Masonry (~> 0.6)
   - MBProgressHUD (~> 0.9)
-  - MOBFoundation
   - MZFormSheetController (~> 3.1)
   - MZFormSheetPresentationController (~> 2.1)
   - objective-zip
@@ -210,7 +209,6 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - SCLAlertView-Objective-C (~> 0.7)
   - SDWebImage (~> 3.7)
-  - ShareSDK3
   - SlackTextViewController (~> 1.7)
   - smc-runtime (~> 6.3)
   - Stripe (~> 6.0)
@@ -224,6 +222,8 @@ SPEC CHECKSUMS:
   AGGeometryKit: 46e712c5a3958e23b98fef15e57df1149670f231
   AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
   AsyncDisplayKit: 49d94f5739669d666ff7cdc3430f43f0b2cfbeaf
+  AWSCore: 8ee5b1dc06a0fd562429fe7120113ca93cbfbca6
+  AWSS3: 7bb3e095a37ed8334a0b868bbca74ab574b37a4f
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
@@ -243,7 +243,6 @@ SPEC CHECKSUMS:
   LMDropdownView: f03fadfe65908c735580f63d04c47e6d7c5325f3
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MOBFoundation: a42168392e216fc56cbcbdfc3d5dcb3bbce5ef87
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
   MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
@@ -255,7 +254,6 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SCLAlertView-Objective-C: e36ab12dc1ec4ff6f932888083b21d71a3a1ad23
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  ShareSDK3: c76cb96eb38e079952b8157071486d945faa2df2
   SlackTextViewController: 1f4e8f68c156ef93de73fd422db2b8d5d5b0f4e7
   smc-runtime: 3941bb60d22acbec01ae9ca31d290a4fdcd513e1
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
@@ -264,6 +262,6 @@ SPEC CHECKSUMS:
   TTTRandomizedEnumerator: 27eefafc5d45b01465c7303d59b5b94c46dcf824
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-PODFILE CHECKSUM: 628347f2f0294e8f80e98a1b253806b6f5b85b2c
+PODFILE CHECKSUM: c5945ba35c64d2e7f3bec00710b5f7ab44245530
 
 COCOAPODS: 1.1.1

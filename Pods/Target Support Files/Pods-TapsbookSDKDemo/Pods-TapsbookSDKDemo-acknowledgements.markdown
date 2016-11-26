@@ -65,6 +65,16 @@ THE SOFTWARE.
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
+## AWSCore
+
+The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License.
+
+
+## AWSS3
+
+The AWS Mobile SDK for iOS is generally licensed under the Apache 2.0 License, with the Amazon Cognito Identity Provider and Amazon Cognito Sync subcomponents being licensed under the Amazon Software License.
+
+
 ## AsyncDisplayKit
 
 BSD License
@@ -476,10 +486,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-## MOBFoundation
-
-Copyright © 2012-2015 mob
-
 ## MZAppearance
 
 The MIT License (MIT)
@@ -880,10 +886,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-
-## ShareSDK3
-
-Copyright © 2012-2015 mob
 
 ## SlackTextViewController
 
