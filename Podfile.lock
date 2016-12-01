@@ -140,7 +140,6 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - LMDropdownView (1.0.3)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
   - MZAppearance (1.1.6)
@@ -194,11 +193,9 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8)
   - FXBlurView (~> 1.6)
   - FXLabel (~> 1.5)
-  - HappyDNS
   - KVOController (~> 1.0)
   - leveldb
   - libextobjc (~> 0.4.1)
-  - LMDropdownView
   - Masonry (~> 0.6)
   - MBProgressHUD (~> 0.9)
   - MZFormSheetController (~> 3.1)
@@ -240,7 +237,6 @@ SPEC CHECKSUMS:
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  LMDropdownView: f03fadfe65908c735580f63d04c47e6d7c5325f3
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
@@ -262,6 +258,6 @@ SPEC CHECKSUMS:
   TTTRandomizedEnumerator: 27eefafc5d45b01465c7303d59b5b94c46dcf824
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-PODFILE CHECKSUM: c5945ba35c64d2e7f3bec00710b5f7ab44245530
+PODFILE CHECKSUM: c950bb3ec7c3c594f07d0dc3f22c34649e7337c7
 
 COCOAPODS: 1.1.1

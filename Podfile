@@ -4,7 +4,6 @@ def available_pods
 
 #Network storage library
 pod 'AFNetworking', '~> 3.0'
-pod 'HappyDNS'
 pod 'Qiniu', '7.1'
 pod 'AWSS3'
 pod 'Reachability', '~> 3.2'
@@ -20,7 +19,6 @@ pod 'FormatterKit', '~> 1.8'
 pod 'FXBlurView', '~> 1.6'
 pod 'FXLabel', '~> 1.5'
 pod 'KVOController', '~> 1.0'
-pod 'LMDropdownView'
 pod 'Masonry', '~> 0.6'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'MZFormSheetController', '~> 3.1'
