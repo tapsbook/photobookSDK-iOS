@@ -64,6 +64,8 @@ extern NSString * const kTBAppKey;
 extern NSString * const kTBAppSecret;
 extern NSString * const kTBSupportedRegions;
 extern NSString * const kTBMerchantKeys;
+extern NSString * const kTBAppURLScheme;
+
 // 2
 extern NSString * const kTBMerchantKeyDefault;
 // 1

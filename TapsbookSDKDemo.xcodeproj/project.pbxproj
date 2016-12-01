@@ -209,7 +209,6 @@
 		C183CE93195D6D66005B68F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C18AEDA9195DAED0005D2609 /* TapsbookSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TapsbookSDK.xcodeproj; path = TapsbookSDK/TapsbookSDK.xcodeproj; sourceTree = "<group>"; };
 		C18AEE30195DAEDF005D2609 /* TapsbookSDKDemo_copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapsbookSDKDemo_copy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C18AEE31195DAEDF005D2609 /* TapsbookSDKDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TapsbookSDKDemo copy-Info.plist"; path = "/Users/ultragtx/DevProjects/iOS/Projects/TapsbookSDKDemo/TapsbookSDKDemo copy-Info.plist"; sourceTree = "<absolute>"; };
 		C1C214471C31A2AE0036D700 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		C1CBE83C1C3418730028F23D /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
 		C1CBE83D1C3418730028F23D /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
@@ -350,7 +349,6 @@
 				C183CB9A195D427E005B68F1 /* TapsbookSDKDemoTests */,
 				C183CB7A195D427E005B68F1 /* Frameworks */,
 				C183CB79195D427E005B68F1 /* Products */,
-				C18AEE31195DAEDF005D2609 /* TapsbookSDKDemo copy-Info.plist */,
 				6468E2CE3D1D0869E81FA5E4 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -1011,7 +1009,7 @@
 					"$(PROJECT_DIR)/SDKVendor",
 				);
 				INFOPLIST_FILE = "TapsbookSDKDemo/TapsbookSDKDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",
@@ -1051,7 +1049,7 @@
 					"$(PROJECT_DIR)/SDKVendor",
 				);
 				INFOPLIST_FILE = "TapsbookSDKDemo/TapsbookSDKDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SDKVendor/WeChatSDK",

@@ -28,6 +28,7 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        kTBAppName : @"TBSDKDemo",             // (Required) Your app name, this name will show up in app UI messages
                                        kTBAppKey : @"",                       // (Required)
                                        kTBAppSecret : @"",                    // (Required)
+                                       kTBAppURLScheme : @"TBSDKDemo",
                                        
                                        kTBSupportedRegions : @[               // (Optional) TBSDKRegions, customize the SDK to support multiple ship to regions (countries)
                                                // TBSDKRegions

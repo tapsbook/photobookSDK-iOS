@@ -56,10 +56,19 @@
     return [self application:application handleOpenURL:url];
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString*, id> *)options {
+    
+    return [self application:application handleOpenURL:url];
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(nonnull NSURL *)url {
     BOOL result = NO;
     
+    //handles alipay payment callback
     result |= [[TBSDKAlbumManager sharedInstance] processOrderWithPaymentResult:url];
+    
     result |= [[TBWeChatManager sharedInstance] application:application openURL:url sourceApplication:nil annotation:nil];
     result |= [[TBFacebookManager sharedInstance] application:application openURL:url sourceApplication:nil annotation:nil];
     
