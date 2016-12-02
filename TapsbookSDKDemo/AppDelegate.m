@@ -21,13 +21,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"%@", NSHomeDirectory());
     
+    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfiguratorCustomCheckout"];
+
     [[TBWeChatManager sharedInstance] setupWithApplication:application options:launchOptions];
     [[TBFacebookManager sharedInstance] setupWithApplication:application options:launchOptions];
     
 //    [Fabric with:@[[Crashlytics class]]];
     
 //    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfigurator"];
-    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfiguratorCustomCheckout"];
     
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
         // iOS 8 Notifications

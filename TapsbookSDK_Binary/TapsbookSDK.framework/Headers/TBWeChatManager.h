@@ -10,6 +10,8 @@
 
 @interface TBWeChatManager : TBSocialManager
 
+- (BOOL)enabled;
+
 - (BOOL)launchWechatToHandlePayRequest:(NSString*)signedReq completionBlock:(TBSocialManagerCompletionBlock)completionBlock;
 
 @end
