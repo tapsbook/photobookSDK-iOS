@@ -121,8 +121,8 @@ static CGSize AssetGridThumbnailSize;
     NSString *buttonTitle = self.mode == PhotoListViewControllerMode_CreateAlbum ? @"Create" : @"Add";
     
 //    UIBarButtonItem *sdkLoginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKStoreLoginViewControllerButton:)];
-//    
-//    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
+    
+    UIBarButtonItem *sdkOrderListButton = [[UIBarButtonItem alloc] initWithTitle:@"Orders" style:UIBarButtonItemStylePlain target:self action:@selector(handleShowSDKOrderListViewControllerButton:)];
 
     UIBarButtonItem *bookListButton = [[UIBarButtonItem alloc] initWithTitle:@"Books" style:UIBarButtonItemStylePlain target:self action:@selector(handleBookListViewControllerButton:)];
 
@@ -139,7 +139,7 @@ static CGSize AssetGridThumbnailSize;
         self.navigationItem.rightBarButtonItems = @[
                                                     self.createAlbumOrAddPhotoButton,
                                                     bookListButton,
-                                                    //                                                sdkOrderListButton,
+                                                    sdkOrderListButton,
                                                     //                                                sdkLoginButton,
                                                     ];
         self.navigationItem.leftBarButtonItem = checkoutButtonItem;
@@ -152,6 +152,18 @@ static CGSize AssetGridThumbnailSize;
         }
     }
 
+    //sign in to SDK if you want to use the order tracking feature
+    if (![TBSDKAlbumManager sharedInstance].currentSDKUser){
+        [[TBSDKAlbumManager sharedInstance] signinSDKUser:@"123456789" fromApp:@"wechat" completionBlock:^(BOOL success, TBSDKUser *sdkUser, NSError *error) {
+            if(success){
+                NSLog(@"SDK user logged in. User name:%@", sdkUser.name);
+            }
+            else {
+                NSLog(@"SDK user cannot log in. Error:%@", error.localizedDescription);
+            }
+        }];
+    }
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -270,7 +282,8 @@ static CGSize AssetGridThumbnailSize;
     [alert addAction:bookAction];
     [alert addAction:canvasAction];
     
-    [self presentViewController:alert animated:YES completion:nil];}
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (void)createProductWithType:(TBProductType) productType {
     NSArray *selectedIndexes = [self.collectionView indexPathsForSelectedItems];
