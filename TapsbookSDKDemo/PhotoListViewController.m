@@ -258,7 +258,8 @@ static CGSize AssetGridThumbnailSize;
 }
 
 - (void)handleShowSDKOrderListViewControllerButton:(id)sender {
-    [[TBSDKAlbumManager sharedInstance] presentOrderListViewControllerOnViewController:self];
+    UIViewController * vc = [[TBSDKAlbumManager sharedInstance] orderListViewController];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)handleCreateAlbumOrAddPhotoButton:(id)sender {
