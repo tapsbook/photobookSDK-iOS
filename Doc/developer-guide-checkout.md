@@ -111,6 +111,50 @@ Once the order is confirmed at the Tapsbook manufacturing system:
 3. You can query the product status via our status tracking APIs
 
 
+## Other details
+The diagram below shows the steps the SDK perform for the usual checkout after the product is created and ready for checkout.
+ 
+ ![image](https://cloud.githubusercontent.com/assets/842068/12008562/dbd3d6de-ac11-11e5-8da3-4079a4b7d4e0.png)
+ 
+ Specifically, TBSDKAlbumManager performs the following steps
+ 
+  1. Load the full size TBImage and renders the high resolution book pages for print
+ 
+  2. Upload the rendered high resolution images to AWS S3 Cloud Storage
+ 
+  3. Present the built-in iOS native shopping cart view and checkout views to collect payment info. The product info and the payment info is then sent to Tapsbook server.
+ 
+  At the backend, the Tapsbook server uses the 3rd party payment handler (Stripe or Paypal) to charge the customer and credit the proceeds to your account. Once completed, the tapsbook server will send the order to its manufacturing partner for production.
+ 
+ The SDK renders the print ready high resolution page images according to the manufacturer printing standard (bleeding margins, spine width etc). During the rendering phase of each page, it loads the full size version of each image using an auto-released pool.  TBSDKAlbumManager will trigger its delegate method [TBSDKAlbumManagerDelegate albumManager:preloadXXLSizeImages:ofSDKAlbum: progressBlock:completionBlock] to ask your app to provide the full size images if they were not imported during the preparation phase.
+ 
+ The rendered images will be uploaded to Cloud Storage and run MD5 check to ensure its integrity. You will need to provide your own AWS S3 storage account for storing the rendered book page images. These images will be retrieved by the photo book manufacturer at the manufacturing time.
+ 
+ The Checkout workflow currently supports Stripe APIs for worldwide customer payment and Alipay APIs for China customer payment. The TBSDKAlbumManager does not store customer credit card number, and it only sends the data to tapsBook backend server for making the charge.  Once the charge is verified, the order will be submitted to manufacturers for production.
+ 
+ **To check out a book using your own eCommerce **
+
+ The diagram below shows the steps the SDK performs and the 3rd party checkout integration point. The red arrow highlights the steps you must implement.
+ 
+ ![image](https://cloud.githubusercontent.com/assets/842068/12011734/d2a4f4ee-aca7-11e5-95b5-e9777acc8c69.png)
+
+ Specifically, TBSDKAlbumManager performs the following steps
+ 
+ 1. Same as the SDK-checkout case, it loads the full size TBImage and renders the high resolution book pages for print and then uploads the pages to AWS S3. The order data is then sent to the Tapsbook server.
+ 
+ 2. Instead of showing SDK shopping cart view and checkout views to collect payment info, the SDK gives you a callback for you to present your own checkout views. The callback will includes an order number as the key to link to order data referred in step 1.
+ 
+ Your app must implement the following:
+ 
+ 1. Implement your own checkout views, including address collection, shopping cart view and payment information views. 
+ 
+ 2. Once you collect the data, send to your server to process the payment and compelte the order on your eCommerce server. Once completed the order and get the payment, your server should communicate to Tapsbook server to "claim" the order identified by the order number. 
+ 
+ 3. Once claimed, the server will reply with the full book data in JSON or XML for you to send to your manufacturing process. You should only claim an order after it is paid, as it will be billed to your merchant account for billing purpose.
+ 
+ To use this option, To use this option you must set YES to [TBSDKConfiguratorProtocol shouldSendJSONDictToHostingAppWhenCheckout] in your app's configuration, and then  implement the delegate [TBSDKAlbumManagerDelegate_Checkout_Enterprise albumManager:checkoutSDKAlbum:withInfoDict:viewControllerToPresentOn:] to present your checkout viewControllers.
+
+
 
 
 
