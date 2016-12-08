@@ -87,6 +87,8 @@
 		C1D6B85C1961A98A0077F14A /* SDKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */; };
 		C1EF9E771A4179F0009CDC3B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EF9E761A4179F0009CDC3B /* Photos.framework */; };
 		C1EF9E781A4179F8009CDC3B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EF9E761A4179F0009CDC3B /* Photos.framework */; };
+		D502DC9A1DF8D60F0035BB40 /* SDKConfiguratorChina.m in Sources */ = {isa = PBXBuildFile; fileRef = D502DC991DF8D60F0035BB40 /* SDKConfiguratorChina.m */; };
+		D502DC9D1DF8D7060035BB40 /* SDKConfiguratorChina.m in Sources */ = {isa = PBXBuildFile; fileRef = D502DC991DF8D60F0035BB40 /* SDKConfiguratorChina.m */; };
 		D52811011C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */; };
 		D5744A5D1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */; };
 		D5744A5E1C347DC8007C5191 /* TBPSSizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D5744A5C1C347DC8007C5191 /* TBPSSizeUtil.m */; };
@@ -219,6 +221,8 @@
 		C1D6B85A1961A98A0077F14A /* SDKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKConfigurator.h; sourceTree = "<group>"; };
 		C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKConfigurator.m; sourceTree = "<group>"; };
 		C1EF9E761A4179F0009CDC3B /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		D502DC981DF8D60F0035BB40 /* SDKConfiguratorChina.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKConfiguratorChina.h; sourceTree = "<group>"; };
+		D502DC991DF8D60F0035BB40 /* SDKConfiguratorChina.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKConfiguratorChina.m; sourceTree = "<group>"; };
 		D52810FF1C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKConfiguratorCustomCheckout.h; sourceTree = "<group>"; };
 		D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKConfiguratorCustomCheckout.m; sourceTree = "<group>"; };
 		D5744A5B1C347DC8007C5191 /* TBPSSizeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPSSizeUtil.h; sourceTree = "<group>"; };
@@ -403,6 +407,8 @@
 				C183CB8B195D427E005B68F1 /* AppDelegate.m */,
 				C1D6B85A1961A98A0077F14A /* SDKConfigurator.h */,
 				C1D6B85B1961A98A0077F14A /* SDKConfigurator.m */,
+				D502DC981DF8D60F0035BB40 /* SDKConfiguratorChina.h */,
+				D502DC991DF8D60F0035BB40 /* SDKConfiguratorChina.m */,
 				D52810FF1C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.h */,
 				D52811001C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m */,
 				C1CBE83C1C3418730028F23D /* CheckoutViewController.h */,
@@ -832,6 +838,7 @@
 				C183CBAD195D434D005B68F1 /* PhotoListViewController.m in Sources */,
 				D52811011C2F92F80075FF01 /* SDKConfiguratorCustomCheckout.m in Sources */,
 				C1CBE83F1C3418730028F23D /* CheckoutViewController.m in Sources */,
+				D502DC9A1DF8D60F0035BB40 /* SDKConfiguratorChina.m in Sources */,
 				C183CE8F195D69D4005B68F1 /* ALAssetRepresentation+Helper.m in Sources */,
 				C183CB8C195D427E005B68F1 /* AppDelegate.m in Sources */,
 				D5F7A34D1D7FB49600FC8460 /* PhotoBookListViewController.m in Sources */,
@@ -859,6 +866,7 @@
 				C172D66119E5959400DB9D8B /* PullableView.m in Sources */,
 				C18AEDCB195DAEDF005D2609 /* PhotoListViewController.m in Sources */,
 				C12FB8EA1C316755009C45A6 /* SDKConfiguratorCustomCheckout.m in Sources */,
+				D502DC9D1DF8D7060035BB40 /* SDKConfiguratorChina.m in Sources */,
 				C1CBE8401C3418730028F23D /* CheckoutViewController.m in Sources */,
 				C18AEDF9195DAEDF005D2609 /* ALAssetRepresentation+Helper.m in Sources */,
 				C18AEE07195DAEDF005D2609 /* AppDelegate.m in Sources */,

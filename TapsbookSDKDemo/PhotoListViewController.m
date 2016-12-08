@@ -383,6 +383,9 @@ static CGSize AssetGridThumbnailSize;
                     NSDictionary * albumOptionBase = @{
                                                        kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
                                                        kTBProductMinPageCount:     @"20",
+                                                       kTBBookHasInsideCover:      @"NO",
+                                                       kTBProductMaxPhotoCount:    @"40",
+                                                       kTBProductMinPhotoCount:    @"20",
                                                        kTBPreferredUIDirection:    @"LTR",   //set this RTL or LTR
                                                        kTBPreferredPageTypeSpread: @(YES)
                                                        };
