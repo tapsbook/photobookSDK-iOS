@@ -130,6 +130,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "Stripe/Stripe/Resources/Images/stp_card_visa@2x.png"
   install_resource "Stripe/Stripe/Resources/Images/stp_card_visa@3x.png"
   install_resource "Stripe/Stripe/Resources/Images"
+  install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "FormatterKit/Localizations/ca.lproj"
@@ -188,6 +189,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Stripe/Stripe/Resources/Images/stp_card_visa@2x.png"
   install_resource "Stripe/Stripe/Resources/Images/stp_card_visa@3x.png"
   install_resource "Stripe/Stripe/Resources/Images"
+  install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

@@ -12,6 +12,8 @@
 extern NSString * const kTBSendAlbumKeyToHostingAppWhenCheckout;
 extern NSString * const kTBUseExternalPrintProductInfo;
 extern NSString * const kTBUseExternalCheckout;
+extern NSString * const kTBSocialAlipayPartnerID;
+extern NSString * const kTBSocialAlipayAccountName;
 
 @implementation SDKConfiguratorChina
 
@@ -28,7 +30,7 @@ extern NSString * const kTBUseExternalCheckout;
                                     @(TBSDKRegion_China),
                                     ],
                             
-                            kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server
+                            kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from https://dashboard.shiyi.co, A string prefix "test_[ACTUAL_KEY]" will connect to the test server http://search.tapsbook.com
                                     // Region : merchantKey
                                     @(TBSDKRegion_China) : @"live_yaopai_c9781afbad6c80b0d6130e2edaacf3aa",
                                     kTBMerchantKeyDefault : @"live_yaopai_c9781afbad6c80b0d6130e2edaacf3aa",
@@ -58,8 +60,20 @@ extern NSString * const kTBUseExternalCheckout;
                                 kTBSendOrderInfoToHostingApp : @NO,
                                 };
     
+    // To support Wechat payment,
+    //   you must add your wechat APPID as urlscheme in order to make the wechat callback find your app
+    // To support Alipay payment,
+    //   you must make sure kTBAppURLScheme property was setup correctly.
+    NSDictionary * socialPayment = @{
+                                     kTBSocialAlipayPartnerID : @"123456",
+                                     kTBSocialAlipayAccountName: @"abc@abc.com",
+                                     kTBSocialWeixinAppID : @"wx123456",
+                                     kTBSocialWeixinAppSecret : @"123456",
+                                     };
+    
     [settings setObject:base forKey:kTBSDKBasics];
     [settings setObject:checkout forKey:kTBCheckoutCustomization];
+//    [settings setObject:socialPayment forKey:kTBSocial];
     
     return settings;
 }

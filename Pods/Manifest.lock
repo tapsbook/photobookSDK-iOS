@@ -174,6 +174,7 @@ PODS:
     - AHEasing
   - TTTAttributedLabel (1.13.4)
   - TTTRandomizedEnumerator (0.0.3)
+  - TZImagePickerController (1.7.1)
   - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
@@ -212,6 +213,7 @@ DEPENDENCIES:
   - TLLayoutTransitioning (~> 1.0)
   - TTTAttributedLabel (~> 1.13)
   - TTTRandomizedEnumerator (~> 0.0)
+  - TZImagePickerController (~> 1.7.1)
   - UICKeyChainStore (~> 2.1)
 
 SPEC CHECKSUMS:
@@ -256,8 +258,9 @@ SPEC CHECKSUMS:
   TLLayoutTransitioning: 286f546cc309ea9693dce2e3b1c4cab77f3308cf
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TTTRandomizedEnumerator: 27eefafc5d45b01465c7303d59b5b94c46dcf824
+  TZImagePickerController: cbfd57ba947263759b860f74132dd1bc33125afc
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-PODFILE CHECKSUM: c950bb3ec7c3c594f07d0dc3f22c34649e7337c7
+PODFILE CHECKSUM: 6c920b342ff88fa871de7bc782c9d6e5d6404775
 
 COCOAPODS: 1.1.1
