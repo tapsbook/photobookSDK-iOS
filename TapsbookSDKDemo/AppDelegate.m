@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PhotoListViewController.h"
+#import "DemoWelcomeViewController.h"
 #import <TapsbookSDK/TapsbookSDK.h>
 #import <AliSDK/AlipaySDK.framework/Headers/AlipaySDK.h>
 #import <Fabric/Fabric.h>
@@ -38,8 +39,8 @@
      
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    PhotoListViewController *photoListVC = [[PhotoListViewController alloc] initWithNibName:@"PhotoListViewController" bundle:nil];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoListVC];
+    DemoWelcomeViewController *homeVC = [[DemoWelcomeViewController alloc] initWithNibName:@"DemoWelcomeViewController" bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:homeVC];
     
     self.window.rootViewController = navController;
     
