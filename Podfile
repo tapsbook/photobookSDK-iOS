@@ -31,6 +31,7 @@ pod 'smc-runtime', '~> 6.3'
 pod 'TLLayoutTransitioning', '~> 1.0'
 pod 'TTTAttributedLabel', '~> 1.13'
 pod 'TTTRandomizedEnumerator', '~> 0.0'
+pod 'TZImagePickerController', '~> 1.7.1'
 
 #Modal layer library
 pod 'FMDB', '~> 2.5'
