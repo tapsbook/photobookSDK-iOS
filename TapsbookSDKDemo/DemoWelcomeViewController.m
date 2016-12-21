@@ -14,6 +14,7 @@
 
 #import "UIImage+Save.h"
 #import "TBPSSizeUtil.h"
+#import <TapsbookSDK/TapsbookSDK.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreLogin.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreOrderList.h>
 

@@ -25,12 +25,24 @@ typedef NS_ENUM(NSInteger, TBSDKLoginRegisterResult) {
 
 - (void)logoutCurrentUser;
 
+/**
+ * Returns the currently signed-in SDK user
+ *
+ * To sign in a user, call signinSDKUser:fromApp:completionBlock: first. If you have not signed-in the user, this method will return nil.
+ */
 - (TBSDKUser *)currentSDKUser;
 
 /**
- * SDK backend has a user registry that is used to associate user orders with the user. You must perform this signin process if you wish to retrieve order status later.
+ * Use this method to sign in your-app-user
+ *
+ * SDK backend has a user registry that is used to associate user orders with the user. You must call this method before the initiating the order creation if you want to let the SDK track this order later.
+ *
+ * Once you signed in your app user, you can call orderListViewController to show the orders made by the signed in app user.
+ *
+ * This is an invitation-only feature, you must use contact us to pre-approve your appName first before using this feature.
+ *
  *  @param userid The userid in your app, it must be unique.
- *  @param appName The appName of your app, it must be unique, use your app bundle id will be a good start.
+ *  @param appName The appName of your app, it must be unique.
  *  @param completionBlock The callback after signin is complete. You can use this to find out whether the signin was successful.
  */
 - (void) signinSDKUser:(NSString *) userid fromApp:(NSString*)appName completionBlock:(void (^)(BOOL success, TBSDKUser *sdkUser, NSError *error))completionBlock;
