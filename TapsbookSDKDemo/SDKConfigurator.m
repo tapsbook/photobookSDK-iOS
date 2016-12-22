@@ -12,6 +12,7 @@
 
 static NSString * const kTBS3AppKey = @"AKIAJYNE4PTKKS4FNDBA";
 static NSString * const kTBS3AppSecret = @"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";
+static NSString * const kTBAWSCognitoPoolID = @"";
 #if DEBUG
 static NSString * const kTBS3BucketNameDefault = @"tapstest";
 #else
@@ -27,11 +28,12 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        kTBAppName : @"TBSDKDemo",             // (Required) Your app name, this name will show up in app UI messages
                                        kTBAppKey : @"",                       // (Required)
                                        kTBAppSecret : @"",                    // (Required)
+                                       kTBAppURLScheme : @"TBSDKDemo",
                                        
                                        kTBSupportedRegions : @[               // (Optional) TBSDKRegions, customize the SDK to support multiple ship to regions (countries)
                                                // TBSDKRegions
-                                               //@(TBSDKRegion_UnitedStates),
-                                               @(TBSDKRegion_China),
+                                               @(TBSDKRegion_UnitedStates),
+                                               //@(TBSDKRegion_China),
                                                ],
                                        
                                        kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server

@@ -1,1 +1,0 @@
-../../../AFAmazonS3Manager/AFAmazonS3Manager/AFAmazonS3Manager.h

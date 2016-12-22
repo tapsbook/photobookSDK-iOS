@@ -64,6 +64,8 @@ extern NSString * const kTBAppKey;
 extern NSString * const kTBAppSecret;
 extern NSString * const kTBSupportedRegions;
 extern NSString * const kTBMerchantKeys;
+extern NSString * const kTBAppURLScheme;
+
 // 2
 extern NSString * const kTBMerchantKeyDefault;
 // 1
@@ -121,6 +123,9 @@ extern NSString * const kTBProductPreferredTheme;
 extern NSString * const kTBProductPreferredSKU;
 extern NSString * const kTBProductMaxPageCount;
 extern NSString * const kTBProductMinPageCount;
+extern NSString * const kTBProductMaxPhotoCount;
+extern NSString * const kTBProductMinPhotoCount;
+extern NSString * const kTBBookHasInsideCover;
 extern NSString * const kTBPreferredUIDirection;
 extern NSString * const kTBSendOrderInfoToHostingApp;
 extern NSString * const kTBExternalCheckoutType;
@@ -131,6 +136,8 @@ extern NSString * const kTBSocial;
 // 1
 extern NSString * const kTBSocialWeixinAppID;
 extern NSString * const kTBSocialWeixinAppSecret;
+extern NSString * const kTBSocialAlipayPartnerID;
+extern NSString * const kTBSocialAlipayAccountName;
 
 // 0
 extern NSString * const kTBHostingAppInfo;

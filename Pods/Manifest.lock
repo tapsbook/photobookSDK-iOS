@@ -1,26 +1,18 @@
 PODS:
-  - AFAmazonS3Manager (3.2.1):
-    - AFNetworking/NSURLConnection (~> 2.4)
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
-  - AFNetworking/NSURLConnection (2.6.3):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
-  - AFNetworking/UIKit (2.6.3):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - AGGeometryKit (1.2.2):
     - AGGeometryKit/CALayerProperties (= 1.2.2)
@@ -37,6 +29,9 @@ PODS:
     - AsyncDisplayKit/Core
     - PINCache (= 3.0.1-beta)
     - PINRemoteImage/iOS (= 3.0.0-beta.3)
+  - AWSCore (2.4.12)
+  - AWSS3 (2.4.12):
+    - AWSCore (= 2.4.12)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -107,7 +102,7 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - FXBlurView (1.6.4)
   - FXLabel (1.5.8)
-  - HappyDNS (0.2.3)
+  - HappyDNS (0.3.10)
   - KVOController (1.0.3)
   - leveldb (1.18)
   - libextobjc (0.4.1):
@@ -145,10 +140,8 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - LMDropdownView (1.0.3)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
-  - MOBFoundation (2.0.1)
   - MZAppearance (1.1.6)
   - MZFormSheetController (3.1.2):
     - MZAppearance
@@ -164,17 +157,14 @@ PODS:
   - PINRemoteImage/iOS (3.0.0-beta.3):
     - PINRemoteImage/Core
   - pop (1.0.8)
-  - Qiniu (7.0.15):
-    - AFNetworking (~> 2.0)
-    - HappyDNS (~> 0.2)
+  - Qiniu (7.1.0):
+    - AFNetworking (~> 3)
+    - HappyDNS (~> 0.3)
   - Reachability (3.2)
   - SCLAlertView-Objective-C (0.7.9)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
-  - ShareSDK3 (3.3.2):
-    - ShareSDK3/ShareSDK (= 3.3.2)
-  - ShareSDK3/ShareSDK (3.3.2)
   - SlackTextViewController (1.7.2)
   - smc-runtime (6.3.0)
   - Stripe (6.0.1):
@@ -184,14 +174,15 @@ PODS:
     - AHEasing
   - TTTAttributedLabel (1.13.4)
   - TTTRandomizedEnumerator (0.0.3)
+  - TZImagePickerController (1.7.1)
   - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
-  - AFAmazonS3Manager (~> 3.2)
-  - AFNetworking (~> 2.0)
+  - AFNetworking (~> 3.0)
   - AGGeometryKit (~> 1.2)
   - AHEasing (~> 1.2)
   - AsyncDisplayKit (~> 1.9.92)
+  - AWSS3
   - BlocksKit (~> 2.2)
   - CocoaLumberjack (~> 2.2)
   - DZNSegmentedControl (~> 1.3)
@@ -206,33 +197,32 @@ DEPENDENCIES:
   - KVOController (~> 1.0)
   - leveldb
   - libextobjc (~> 0.4.1)
-  - LMDropdownView
   - Masonry (~> 0.6)
   - MBProgressHUD (~> 0.9)
-  - MOBFoundation
   - MZFormSheetController (~> 3.1)
   - MZFormSheetPresentationController (~> 2.1)
   - objective-zip
   - pop (~> 1.0)
-  - Qiniu (~> 7.0)
+  - Qiniu (= 7.1)
   - Reachability (~> 3.2)
   - SCLAlertView-Objective-C (~> 0.7)
   - SDWebImage (~> 3.7)
-  - ShareSDK3
   - SlackTextViewController (~> 1.7)
   - smc-runtime (~> 6.3)
   - Stripe (~> 6.0)
   - TLLayoutTransitioning (~> 1.0)
   - TTTAttributedLabel (~> 1.13)
   - TTTRandomizedEnumerator (~> 0.0)
+  - TZImagePickerController (~> 1.7.1)
   - UICKeyChainStore (~> 2.1)
 
 SPEC CHECKSUMS:
-  AFAmazonS3Manager: 688f9238511bb86011159d0155fcda09838b0e0d
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AGGeometryKit: 46e712c5a3958e23b98fef15e57df1149670f231
   AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
   AsyncDisplayKit: 49d94f5739669d666ff7cdc3430f43f0b2cfbeaf
+  AWSCore: 8ee5b1dc06a0fd562429fe7120113ca93cbfbca6
+  AWSS3: 7bb3e095a37ed8334a0b868bbca74ab574b37a4f
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
@@ -245,14 +235,12 @@ SPEC CHECKSUMS:
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   FXLabel: 14f7d4abb0eb531a0824b327a86f5b790171207f
-  HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
+  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  LMDropdownView: f03fadfe65908c735580f63d04c47e6d7c5325f3
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MOBFoundation: a42168392e216fc56cbcbdfc3d5dcb3bbce5ef87
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetController: 7909e75056fe18366ce00ef8756ce6181414c36c
   MZFormSheetPresentationController: a268a1840780d52f47688d823d2b6d35318bf24d
@@ -260,17 +248,19 @@ SPEC CHECKSUMS:
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
-  Qiniu: ade34d722c8ce0eed7080fd268249e8402a2f535
+  Qiniu: d705a0f82e6fdad0c8369d088c3e4fcd9de45e94
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SCLAlertView-Objective-C: e36ab12dc1ec4ff6f932888083b21d71a3a1ad23
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  ShareSDK3: c76cb96eb38e079952b8157071486d945faa2df2
   SlackTextViewController: 1f4e8f68c156ef93de73fd422db2b8d5d5b0f4e7
   smc-runtime: 3941bb60d22acbec01ae9ca31d290a4fdcd513e1
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
   TLLayoutTransitioning: 286f546cc309ea9693dce2e3b1c4cab77f3308cf
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TTTRandomizedEnumerator: 27eefafc5d45b01465c7303d59b5b94c46dcf824
+  TZImagePickerController: cbfd57ba947263759b860f74132dd1bc33125afc
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 6c920b342ff88fa871de7bc782c9d6e5d6404775
+
+COCOAPODS: 1.1.1

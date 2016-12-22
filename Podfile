@@ -2,46 +2,52 @@ platform :ios, 8.0
 
 def available_pods
 
-pod 'AGGeometryKit', '~> 1.2'
-pod 'SDWebImage', '~> 3.7'
-pod 'SlackTextViewController', '~> 1.7'
-pod 'FXLabel', '~> 1.5'
-pod 'FastImageCache', '~> 1.3'
-pod 'SCLAlertView-Objective-C', '~> 0.7'
-pod 'FormatterKit', '~> 1.8'
-pod 'Stripe', '~> 6.0'
-pod 'AsyncDisplayKit', '~> 1.9.92'
-pod 'smc-runtime', '~> 6.3'
-pod 'AHEasing', '~> 1.2'
-pod 'TLLayoutTransitioning', '~> 1.0'
-pod 'CocoaLumberjack', '~> 2.2'
-pod 'pop', '~> 1.0'
-pod 'DZNSegmentedControl', '~> 1.3'
-pod 'KVOController', '~> 1.0'
+#Network storage library
+pod 'AFNetworking', '~> 3.0'
+pod 'Qiniu', '7.1'
+pod 'AWSS3'
 pod 'Reachability', '~> 3.2'
+
+#UI library
+pod 'AGGeometryKit', '~> 1.2'
+pod 'AHEasing', '~> 1.2'
+pod 'AsyncDisplayKit', '~> 1.9.92'
 pod 'BlocksKit', '~> 2.2'
-pod 'TTTAttributedLabel', '~> 1.13'
+pod 'DZNSegmentedControl', '~> 1.3'
+pod 'FastImageCache', '~> 1.3'
+pod 'FormatterKit', '~> 1.8'
 pod 'FXBlurView', '~> 1.6'
-pod "AFNetworking", "~> 2.0"
-pod 'Qiniu', '~> 7.0'
+pod 'FXLabel', '~> 1.5'
+pod 'KVOController', '~> 1.0'
+pod 'Masonry', '~> 0.6'
+pod 'MBProgressHUD', '~> 0.9'
 pod 'MZFormSheetController', '~> 3.1'
 pod 'MZFormSheetPresentationController', '~> 2.1'
-pod 'FMDB', '~> 2.5'
-pod 'MBProgressHUD', '~> 0.9'
+pod 'pop', '~> 1.0'
+pod 'SCLAlertView-Objective-C', '~> 0.7'
+pod 'SDWebImage', '~> 3.7'
+pod 'SlackTextViewController', '~> 1.7'
+pod 'smc-runtime', '~> 6.3'
+pod 'TLLayoutTransitioning', '~> 1.0'
+pod 'TTTAttributedLabel', '~> 1.13'
 pod 'TTTRandomizedEnumerator', '~> 0.0'
+pod 'TZImagePickerController', '~> 1.7.1'
+
+#Modal layer library
+pod 'FMDB', '~> 2.5'
+pod 'leveldb'
 pod 'libextobjc', '~>0.4.1'
-pod 'AFAmazonS3Manager', '~> 3.2'
-pod 'Masonry', '~> 0.6'
+pod 'objective-zip'
+pod 'CocoaLumberjack', '~> 2.2'
 pod 'UICKeyChainStore', '~> 2.1'
+
+#Payment integration (Alipay, Wechat supported via their framework)
+pod 'Stripe', '~> 6.0'
+
+#Social share (Wechat supported via their framework)
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
-pod 'LMDropdownView'
-pod 'leveldb'
-pod 'objective-zip'
-
-pod 'ShareSDK3'
-pod 'MOBFoundation'
 
 #disabled for China build
 #pod 'GoogleAnalytics', '3.14.0'
