@@ -11,10 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DemoWelcomeViewController">
             <connections>
                 <outlet property="createProjectButton" destination="URI-Vt-XiK" id="Lr1-Wc-Exo"/>
-                <outlet property="headerTitle" destination="Ffx-KX-Idt" id="fe0-h2-HAp"/>
+                <outlet property="headerTitle" destination="Ffx-KX-Idt" id="RmA-Em-Szv"/>
                 <outlet property="orderListButton" destination="eqY-5K-Dsp" id="awR-1m-1pE"/>
                 <outlet property="projectListButton" destination="l9B-e6-ugi" id="Jb1-wI-NQ6"/>
-                <outlet property="title" destination="Ffx-KX-Idt" id="0DM-UB-1qC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
