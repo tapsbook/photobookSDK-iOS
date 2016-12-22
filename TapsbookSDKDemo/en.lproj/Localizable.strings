@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  TapsbookSDKDemo
+
+  Created by yoda on 12/23/16.
+  Copyright © 2016 tapsbook. All rights reserved.
+*/
+
+"welcome-title"         = "Welcome to SDK Demo";
+"welcome-new"           = "New Project";
+"welcome-existing"      = "My Project";
+"welcome-orders"        = "My orders";
+"booklist-title"        = "My Projects";
+"booklist-buy"          = "Buy";
+"booklist-delete"       = "Delete";

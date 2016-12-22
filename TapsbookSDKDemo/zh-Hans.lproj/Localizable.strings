@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  TapsbookSDKDemo
+
+  Created by yoda on 12/23/16.
+  Copyright © 2016 tapsbook. All rights reserved.
+*/
+
+"welcome-title"         = "欢迎使用Tapsbook示范";
+"welcome-new"           = "新建项目";
+"welcome-existing"      = "历史项目";
+"welcome-orders"        = "订单列表";
+"booklist-title"        = "历史项目";
+"booklist-buy"          = "购买";
+"booklist-delete"       = "删除";

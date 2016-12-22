@@ -27,6 +27,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    [self.buyButton setTitle:NSLocalizedString(@"booklist-buy", @"") forState:UIControlStateNormal];
+    [self.productMoreButton setTitle:NSLocalizedString(@"booklist-delete", @"") forState:UIControlStateNormal];
 
     self.mainView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
     self.mainView.layer.shadowOffset = CGSizeMake(0, 0);

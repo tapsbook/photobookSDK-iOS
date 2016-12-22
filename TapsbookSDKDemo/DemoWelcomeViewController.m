@@ -28,6 +28,11 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
 @property (strong, nonatomic) void (^tb_completionBlock)(NSArray *newImages);
 @property (nonatomic, strong) NSArray * selectedImages;
 @property (nonatomic, assign) ViewControllerMode mode;
+@property (weak, nonatomic) IBOutlet UIButton *projectListButton;
+@property (weak, nonatomic) IBOutlet UIButton *orderListButton;
+@property (weak, nonatomic) IBOutlet UIButton *createProjectButton;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitle;
+
 
 @end
 
@@ -35,6 +40,7 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self translateButtons];
     
     // Sign in to SDK in order to retrieve order list
     [self signInSDKUser];
@@ -170,6 +176,7 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
         
         NSString *sPath = [self imageCachePathForAsset:name size:TBImageSize_s];
         NSString *lPath = [self imageCachePathForAsset:name size:TBImageSize_l];
+        NSString *xlPath = [self imageCachePathForAsset:name size:TBImageSize_xxl];
         
         //save small size photos
         [[TZImageManager manager] getPhotoWithAsset:asset
@@ -177,15 +184,22 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
                                          completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
                                              [photo writeToFile:sPath withCompressQuality:1];
                                          }];
-        //save small size photos
+        //save large size photos
         [[TZImageManager manager] getPhotoWithAsset:asset
                                          photoWidth:800
                                          completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
                                              [photo writeToFile:lPath withCompressQuality:1];
                                          }];
 
+        //save print size photos, in
+        [[TZImageManager manager] getOriginalPhotoWithAsset:asset
+                                                 completion:^(UIImage *photo, NSDictionary *info) {
+                                             [photo writeToFile:xlPath withCompressQuality:1];
+                                         }];
+
         [tbImage setImagePath:sPath size:TBImageSize_s];
         [tbImage setImagePath:lPath size:TBImageSize_l];
+        [tbImage setImagePath:xlPath size:TBImageSize_xxl];
         [tbImage setDesc:name];
         [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_full.jpg" size:TBImageSize_xxl];
         [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_regular.jpg" size:TBImageSize_l];
@@ -204,6 +218,13 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
     }
     NSString *filePath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%zd", name, size]];
     return filePath;
+}
+
+- (void)translateButtons {
+    [self.projectListButton setTitle:NSLocalizedString(@"welcome-existing", @"") forState:UIControlStateNormal];
+    [self.orderListButton setTitle:NSLocalizedString(@"welcome-orders", @"") forState:UIControlStateNormal];
+    [self.createProjectButton setTitle:NSLocalizedString(@"welcome-new", @"") forState:UIControlStateNormal];
+    self.headerTitle.text = NSLocalizedString(@"welcome-title", @"");
 }
 
 @end

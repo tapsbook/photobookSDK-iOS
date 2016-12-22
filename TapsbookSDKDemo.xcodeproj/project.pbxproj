@@ -100,6 +100,8 @@
 		D57DCB961BC717220004D8D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB941BC717220004D8D0 /* Crashlytics.framework */; };
 		D57DCB9A1BC7174D0004D8D0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB971BC7174D0004D8D0 /* Fabric.framework */; };
 		D57DCB9C1BC7174D0004D8D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */; };
+		D5F38FEC1E0C355C006F6E30 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5F38FEF1E0C355C006F6E30 /* Localizable.strings */; };
+		D5F38FED1E0C355C006F6E30 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5F38FEF1E0C355C006F6E30 /* Localizable.strings */; };
 		D5F7A34D1D7FB49600FC8460 /* PhotoBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F7A34B1D7FB49600FC8460 /* PhotoBookListViewController.m */; };
 		D5F7A34E1D7FB49600FC8460 /* PhotoBookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F7A34B1D7FB49600FC8460 /* PhotoBookListViewController.m */; };
 		D5F7A34F1D7FB49600FC8460 /* PhotoBookListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F7A34C1D7FB49600FC8460 /* PhotoBookListViewController.xib */; };
@@ -239,6 +241,8 @@
 		D57DCB971BC7174D0004D8D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		D57DCB981BC7174D0004D8D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		D587F29E1C49A4FF00DD06B7 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5F38FEE1E0C355C006F6E30 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D5F38FF41E0C3A08006F6E30 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D5F7A34A1D7FB49600FC8460 /* PhotoBookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBookListViewController.h; sourceTree = "<group>"; };
 		D5F7A34B1D7FB49600FC8460 /* PhotoBookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBookListViewController.m; sourceTree = "<group>"; };
 		D5F7A34C1D7FB49600FC8460 /* PhotoBookListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoBookListViewController.xib; sourceTree = "<group>"; };
@@ -454,6 +458,7 @@
 				C183CB84195D427E005B68F1 /* InfoPlist.strings */,
 				C183CB87195D427E005B68F1 /* main.m */,
 				C183CB89195D427E005B68F1 /* TapsbookSDKDemo-Prefix.pch */,
+				D5F38FEF1E0C355C006F6E30 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -594,6 +599,9 @@
 		C183CB70195D427E005B68F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = tapsbook;
 				TargetAttributes = {
@@ -625,6 +633,7 @@
 				en,
 				ar,
 				he,
+				"zh-Hans",
 			);
 			mainGroup = C183CB6F195D427E005B68F1;
 			productRefGroup = C183CB79195D427E005B68F1 /* Products */;
@@ -682,6 +691,7 @@
 				C183CB8E195D427E005B68F1 /* Images.xcassets in Resources */,
 				C183CBB3195D4D36005B68F1 /* TapsbookSDK.bundle in Resources */,
 				C1CBE8411C3418730028F23D /* CheckoutViewController.xib in Resources */,
+				D5F38FEC1E0C355C006F6E30 /* Localizable.strings in Resources */,
 				D5F7A34F1D7FB49600FC8460 /* PhotoBookListViewController.xib in Resources */,
 				D5F7A3561D7FB74B00FC8460 /* PhotoBookListCell.xib in Resources */,
 				C13F6A131BFA3F61000162F5 /* read_me.txt in Resources */,
@@ -709,6 +719,7 @@
 				C18AEE2A195DAEDF005D2609 /* Images.xcassets in Resources */,
 				C18AEE37195DAF05005D2609 /* TapsbookSDK.bundle in Resources */,
 				C1CBE8421C3418730028F23D /* CheckoutViewController.xib in Resources */,
+				D5F38FED1E0C355C006F6E30 /* Localizable.strings in Resources */,
 				D5F7A3501D7FB49600FC8460 /* PhotoBookListViewController.xib in Resources */,
 				D5F7A3571D7FB74B00FC8460 /* PhotoBookListCell.xib in Resources */,
 				C13F6A141BFA3F61000162F5 /* read_me.txt in Resources */,
@@ -927,6 +938,15 @@
 				C12FB9211C319BE4009C45A6 /* ar */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D5F38FEF1E0C355C006F6E30 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5F38FEE1E0C355C006F6E30 /* en */,
+				D5F38FF41E0C3A08006F6E30 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

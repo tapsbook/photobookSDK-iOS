@@ -52,7 +52,7 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
     self.imagePreloadingOperationQueue = [NSOperationQueue mainQueue];
     self.diskIOQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
-    self.title = NSLocalizedString(@"My Books", nil);
+    self.title = NSLocalizedString(@"booklist-title", @"");
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Regular" size:18]}];
     
