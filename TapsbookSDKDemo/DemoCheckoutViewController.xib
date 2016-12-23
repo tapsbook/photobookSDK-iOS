@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckoutViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YZ-Sy-QVR">
+                    <rect key="frame" x="87.5" y="368.5" width="200" height="30"/>
+                    <color key="backgroundColor" red="0.1919802725315094" green="0.19197453558444977" blue="0.19197782874107361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="BaK-c6-14i"/>
+                        <constraint firstAttribute="height" constant="30" id="IaS-aQ-KcC"/>
+                    </constraints>
+                    <state key="normal" title="Complete Order">
+                        <color key="titleColor" red="0.95686274510000002" green="0.96862745100000003" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="handleCheckoutButton:" destination="-1" eventType="touchUpInside" id="O5z-IM-tYk"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace this with your Checkout views" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWW-Sh-TTN">
+                    <rect key="frame" x="80" y="187" width="214" height="71"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="71" id="VYN-TD-3tX"/>
+                        <constraint firstAttribute="width" constant="214" id="WmE-dp-ODW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. show payment UI to let user pay 2. Once payment is received, send order confirmation API to us 3. Dismiss the views " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-u0-fDn">
+                    <rect key="frame" x="37.5" y="266" width="300" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="dtE-tH-6Rj"/>
+                        <constraint firstAttribute="height" constant="80" id="j0l-RP-2BP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mWW-Sh-TTN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="2gP-Cc-ewx"/>
+                <constraint firstItem="1YZ-Sy-QVR" firstAttribute="top" secondItem="Oa3-u0-fDn" secondAttribute="bottom" constant="22.5" id="GKA-yC-9Rg"/>
+                <constraint firstItem="1YZ-Sy-QVR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HeH-pd-6LW"/>
+                <constraint firstItem="Oa3-u0-fDn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Re0-k1-OeU"/>
+                <constraint firstItem="1YZ-Sy-QVR" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="50" id="Ufd-nj-ZlW"/>
+                <constraint firstItem="mWW-Sh-TTN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cuL-vx-f1W"/>
+                <constraint firstItem="1YZ-Sy-QVR" firstAttribute="top" secondItem="mWW-Sh-TTN" secondAttribute="bottom" constant="110.5" id="exh-nf-nfz"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2gP-Cc-ewx"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="767.5" y="325.5"/>
+        </view>
+    </objects>
+</document>

@@ -27,7 +27,7 @@ extern NSString * const kTBUseExternalCheckout;
                                         },
                                 
                                 // Only set YES to ONE of the following
-                                // option 1, generate album pages and use your own checkout UI
+                                // option 2, generate album pages and use your own checkout UI
                                 kTBUseExternalCheckout : @NO,
                                 
                                 // option 2, generate album JSON for 1 book

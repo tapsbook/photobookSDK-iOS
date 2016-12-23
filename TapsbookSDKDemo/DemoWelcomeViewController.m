@@ -8,7 +8,6 @@
 
 #import "DemoWelcomeViewController.h"
 #import "TZImagePickerController.h"
-#import "TZImageManager.h"
 #import "MBProgressHUD.h"
 #import "PhotoBookListViewController.h"
 
@@ -17,11 +16,6 @@
 #import <TapsbookSDK/TapsbookSDK.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreLogin.h>
 #import <TapsbookSDK/TBSDKAlbumManager+StoreOrderList.h>
-
-typedef NS_ENUM(NSInteger, ViewControllerMode) {
-    ViewControllerMode_CreateAlbum,
-    ViewControllerMode_AddPhoto,
-};
 
 @interface DemoWelcomeViewController () <TZImagePickerControllerDelegate, TBSDKAlbumManagerDelegate>
 
@@ -32,7 +26,7 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
 @property (weak, nonatomic) IBOutlet UIButton *orderListButton;
 @property (weak, nonatomic) IBOutlet UIButton *createProjectButton;
 @property (weak, nonatomic) IBOutlet UILabel *headerTitle;
-
+@property (weak, nonatomic) IBOutlet UIButton *checkoutButton;
 
 @end
 
@@ -41,6 +35,8 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self translateButtons];
+    
+    self.checkoutButton.hidden = self.checkoutMethod != CheckoutMethod_AppCommerceAndProduction;
     
     // Sign in to SDK in order to retrieve order list
     [self signInSDKUser];
@@ -87,7 +83,7 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
             
             //the createSDKAlbumWithImages process include facial recognition, which  takes some time..
             hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"recognizing faces...";
+            hud.labelText = NSLocalizedString(@"loader-create", @"");
             
             //create a new product
             [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:tbImages
@@ -117,7 +113,7 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
     
 }
 
-#pragma mark TBSDKAlbumManager
+#pragma mark TBSDKAlbumManagerDelegate
 
 - (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount allowMultiple:(BOOL)allowMultiple completionBlock:(void (^)(NSArray *newImages))completionBlock {
 
@@ -130,25 +126,6 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
     return imagePickerVc;
 }
 
-- (NSMutableDictionary *)getDefaultProductOptions {
-    NSDictionary * albumOptionBase = @{
-                                       kTBProductMaxPageCount:     @"20",   //set max=min will limit the page count
-                                       kTBProductMinPageCount:     @"20",
-                                       kTBBookHasInsideCover:      @"NO",
-                                       kTBProductMaxPhotoCount:    @"40",
-                                       kTBProductMinPhotoCount:    @"20",
-                                       kTBPreferredUIDirection:    @"LTR",   //set this RTL or LTR
-                                       kTBPreferredPageTypeSpread: @(YES)
-                                       };
-    NSDictionary * albumBookType8x8 =@{
-                                       kTBProductPreferredTheme:   @"200",  //200 is for square book
-                                       kTBProductPreferredSKU:     @"1003", //1003 is a layflat square book
-                                       };
-    
-    NSMutableDictionary *  albumOption = [albumOptionBase mutableCopy];
-    [albumOption addEntriesFromDictionary:albumBookType8x8];
-    return albumOption;
-}
 
 - (void) signInSDKUser {
     
@@ -163,68 +140,18 @@ typedef NS_ENUM(NSInteger, ViewControllerMode) {
             }
         }];
     }
-
-}
-
-- (NSMutableArray *)convertAssetsToTBImages:(NSArray *) assets {
-    NSMutableArray * tbImages = [NSMutableArray arrayWithCapacity:assets.count];
-    
-    //download the selected images to cache, SDK req all images available on local file system
-    for (id asset in self.selectedImages){
-        NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
-        TBImage *tbImage = [[TBImage alloc] initWithIdentifier:name];
-        
-        NSString *sPath = [self imageCachePathForAsset:name size:TBImageSize_s];
-        NSString *lPath = [self imageCachePathForAsset:name size:TBImageSize_l];
-        NSString *xlPath = [self imageCachePathForAsset:name size:TBImageSize_xxl];
-        
-        //save small size photos
-        [[TZImageManager manager] getPhotoWithAsset:asset
-                                         photoWidth:150
-                                         completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
-                                             [photo writeToFile:sPath withCompressQuality:1];
-                                         }];
-        //save large size photos
-        [[TZImageManager manager] getPhotoWithAsset:asset
-                                         photoWidth:800
-                                         completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
-                                             [photo writeToFile:lPath withCompressQuality:1];
-                                         }];
-
-        //save print size photos, in
-        [[TZImageManager manager] getOriginalPhotoWithAsset:asset
-                                                 completion:^(UIImage *photo, NSDictionary *info) {
-                                             [photo writeToFile:xlPath withCompressQuality:1];
-                                         }];
-
-        [tbImage setImagePath:sPath size:TBImageSize_s];
-        [tbImage setImagePath:lPath size:TBImageSize_l];
-        [tbImage setImagePath:xlPath size:TBImageSize_xxl];
-        [tbImage setDesc:name];
-        [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_full.jpg" size:TBImageSize_xxl];
-        [tbImage setImageCSURLString:@"http://awesome.web/where/is/my/photo_regular.jpg" size:TBImageSize_l];
-        [tbImages addObject:tbImage];
-    }
-    
-    return tbImages;
-}
-
-- (NSString *) imageCachePathForAsset:(NSString*) name size:(TBImageSize) size {
-    NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if (![fileManager fileExistsAtPath:cachePath isDirectory:NULL]) {
-        [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:NULL];
-    }
-    NSString *filePath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%zd", name, size]];
-    return filePath;
 }
 
 - (void)translateButtons {
     [self.projectListButton setTitle:NSLocalizedString(@"welcome-existing", @"") forState:UIControlStateNormal];
     [self.orderListButton setTitle:NSLocalizedString(@"welcome-orders", @"") forState:UIControlStateNormal];
     [self.createProjectButton setTitle:NSLocalizedString(@"welcome-new", @"") forState:UIControlStateNormal];
+    [self.checkoutButton setTitle:NSLocalizedString(@"welcome-checkout", @"") forState:UIControlStateNormal];
     self.headerTitle.text = NSLocalizedString(@"welcome-title", @"");
+}
+
+- (IBAction)handleCheckoutButton:(id)sender {
+    [super handleCheckoutButton:sender];
 }
 
 @end

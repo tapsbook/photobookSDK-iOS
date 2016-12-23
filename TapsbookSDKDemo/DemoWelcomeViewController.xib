@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DemoWelcomeViewController">
             <connections>
+                <outlet property="checkoutButton" destination="onp-B9-zKE" id="Kqb-T8-B73"/>
                 <outlet property="createProjectButton" destination="URI-Vt-XiK" id="Lr1-Wc-Exo"/>
                 <outlet property="headerTitle" destination="Ffx-KX-Idt" id="RmA-Em-Szv"/>
                 <outlet property="orderListButton" destination="eqY-5K-Dsp" id="awR-1m-1pE"/>
@@ -66,9 +67,22 @@
                         <action selector="handleExistingProjects:" destination="-1" eventType="touchUpInside" id="OWm-9X-oml"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onp-B9-zKE">
+                    <rect key="frame" x="87" y="508.5" width="200" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="LDg-YC-JVS"/>
+                        <constraint firstAttribute="width" constant="200" id="QHe-3O-yoo"/>
+                    </constraints>
+                    <state key="normal" title="Checkout"/>
+                    <connections>
+                        <action selector="handleCheckoutButton:" destination="-1" eventType="touchUpInside" id="6YX-iv-IUp"/>
+                        <action selector="handleHistoryOrders:" destination="-1" eventType="touchUpInside" id="XHu-nm-CNm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="onp-B9-zKE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1Uw-ix-IIf"/>
                 <constraint firstItem="l9B-e6-ugi" firstAttribute="top" secondItem="URI-Vt-XiK" secondAttribute="bottom" constant="30" id="3o8-cy-oIK"/>
                 <constraint firstItem="eqY-5K-Dsp" firstAttribute="top" secondItem="l9B-e6-ugi" secondAttribute="bottom" constant="30" id="6pg-Wn-12a"/>
                 <constraint firstItem="URI-Vt-XiK" firstAttribute="top" secondItem="Ffx-KX-Idt" secondAttribute="bottom" constant="77" id="KIz-Il-IHD"/>
@@ -76,6 +90,7 @@
                 <constraint firstItem="URI-Vt-XiK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q5W-Xp-Sq7"/>
                 <constraint firstItem="eqY-5K-Dsp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="S01-1Z-O3b"/>
                 <constraint firstItem="URI-Vt-XiK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="dSg-ns-fkO"/>
+                <constraint firstItem="onp-B9-zKE" firstAttribute="top" secondItem="eqY-5K-Dsp" secondAttribute="bottom" constant="30" id="hW6-YY-mHv"/>
                 <constraint firstItem="Ffx-KX-Idt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="q4K-Xk-ONp"/>
             </constraints>
         </view>

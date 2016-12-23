@@ -8,31 +8,18 @@
 
 #import "PhotoBookListViewController.h"
 #import "PhotoBookListCell.h"
-#import "PhotoListViewController.h"
-#import "TBPSSizeUtil.h"
-#import "MBProgressHUD.h"
-#import "CheckoutViewController.h"
-
-#import "UIImage+Save.h"
 #import <TapsbookSDK/TapsbookSDK.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+
 #import <Photos/Photos.h>
+#import "MBProgressHUD.h"
+#import "TZImagePickerController.h"
 
+@interface PhotoBookListViewController()<UITableViewDataSource, UITableViewDelegate,TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate, TZImagePickerControllerDelegate>
 
-@interface PhotoBookListViewController()<UITableViewDataSource, UITableViewDelegate,
-TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
+@property (strong, nonatomic) void (^tb_completionBlock)(NSArray *newImages);
 @property (nonatomic, strong) NSMutableArray *albums;
+@property (nonatomic, assign) ViewControllerMode mode;
 @property (weak, nonatomic) IBOutlet UILabel *noBookLabel;
-
-@property (strong, nonatomic) dispatch_queue_t cellImageLoadingQueue;
-
-@property (strong, nonatomic) NSOperationQueue *imageCacheingQueue;
-
-@property (strong, nonatomic) NSOperationQueue *imagePreloadingOperationQueue;
-
-@property (strong, nonatomic) dispatch_queue_t diskIOQueue;
-
-@property (strong, nonatomic) PHCachingImageManager * imageManager;
 
 @end
 
@@ -49,15 +36,10 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
 {
     [super viewDidLoad];
     
-    self.imagePreloadingOperationQueue = [NSOperationQueue mainQueue];
-    self.diskIOQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
     self.title = NSLocalizedString(@"booklist-title", @"");
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Regular" size:18]}];
-    
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 30, 0)];
-        
+    [self reloadPhotoBooks];
+         
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithImage:[UIImage imageNamed:@"nav-back"]
                                              style:UIBarButtonItemStylePlain
@@ -71,7 +53,13 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self reloadPhotoBooks];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
+                                forKey:@"orientation"];
 }
 
 #pragma mark - PhotoListCellDelegate
@@ -135,6 +123,23 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
     return 358;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"cell";
+    
+    PhotoBookListCell *cell = (PhotoBookListCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (cell == nil) {
+        cell = [PhotoBookListCell createPhotoBookListCell];
+    }
+    cell.delegate = self;
+    
+    [cell configureCellWithAlbum:self.albums[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+
 #pragma mark - Private
 - (void)reloadPhotoBooks
 {
@@ -169,6 +174,7 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
     }
 }
 
+
 //reload images if needed because user may clean cache
 - (void)loadImagesAndOpenAlbum:(TBSDKAlbum*)album printDirectly:(BOOL)shouldPrintDirectly {
     NSArray *tbImages = album.images;
@@ -179,198 +185,41 @@ TBSDKAlbumManagerDelegate, PhotoBookListCellDelegate>
         return;
     } else {
         for (TBImage * tbImage in tbImages) {
-            PHAsset *asset;
-            NSString *identifier = tbImage.identifier;
-
-            PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
-            asset = result.firstObject;
-            
-            [selectedAssets addObject:asset];
+            PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[tbImage.identifier] options:nil];
+            [selectedAssets addObject:result.firstObject];
         }
     }
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.labelText = @"Loading images";
+    hud.labelText = NSLocalizedString(@"loader-reload", @"");
     hud.dimBackground = YES;
+    [self convertAssetsToTBImages:selectedAssets];
     
-    // Saving assetes to disk
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Cache image to disk
-        NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        if (![fileManager fileExistsAtPath:cachePath isDirectory:NULL]) {
-            [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:NULL];
-        }
-        
-        for (PHAsset *asset in selectedAssets) {
-            @autoreleasepool {
-                
-                NSString *name = [[[asset localIdentifier] componentsSeparatedByString:@"/"] firstObject];
-                
-                // Size
-                CGSize boundingSize_s = [TBPSSizeUtil sizeFromPSImageSize:(TBPSImageSize)TBImageSize_s];
-                CGSize boundingSize_l = [TBPSSizeUtil sizeFromPSImageSize:(TBPSImageSize)TBImageSize_l];
-                CGSize convertedSize_s = boundingSize_s;
-                CGSize convertedSize_l = boundingSize_l;
-                if (asset.pixelWidth * asset.pixelHeight > 0) {
-                    CGSize photoSize = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
-                    convertedSize_s = [TBPSSizeUtil convertSize:photoSize toSize:boundingSize_s contentMode:UIViewContentModeScaleAspectFill];
-                    convertedSize_l = [TBPSSizeUtil convertSize:photoSize toSize:boundingSize_l contentMode:UIViewContentModeScaleAspectFill];
-                }
-                else {
-                    NSAssert(NO, @"asset should have a size");
-                }
-                
-                NSString *sPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_s", name]];
-                NSString *lPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_l", name]];
-                
-                NSLog(@"downloading file for:%@", name);
-                PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc] init];
-                requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
-                requestOptions.networkAccessAllowed = YES;
-                requestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
-                
-                if (![fileManager fileExistsAtPath:sPath]) {
-                    
-                    [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                               targetSize:convertedSize_s
-                                                              contentMode:PHImageContentModeAspectFill
-                                                                  options:requestOptions
-                                                            resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                                [result writeToFile:sPath withCompressQuality:1];
-                                                            }];
-                    
-                }
-                
-                if (![fileManager fileExistsAtPath:lPath]) {
-                    [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                               targetSize:convertedSize_l
-                                                              contentMode:PHImageContentModeAspectFill
-                                                                  options:requestOptions
-                                                            resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                                [result writeToFile:lPath withCompressQuality:1];
-                                                            }];
-                }
-                
-            }//end of autorelease
-        }//enf of for loop
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [hud hide:YES];
-            //private API demo here for enterprise clients, consulting before use.
-            NSDictionary * albumOption = @{
-                                           kTBProductPreferredTheme:   @"200",  //200 is for square book
-                                           kTBProductPreferredSKU:     @"1003", //sku=1003 is a layflat book
-                                           kTBProductMaxPageCount:     @"24",   //set max=min will limit the page count
-                                           kTBProductMinPageCount:     @"24",
-                                           kTBPreferredUIDirection:    @"LTR"
-                                           };
-            album.productOptions = albumOption;
-            [[TBSDKAlbumManager sharedInstance] openSDKAlbum:album presentOnViewController:self.navigationController shouldPrintDirectly:NO];
-        });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [hud hide:YES];
+        [[TBSDKAlbumManager sharedInstance] openSDKAlbum:album presentOnViewController:self.navigationController shouldPrintDirectly:NO];
     });
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"cell";
-    
-    PhotoBookListCell *cell = (PhotoBookListCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell == nil) {
-        cell = [PhotoBookListCell createPhotoBookListCell];
-    }
-    cell.delegate = self;
-    
-    [cell configureCellWithAlbum:self.albums[indexPath.row]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
-}
 
 #pragma mark - TBSDK
 
 //handle the + (add photo) function of the SDK
 - (UIViewController *)photoSelectionViewControllerInstanceForAlbumManager:(TBSDKAlbumManager *)albumManager withSDKAlbum:(TBSDKAlbum *)sdkAlbum existingTBImages:(NSArray *)existingTBImages maxPhotoCount:(NSInteger)maxPhotoCount allowMultiple:(BOOL)allowMultiple completionBlock:(void (^)(NSArray *))completionBlock
 {
-    PhotoListViewController *vc = [PhotoListViewController new];
-    vc.mode = PhotoListViewControllerMode_AddPhoto;
-    vc.sdkAlbum = sdkAlbum;
-    vc.existingTBImages = existingTBImages;
-    vc.tb_completionBlock = completionBlock;
-    vc.allowMultipleSelection = allowMultiple;
+    self.mode = ViewControllerMode_AddPhoto;
+    self.tb_completionBlock = completionBlock;
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    return nav;
-}
-
-- (void)albumManager:(TBSDKAlbumManager *)albumManager preloadXXLSizeImages:(NSArray *)tbImages ofSDKAlbum:(TBSDKAlbum *)sdkAlbum progressBlock:(void (^)(NSInteger, NSInteger, float))progressBlock completionBlock:(void (^)(NSInteger, NSInteger, NSError *))completionBlock
-{    
-    [self preloadImageWithEnumerator:[tbImages objectEnumerator] currentIdx:0 total:tbImages.count progressBlock:progressBlock completionBlock:completionBlock];
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:20 delegate:self];
+    imagePickerVc.autoDismiss = NO;
+    imagePickerVc.allowPickingVideo = NO;
+    return imagePickerVc;
 }
 
 - (void)albumManager:(TBSDKAlbumManager *)albumManager didFinishEditingSDKAlbum:(TBSDKAlbum *)sdkAlbum{
     //do some album clean up, e.g. clean up image cache if needed
-    NSLog(@"Book data has been saved to the DB, now it is safe to do more with the album object");
+    [self reloadPhotoBooks];
 }
-
-- (void)albumManager:(TBSDKAlbumManager *)albumManager cancelPreloadingXXLSizeImages:(NSArray *)tbImages ofSDKAlbum:(TBSDKAlbum *)sdkAlbum {
-    
-}
-
-- (void)albumManager:(TBSDKAlbumManager *)albumManager checkoutSDKAlbum:(TBSDKAlbum *)sdkAlbum withOrderNumber:(NSString *)orderNumber viewControllerToPresentOn:(UIViewController *)viewController {
-    
-    NSLog(@"preorder is compelte with an order number:%@", orderNumber);
-    
-    //show your checkout view now
-    CheckoutViewController *vc = [CheckoutViewController new];
-    [viewController presentViewController:vc animated:YES completion:nil];
-}
-
-#pragma mark -
-
-- (void)preloadImageWithEnumerator:(NSEnumerator *)enumerator currentIdx:(NSInteger)currentIdx total:(NSInteger)total progressBlock:(void (^)(NSInteger, NSInteger, float))progressBlock completionBlock:(void (^)(NSInteger, NSInteger, NSError *))completionBlock {
-    TBImage *tbImage = [enumerator nextObject];
-    
-    if (tbImage) {
-        NSString *cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"ImageCache"];
-        NSString *xxlPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_l", tbImage.identifier]];
-        
-        // Cache image to disk
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if ([fileManager fileExistsAtPath:xxlPath]) {
-            NSLog(@"I'm lazy, using L size as XXL images");
-            [tbImage setImagePath:xxlPath size:TBImageSize_xxl];
-            progressBlock(currentIdx, total, 1);
-            
-            [self preloadImageWithEnumerator:enumerator currentIdx:currentIdx + 1 total:total progressBlock:progressBlock completionBlock:completionBlock];
-        }
-        else {
-            NSLog(@"cannot find L size images");
-        }
-    }
-    else {
-        completionBlock(currentIdx, total, nil);
-    }
-}
-
-//datasource method that helps SDK to recognize an album is new or existing
-- (BOOL)albumManager:(TBSDKAlbumManager *)albumManager checkout3_isSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum {
-    return NO;
-}
-
-//a callback after user click order for an album if the album is new,  the infoDict here only contains the cover page JSON
-- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_addSDKAlbumToCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
-    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
-}
-
-//a callback after user click order for an album if the album is already in the cart, just need to update it, the infoDict here only contains the cover page JSON
-- (void)albumManager:(TBSDKAlbumManager *)albumManager checkout3_updateSDKAlbumInCart:(TBSDKAlbum *)sdkAlbum withInfoDict:(NSDictionary *)infoDict viewControllerToPresentOn:viewController {
-    [[TBSDKAlbumManager sharedInstance] dismissTBSDKViewControllersAnimated:YES completion:nil];
-}
-
 
 @end

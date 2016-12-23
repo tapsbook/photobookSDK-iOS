@@ -3,19 +3,18 @@
 //  TapsbookSDKDemo
 //
 //  Created by Xinrong Guo on 14-6-27.
-//  Copyright (c) 2014年 tapsbook. All rights reserved.
+//  Copyright (c) 2016年 tapsbook. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "PhotoListViewController.h"
 #import "DemoWelcomeViewController.h"
 #import <TapsbookSDK/TapsbookSDK.h>
-#import <AliSDK/AlipaySDK.framework/Headers/AlipaySDK.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-#import "WXApi.h"
 #import <TapsbookSDK/TBWeChatManager.h>
 #import <TapsbookSDK/TBFacebookManager.h>
+
+#import <AliSDK/AlipaySDK.framework/Headers/AlipaySDK.h>
+#import <Crashlytics/Crashlytics.h>
+#import "WXApi.h"
 
 @implementation AppDelegate
 
@@ -26,10 +25,6 @@
 
     [[TBWeChatManager sharedInstance] setupWithApplication:application options:launchOptions];
     [[TBFacebookManager sharedInstance] setupWithApplication:application options:launchOptions];
-    
-//    [Fabric with:@[[Crashlytics class]]];
-    
-//    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfigurator"];
     
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
         // iOS 8 Notifications

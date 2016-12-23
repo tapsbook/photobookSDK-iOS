@@ -10,6 +10,10 @@
 "welcome-new"           = "新建项目";
 "welcome-existing"      = "历史项目";
 "welcome-orders"        = "订单列表";
+"welcome-checkout"      = "提交订单";
+"welcome-checkout-item" = "提交订单 (%zd)";
 "booklist-title"        = "历史项目";
 "booklist-buy"          = "购买";
 "booklist-delete"       = "删除";
+"loader-create"         = "为您制作中";
+"loader-reload"         = "导入照片...";

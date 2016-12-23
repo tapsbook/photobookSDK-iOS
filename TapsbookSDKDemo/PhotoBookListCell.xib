@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Eb-eq-7c0" id="3l7-f8-moQ" userLabel="book_cover">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="359.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="359"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMY-iy-uZ4" userLabel="cover wrapper">
