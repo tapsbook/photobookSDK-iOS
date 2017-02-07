@@ -15,7 +15,7 @@ iOS 8.0 or higher
 ### 安装
 
 导入Tapsbook pod, 然后执行  'Pod install' 会自动下载Tapsbook SDK及所需的其它软件库
-        pod 'Tapsbook'
+		pod 'Tapsbook'
 
 	
 ## TapsbookSDK 数据结构
