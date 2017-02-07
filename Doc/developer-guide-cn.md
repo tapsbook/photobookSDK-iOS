@@ -14,82 +14,9 @@ iOS 8.0 or higher
 
 ### 安装
 
-1. 复制 SDK 文件
-	
-	复制 `TapsbookSDK.framework` and `TapsbookSDK.bundle` 到你的项目中.
-	
-	![FinderImageForSDK](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copyfilesforsdk.png)
-	
-2. 连接苹果官方 libiraries
-	
-	检查Xcode里项目的 "build phase" => "Link Binary With Libraries"  点选以下框架
-	
-		TapsbookSDK.framework
-		libsqlite3.0.dylib
-		libz.dylib
-		UIKit.framework
-		Accelerate.framework
-		AdSupport.framework
-		CoreData.framework
-		SystemConfiguration.framework
-		ImageIO.framework
-		MessageUI.framework
-		Social.framework
-		Photos.framework
-	
-3. 启用SDK资源包
-	
-	检查Xcode里项目的 "build phase" => "Copy Bundle Resources", 在项目中加入 `TapsbookSDK.bundle` 
-	
-	![XcodeImageForCopyBundleResources](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copybundle.png)
-	
-4. 加 `-ObjC` 到 "Build Settings" > "Other Linker Flags"
+导入Tapsbook pod, 然后执行  'Pod install' 会自动下载Tapsbook SDK及所需的其它软件库
+        pod 'Tapsbook'
 
-5. 导入第三方软件库
-
-	TapsbookSDK需要如下的第三方开源软件。建议你使用CocoaPods来管理这些依赖软件库，这样的话，只需加入如下列表到Podfile， 然后执行  'Pod install' 开始下载这些软件库
-	
-		pod 'AGGeometryKit', '~> 1.2'
-		pod 'SDWebImage', '~> 3.7'
-		pod 'SlackTextViewController', '~> 1.7'
-		pod 'FXLabel', '~> 1.5'
-		pod 'FastImageCache', '~> 1.3'
-		pod 'SCLAlertView-Objective-C', '~> 0.7'
-		pod 'FormatterKit', '~> 1.8'
-		pod 'Stripe', '~> 6.0'
-		pod 'AsyncDisplayKit', '~> 1.9.92'
-		pod 'smc-runtime', '~> 6.3'
-		pod 'AHEasing', '~> 1.2'
-		pod 'TLLayoutTransitioning', '~> 1.0'
-		pod 'CocoaLumberjack', '~> 2.2'
-		pod 'pop', '~> 1.0'
-		pod 'DZNSegmentedControl', '~> 1.3'
-		pod 'KVOController', '~> 1.0'
-		pod 'Reachability', '~> 3.2'
-		pod 'BlocksKit', '~> 2.2'
-		pod 'TTTAttributedLabel', '~> 1.13'
-		pod 'FXBlurView', '~> 1.6'
-		pod "AFNetworking", "~> 2.0"
-		pod 'Qiniu', '~> 7.0'
-		pod 'MZFormSheetController', '~> 3.1'
-		pod 'MZFormSheetPresentationController', '~> 2.1'
-		pod 'FMDB', '~> 2.5'
-		pod 'MBProgressHUD', '~> 0.9'
-		pod 'TTTRandomizedEnumerator', '~> 0.0'
-		pod 'libextobjc', '~>0.4.1'
-		pod 'AFAmazonS3Manager', '~> 3.2'
-		pod 'Masonry', '~> 0.6'
-		pod 'UICKeyChainStore', '~> 2.1'
-		pod 'FBSDKCoreKit'
-		pod 'FBSDKLoginKit'
-		pod 'FBSDKShareKit'
-		pod 'LMDropdownView'
-		pod 'leveldb'
-		pod 'objective-zip'
-		pod 'ShareSDK3'
-		pod 'MOBFoundation'
-	
-	一般来说，使用更新版的这些第三方库不会导致任何编译问题，但是万一您在试用中有任何冲突，请联系我们。
 	
 ## TapsbookSDK 数据结构
 
@@ -289,4 +216,83 @@ iOS 8.0 or higher
 
 	
 ### 关于订单提交和支付，详情参见关于它的专文
+
+### 手动配置Tapsbook SDK到客户app
+1. 复制 SDK 文件
+	
+	复制 `TapsbookSDK.framework` and `TapsbookSDK.bundle` 到你的项目中.
+	
+	![FinderImageForSDK](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copyfilesforsdk.png)
+	
+2. 连接苹果官方 libiraries
+	
+	检查Xcode里项目的 "build phase" => "Link Binary With Libraries"  点选以下框架
+	
+		TapsbookSDK.framework
+		libsqlite3.0.dylib
+		libz.dylib
+		UIKit.framework
+		Accelerate.framework
+		AdSupport.framework
+		CoreData.framework
+		SystemConfiguration.framework
+		ImageIO.framework
+		MessageUI.framework
+		Social.framework
+		Photos.framework
+	
+3. 启用SDK资源包
+	
+	检查Xcode里项目的 "build phase" => "Copy Bundle Resources", 在项目中加入 `TapsbookSDK.bundle` 
+	
+	![XcodeImageForCopyBundleResources](http://7xsnph.com1.z0.glb.clouddn.com/sdk-guide-copybundle.png)
+	
+4. 加 `-ObjC` 到 "Build Settings" > "Other Linker Flags"
+
+5. 导入第三方软件库
+
+	TapsbookSDK需要如下的第三方开源软件。建议你使用CocoaPods来管理这些依赖软件库，这样的话，只需加入如下列表到Podfile， 然后执行  'Pod install' 开始下载这些软件库
+	
+		pod 'AGGeometryKit', '~> 1.2'
+		pod 'SDWebImage', '~> 3.7'
+		pod 'SlackTextViewController', '~> 1.7'
+		pod 'FXLabel', '~> 1.5'
+		pod 'FastImageCache', '~> 1.3'
+		pod 'SCLAlertView-Objective-C', '~> 0.7'
+		pod 'FormatterKit', '~> 1.8'
+		pod 'Stripe', '~> 6.0'
+		pod 'AsyncDisplayKit', '~> 1.9.92'
+		pod 'smc-runtime', '~> 6.3'
+		pod 'AHEasing', '~> 1.2'
+		pod 'TLLayoutTransitioning', '~> 1.0'
+		pod 'CocoaLumberjack', '~> 2.2'
+		pod 'pop', '~> 1.0'
+		pod 'DZNSegmentedControl', '~> 1.3'
+		pod 'KVOController', '~> 1.0'
+		pod 'Reachability', '~> 3.2'
+		pod 'BlocksKit', '~> 2.2'
+		pod 'TTTAttributedLabel', '~> 1.13'
+		pod 'FXBlurView', '~> 1.6'
+		pod "AFNetworking", "~> 2.0"
+		pod 'Qiniu', '~> 7.0'
+		pod 'MZFormSheetController', '~> 3.1'
+		pod 'MZFormSheetPresentationController', '~> 2.1'
+		pod 'FMDB', '~> 2.5'
+		pod 'MBProgressHUD', '~> 0.9'
+		pod 'TTTRandomizedEnumerator', '~> 0.0'
+		pod 'libextobjc', '~>0.4.1'
+		pod 'AFAmazonS3Manager', '~> 3.2'
+		pod 'Masonry', '~> 0.6'
+		pod 'UICKeyChainStore', '~> 2.1'
+		pod 'FBSDKCoreKit'
+		pod 'FBSDKLoginKit'
+		pod 'FBSDKShareKit'
+		pod 'LMDropdownView'
+		pod 'leveldb'
+		pod 'objective-zip'
+		pod 'ShareSDK3'
+		pod 'MOBFoundation'
+	
+	一般来说，使用更新版的这些第三方库不会导致任何编译问题，但是万一您在试用中有任何冲突，请联系我们。
+
 
