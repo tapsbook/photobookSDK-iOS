@@ -8,6 +8,6 @@
 
 #import "SDKConfigurator.h"
 
-@interface SDKConfiguratorCustomCheckout : SDKConfigurator
+@interface SDKConfiguratorWW : SDKConfigurator
 
 @end

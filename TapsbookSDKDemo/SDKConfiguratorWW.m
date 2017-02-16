@@ -6,14 +6,14 @@
 //  Copyright © 2015 tapsbook. All rights reserved.
 //
 
-#import "SDKConfiguratorCustomCheckout.h"
+#import "SDKConfiguratorWW.h"
 #import <TapsbookSDK/TapsbookSDK.h>
 
 extern NSString * const kTBSendAlbumKeyToHostingAppWhenCheckout;
 extern NSString * const kTBUseExternalPrintProductInfo;
 extern NSString * const kTBUseExternalCheckout;
 
-@implementation SDKConfiguratorCustomCheckout
+@implementation SDKConfiguratorWW
 
 - (NSDictionary *)basicSettings {
     NSMutableDictionary * settings = [[super basicSettings] mutableCopy];

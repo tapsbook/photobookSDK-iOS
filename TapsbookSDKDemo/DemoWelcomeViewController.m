@@ -86,18 +86,18 @@
             hud.labelText = NSLocalizedString(@"loader-create", @"");
             
             //create a new product
-            [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithImages:tbImages
-                                                              identifier:nil
-                                                                   title:@"Album"
-                                                                     tag:0
-                                                                 options:[self getDefaultProductOptions]
-                                                         completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
-                
+            TBProductType productType = TBProductType_Canvas;
+            [[TBSDKAlbumManager sharedInstance] createSDKAlbumWithProductType:productType
+                                                                       images:tbImages
+                                                                   identifier:nil
+                                                                        title:@"album"
+                                                                          tag:0
+                                                              completionBlock:^(BOOL success, TBSDKAlbum *sdkAlbum, NSError *error) {
+            
                 [hud hide:YES];
                 [[TBSDKAlbumManager sharedInstance] openSDKAlbum:sdkAlbum
                                          presentOnViewController:self.navigationController
                                              shouldPrintDirectly:NO];
-                
             }];
             
         }

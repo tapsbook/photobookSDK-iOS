@@ -39,11 +39,11 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        kTBMerchantKeys : @{                   // (Required) Your app keys that you setup from http://dashboard.tapsbook.com, Append a string prefix "test_[ACTUAL_KEY]" will connect to the test server
                                                // Region : merchantKey
 #ifdef DEBUG
-                                               @(TBSDKRegion_UnitedStates) : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb",
+                                               @(TBSDKRegion_UnitedStates) : @"live_canvas_7c5041f868a53ab26abf24b110d9bec7",
 #else
                                                @(TBSDKRegion_UnitedStates) : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb",
 #endif
-                                               kTBMerchantKeyDefault : @"test_CLEEN_587a7f4ae3b2060a4822aadafb6f72fb",   // (Optional) The default key
+                                               kTBMerchantKeyDefault : @"live_canvas_7c5041f868a53ab26abf24b110d9bec7",   // (Optional) The default key
                                                },
                                        kTBStripeKeys : @{                     // (Required) Stripe uses this key to create a charge token to make the charge on the tapsbook eCommerce server.
                                                // Region : stripeKey
@@ -126,7 +126,7 @@ static NSString * const kTBS3BucketNameDefault = @"tapsbookapp";
                                        
                                        kTBRequireBookTitle: @NO,
                                        
-                                       kTBLoadProductFromServerWhenPreparingLocalAlbum : @(NO), // (Optional)
+                                       kTBLoadProductFromServerWhenPreparingLocalAlbum : @(YES), // (Optional)
                                        },
                                
                                kTBCheckoutCustomization : @{                    // (Optional)

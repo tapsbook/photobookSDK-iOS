@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"%@", NSHomeDirectory());
     
-    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfiguratorChina"];
+    [TBSDKConfiguration initializeWithConfiguratorClassName:@"SDKConfiguratorWW"];
 
     [[TBWeChatManager sharedInstance] setupWithApplication:application options:launchOptions];
     [[TBFacebookManager sharedInstance] setupWithApplication:application options:launchOptions];
